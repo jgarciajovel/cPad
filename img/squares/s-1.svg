@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="740px" height="383px" viewBox="0 0 740 383" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>Path 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Dashboard" sketch:type="MSArtboardGroup" transform="translate(-186.000000, -292.000000)" fill="#4B62CA">
+            <g id="articulos" sketch:type="MSLayerGroup" transform="translate(186.000000, 175.000000)">
+                <path d="M-17.3333333,351.623657 L40.6046557,383.589445 L64.578996,373.600136 L138.499879,417.553093 L190.444282,409.561647 L228.403655,457.510327 L264.365165,407.563785 L290.337367,433.535987 L332.292462,359.615104 L388.23259,351.623657 L472.142781,321.655732 L576.031589,315.662147 L629.973854,277.702775 L657.943918,207.777616 L693.905428,213.771201 L755.839141,83.910191 L755.839141,519.444039 L-17.3333333,519.444039 L-17.3333333,351.623657 Z" id="Path-3" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

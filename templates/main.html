@@ -1,0 +1,458 @@
+<!-- Menu Responsive
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Reportar Error</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
+<div class="sidebar">
+    <div class="sidebar-item-out">
+        <i class="ion-power"></i>
+    </div>
+    <div class="sidebar-item-active home">
+        <i class="ion-android-home"></i>
+    </div>
+    <a href="#/new-article"><div class="sidebar-item">
+        <i class="ion-edit"></i>
+    </div></a>
+    <a href="#/photogallery"><div class="sidebar-item">
+        <i class="ion-images"></i>
+    </div></a>
+    <a href="#/ads"><div class="sidebar-item">
+        <i class="ion-connection-bars"></i>
+    </div></a>
+</div>
+<div class="new-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="main-title"><span>database:</span> cPad.</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#/new-article"><div class="square">
+                <div class="n-a">
+                    <h1>Nuevo Articulo <i class="ion-edit"></i></h1>
+                    <h4>tu articulo más leido</h4>
+                    <h2>Meléndez: Seré fiscal del pueblo</h2>
+                    <h3>3,000 visitas </h3>
+                </div>
+            </div></a>
+        </div>
+        <div class="col-md-4">
+            <a href="#/photogallery">
+                <div class="square">
+                    <div id="move" class="ft">
+                        <div class="move-ft">
+                            <h1>Fotogalería</h1>
+                            <h4>Fotogalería más vista</h4>
+                            <h2>En la ruta del café salvadoreño</h2>
+                            <h3>1,500 visitas </h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="#/ads"><div class="square">
+                <div class="pub">
+                    <h1>Publicidad</h1>
+                    <h4>Cliente más visto</h4>
+                    <h2>ALBA</h2>
+                    <h3>1,200 Clicks</h3>
+                </div>
+            </div></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mod-economia">
+                <img src="img/squares/EcoLogo.svg">
+                <h1>Modulos | Economía</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="#/">
+                            <div class="eco-btn">
+                                <a href="" data-toggle="modal" data-target=".new-bolsas">Bolsas</a>
+                            </div>
+                        </a>
+                    </div>
+                     <div class="col-md-4">
+                        <a href="#/">
+                            <div class="eco-btn">
+                                <a href="" data-toggle="modal" data-target=".new-mercados">Mercados</a>
+                            </div>
+                        </a>
+                    </div>
+                     <div class="col-md-4">
+                        <a href="#/">
+                            <div class="eco-btn">
+                                <a href="" data-toggle="modal" data-target=".new-cifras">Cifras</a>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-md-offset-2">
+                       <a href="#/">
+                           <div class="eco-btn-2">
+                               <a href="" data-toggle="modal" data-target=".new-divisas">Divisas</a>
+                           </div>
+                       </a>
+                   </div>
+                    <div class="col-md-4">
+                       <a href="#/">
+                           <div class="eco-btn-2">
+                               <a href="" data-toggle="modal" data-target=".new-tasas">Tasas</a>
+                           </div>
+                       </a>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <a href="#/sondeo">
+          <div class="col-md-3">
+              <div class="sondeo">
+                  <h1>Sondeo ciudadano</h1>
+                  <h3>Sondeo actual</h3>
+                  <h2>¿Está usted de acuerdo con que se instaure el Socialismo en El Salvador?</h2>
+                  <h4>No, no estoy de acuerdo</h4>
+                  <h1 class="respuesta">78%</h1>
+              </div>
+          </div>
+        </a>
+        <div class="col-md-3">
+            <div id="move-ca" class="caricatura" style="background-image: url(http://3.bp.blogspot.com/-_cHelgqWTDY/Tv2lI0VYnaI/AAAAAAAAAv4/k1-yvFQnYCo/s1600/8+de+enero+domingo.jpg);">
+                <div class="trans">
+                    <h1>Caricaturas</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="tus-mas-leidos">
+                <h1>Tus articulos más leidos</h1>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td style="min-width:80%;">Meléndez: Seré fiscal del pueblo</td>
+                            <td style="min-width:20%;">2,000 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td style="min-width:80%;">El Salvador se alista para traslado de cubanos</td>
+                            <td style="min-width:20%;">1,000 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td style="min-width:80%;">Afinan detalles en caso Flores</td>
+                            <td style="min-width:20%;">800 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td style="min-width:80%;">PDDH pide inmediata detención de exmilitares</td>
+                            <td style="min-width:20%;">790 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td style="min-width:80%;">¿Llegó el fiscal anticorrupción?</td>
+                            <td style="min-width:20%;">720 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td style="min-width:80%;">IUDOP: la gente vive con miedo</td>
+                            <td style="min-width:20%;">680 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td style="min-width:80%;">Crimen jesuita, ¿gatos o ratones?</td>
+                            <td style="min-width:20%;">654 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">8</th>
+                            <td style="min-width:80%;">SC empujará propuesta de reforma de Ley</td>
+                            <td style="min-width:20%;">564 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">9</th>
+                            <td style="min-width:80%;">Ficciones: el intelectual y el poder en El Salvador</td>
+                            <td style="min-width:20%;">417 visitas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="los-mas-leidos">
+                <h1>Los articulos más leidos</h1>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td style="min-width:80%;">Meléndez: Seré fiscal del pueblo</td>
+                            <td style="min-width:20%;">2,000 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td style="min-width:80%;">El Salvador se alista para traslado de cubanos</td>
+                            <td style="min-width:20%;">1,000 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td style="min-width:80%;">Afinan detalles en caso Flores</td>
+                            <td style="min-width:20%;">800 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td style="min-width:80%;">PDDH pide inmediata detención de exmilitares</td>
+                            <td style="min-width:20%;">790 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td style="min-width:80%;">¿Llegó el fiscal anticorrupción?</td>
+                            <td style="min-width:20%;">720 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td style="min-width:80%;">IUDOP: la gente vive con miedo</td>
+                            <td style="min-width:20%;">680 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td style="min-width:80%;">Crimen jesuita, ¿gatos o ratones?</td>
+                            <td style="min-width:20%;">654 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">8</th>
+                            <td style="min-width:80%;">SC empujará propuesta de reforma de Ley</td>
+                            <td style="min-width:20%;">564 visitas</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">9</th>
+                            <td style="min-width:80%;">Ficciones: el intelectual y el poder en El Salvador</td>
+                            <td style="min-width:20%;">417 visitas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal | Bolsas del mundo -->
+<div class="modal fade new-bolsas" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
+                      </div>
+                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                        <table class="table table-striped">
+                          <tr>
+                            <td><input ng-model="newBolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newBolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="newBolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          </tr>
+                        </table>
+                        <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Bolsas del mundo -->
+<!-- modal | Mercados del mundo -->
+<div class="modal fade new-mercados" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Mercados del mundo</h4>
+                      </div>
+                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                        <table class="table table-striped">
+                          <tr>
+                            <td><input ng-model="newMercadosNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosContrato" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosUltimo" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosCambios" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosPorCambio" placeholder="%" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosMenor" placeholder="Menor" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="mercadosNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosContrato" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosUltimo" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosCambios" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosPorCambio" placeholder="%" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosMenor" placeholder="Menor" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercadosAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                          </tr>
+                        </table>
+                        <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Mercados del mundo -->
+<!-- modal | Cifras economicas -->
+<div class="modal fade new-cifras" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Cifras económicas</h4>
+                      </div>
+                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                        <table class="table table-striped">
+                          <tr>
+                            <td><input ng-model="newCifrasIndicador" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newCifrasPeriodo" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newCifrasCifras" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newCifrasDetalles" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="cifrasIndicador" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifrasPeriodo" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifrasCifras" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifrasDetalles" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                          </tr>
+                        </table>
+                        <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Cifras economicas -->
+<!-- modal | Divisas -->
+<div class="modal fade new-divisas" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Divisas</h4>
+                      </div>
+                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                        <table class="table table-striped">
+                          <tr>
+                            <td><input ng-model="newDivisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newDivisaPais" placeholder="Región" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newDivisaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="divisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="divisaPais" placeholder="Región" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="divisaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
+                          </tr>
+                        </table>
+                        <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Divisas -->
+<!-- modal | Tasas del mundo -->
+<div class="modal fade new-tasas" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Tasas de interés</h4>
+                      </div>
+                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                        <table class="table table-striped">
+                          <tr>
+                            <td><input ng-model="newBolsaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newBolsaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': newBolsaPorcentaje > 0, 'red': newBolsaPorcentaje < 0}" type="text"></td>
+                          </tr>
+                          <tr>
+                            <td><input ng-model="tasaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="tasaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                          </tr>
+                        </table>
+                        <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Tasas del mundo -->

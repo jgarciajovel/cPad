@@ -1,0 +1,148 @@
+    <!-- Menu Responsive
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Reportar Error</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
+<div class="sidebar">
+    <div class="sidebar-item-out">
+        <i class="ion-power"></i>
+    </div>
+    <a href="#/"><div class="sidebar-item">
+        <i class="ion-android-home"></i>
+    </div></a>
+    <div class="sidebar-item-active purple">
+        <i class="ion-edit"></i>
+    </div>
+</div>
+<div class="new-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="main-title"><span>database:</span> cPad.</h1>
+            <h1 class="new-article-h1">Sondeos</h1>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-4">
+            <button class="new-sondeo" data-toggle="modal" data-target=".new-sondeo-action">
+            </button>
+        </div>
+        <!-- Sondeo Item-->
+        <div class="col-md-4">
+          <a class="edit-sondeo" href="">
+            <div class="sondeo-4">
+              <div class="header">
+                <h1>Caso Jesuitas | <span>01/02/2016</span><a href="#"><i class="ion-edit"></i></a>
+  </h1>
+                <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/02/JOV8638-copy.jpg);"></div>
+              </div>
+              <div class="cuerpo">
+                <h4>
+                  ¿Está usted de acuerdo con que se lleven a españa a los militares involucrados en el caso Jesuita?
+                </h4>
+                <div class="div-respuesta">
+                  <div class="text">                    Si, estoy de acuerdo <span>65% | 65 votos</span>
+                  </div>
+                  <div style="width:60%;" class="color">
+                  </div>
+                </div>
+                <div class="div-respuesta">
+                  <div class="text">                    Si, estoy de acuerdo <span>65% | 65 votos</span>
+                  </div>
+                  <div style="width:30%;" class="color">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Sondeo Item-->
+        <!-- Sondeo Item-->
+        <div class="col-md-4">
+          <a class="edit-sondeo" href="">
+            <div class="sondeo-4">
+              <div class="header">
+                <h1>Salarios de policias | <span>01/02/2016</span><a href="#"><i class="ion-edit"></i></a>
+  </h1>
+                <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/JOV6782-copy.jpg);"></div>
+              </div>
+              <div class="cuerpo">
+                <h4>
+                  Esta usted de acuerdo con que le aumenten el salario a los agentes de la PNC?
+                </h4>
+                <div class="div-respuesta">
+                  <div class="text">Posiblemente <span>65% | 65 votos</span>
+                  </div>
+                  <div style="width:20%;" class="color">
+                  </div>
+                </div>
+                <div class="div-respuesta">
+                  <div class="text">No me interesa <span>65% | 65 votos</span>
+                  </div>
+                  <div style="width:80%;" class="color">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Sondeo Item-->
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal | Tasas del mundo -->
+<div class="modal fade new-sondeo-action" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="gridSystemModalLabel">Nuevo sondeo</h4>
+                    </div>
+
+                    <textarea class="pregunta-sondeo" placeholder="¿Cúal es tu pregunta?"></textarea>
+                    <div class="opciones">
+                      <input type="text">
+                    </div>
+                    <br>
+                    <button class="save-modal">Guardar</button>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Tasas del mundo -->

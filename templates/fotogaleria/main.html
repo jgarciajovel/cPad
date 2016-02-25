@@ -1,0 +1,148 @@
+    <!-- Menu Responsive
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Reportar Error</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
+<div class="sidebar">
+    <div class="sidebar-item-out">
+        <i class="ion-power"></i>
+    </div>
+    <a href="#/"><div class="sidebar-item">
+        <i class="ion-android-home"></i>
+    </div></a>
+    <div class="sidebar-item-active blue">
+        <i class="ion-images"></i>
+    </div>
+    <div class="sidebar-item">
+        <i class="ion-stats-bars"></i>
+    </div>
+</div>
+<div class="new-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="main-title"><span>database:</span> cPad.</h1>
+            <h1 class="new-photogallery-h1">Nueva fotogalería</h1>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-4">
+            <button class="upload-album" data-toggle="modal" data-target=".new-photogallery">
+            </button>
+        </div>
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/8.jpg);">
+                <div class="transparency">
+                    <div class="texto">
+                        <h6>9/01/2016</h6>
+                        <h1>García desterrado del país que lo cobijó</h1>
+                        <h3>3,000 visitas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/JOV5328-copy.jpg);">
+                <div class="transparency">
+                    <div class="texto">
+                        <h6>8/01/2016</h6>
+                        <h1>El nuevo Fiscal General</h1>
+                        <h3>2,000 visitas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/8-Jessica-Orellana.jpg);">
+                <div class="transparency">
+                    <div class="texto">
+                        <h6>7/01/2016</h6>
+                        <h1>Expresidente de la FESFUT entregado a la
+    INTERPOL</h1>
+                        <h3>4,000 visitas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/JOV3415-copy.jpg);">
+                <div class="transparency">
+                    <div class="texto">
+                        <h6>6/01/2016</h6>
+                        <h1>Star Wars: la fuerza acompañó al hospital Bloom</h1>
+                        <h3>2,000 visitas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/FOTO-9.jpg);">
+                <div class="transparency">
+                    <div class="texto">
+                        <h6>6/01/2016</h6>
+                        <h1>Bailando con la Bella Durmiente</h1>
+                        <h3>1,800 visitas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade new-photogallery" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Nueva fotogalería</h4>
+                      </div>
+                    <center><div class="upload-input">
+                        <input type="file" class="file">
+                        <input placeholder="autor/fotogalería" class="author" type="text">
+                        <input placeholder="link" class="author" type="text">
+                        <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
+<b>600px</b> x <b>400px</b>.</h4></div>
+                        <div style="float:right" class="pub-boton">Publicar</div>
+                    </div></center>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal -->

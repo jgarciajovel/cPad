@@ -1,0 +1,274 @@
+    <!-- Menu Responsive
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Reportar Error</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
+<div class="sidebar">
+    <div class="sidebar-item-out">
+        <i class="ion-power"></i>
+    </div>
+    <a href="#/"><div class="sidebar-item">
+        <i class="ion-android-home"></i>
+    </div></a>
+    <div class="sidebar-item-active pink">
+        <i class="ion-connection-bars"></i>
+    </div>
+    <a href="#/ads/metrics/analytics"><div class="sidebar-item">
+        <i class="ion-stats-bars"></i>
+    </div></a>
+</div>
+<div class="new-container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1 class="main-title"><span>database:</span> cPad.</h1>
+            <h1 class="new-ads-h1">Publicidad</h1> <button data-toggle="modal" data-target=".new-client" class="crear-cliente">Agregar cliente</button>
+        </div>
+        <div class="col-md-2">
+            <button class="settings" ng-class="{home:adsPosition}" ng-disabled="!adsPosition" data-toggle="modal" data-target=".new-adv"><i class="ion-plus-round"></i></button>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-4">
+            <div class="choose-position">
+                <h6>Posiciones</h6>
+                <select ng-model="adsPosition" multiple>
+                    <option value="position1">Posición 1</option>
+                    <option value="position2">Posición 2</option>
+                    <option value="position3">Posición 3</option>
+                    <option value="position4">Posición 4</option>
+                    <option value="positionPost">Posición post</option>
+                    <option value="positionMovil">Posición móvil</option>
+                </select>
+            </div>
+            <div ng-if="adsPosition == 'position1'" class="details-position">
+                <h6>Resumen</h6>
+                <h1 class="item">Espacios disponibles: 3</h1>
+                <h6>Clientes</h6>
+                <h1 class="item-2">Alba</h1>
+                <h1 class="item-2">Subes</h1>
+                <h6>Cliente más visto</h6>
+                <h1 class="item">Alba</h1>
+            </div>
+            <div ng-if="adsPosition == 'position2'" class="details-position">
+                <h6>Resumen</h6>
+                <h1 class="item">Espacios disponibles: 5</h1>
+            </div>
+            <div ng-if="adsPosition == 'position3'" class="details-position">
+                <h6>Resumen</h6>
+                <h1 class="item">Espacios disponibles: 3</h1>
+                <h6>Clientes</h6>
+                <h1 class="item-2">Cinemark</h1>
+                <h1 class="item-2">Super Selectos</h1>
+                <h6>Cliente más visto</h6>
+                <h1 class="item">Super Selectos</h1>
+            </div>
+            <div ng-if="adsPosition == 'positionMovil'" class="details-position">
+                <h6>Resumen</h6>
+                <h1 class="item">Espacios disponibles: 4</h1>
+                <h6>Clientes</h6>
+                <h1 class="item-2">Decameron</h1>
+                <h6>Cliente más visto</h6>
+                <h1 class="item">Decameron</h1>
+            </div>
+        </div>
+        <div ng-if="!adsPosition" class="col-md-8">
+            <div class="no-position-selected">
+                <center><div class="back-no-position"></div></center>
+                <h4>No has elegido ninguna posición</h4>
+            </div>
+        </div>
+        <div ng-if="adsPosition == 'position2'" class="col-md-8">
+            <div class="no-position-selected">
+                <center><div class="back-no-position"></div></center>
+                <h4>No hay clientes para esta posición</h4>
+            </div>
+        </div>
+        <div ng-if="adsPosition == 'position1'">
+            <div class="col-md-4">
+                <div class="old-album" style="background-image:url(https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg);">
+                    <div class="transparency">
+                        <div class="texto">
+                            <h6>9/01/2016</h6>
+                            <h1>Cliente: Alba</h1>
+                            <h3>3,000 clicks</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="old-album" style="background-image:url(http://sitramssdebecontinuar.com/wp-content/uploads/2015/08/rsz_screen_shot_2015-08-31_at_95311_am-680x330.jpg);">
+                    <div class="transparency">
+                        <div class="texto">
+                            <h6>9/01/2016</h6>
+                            <h1>Cliente: SUBES</h1>
+                            <h3>1,000 clicks</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="adsPosition == 'position3'">
+            <div class="col-md-4">
+                <div class="old-album" style="background-image:url(http://www.ofertasahora.com/wp-content/uploads/2013/11/supermercado-super-selectos-el-salvador.jpg);">
+                    <div class="transparency">
+                        <div class="texto">
+                            <h6>18/01/2016</h6>
+                            <h1>Cliente: Super Selectos</h1>
+                            <h3>4,230 clicks</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="old-album" style="background-image:url(http://pastoempresa.com/wp-content/uploads/2015/06/CInemark.jpg);">
+                    <div class="transparency">
+                        <div class="texto">
+                            <h6>9/01/2016</h6>
+                            <h1>Cliente: CineMark</h1>
+                            <h3>1,000 clicks</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-if="adsPosition == 'positionMovil'">
+            <div class="col-md-4">
+                <div class="old-album" style="background-image:url(http://hotelperunews.com/wp-content/uploads/2015/07/Decameron-Hotel-Punta-Sal.jpg);">
+                    <div class="transparency">
+                        <div class="texto">
+                            <h6>18/01/2016</h6>
+                            <h1>Cliente: Decameron</h1>
+                            <h3>8,130 clicks</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="adsPosition" class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+<div class="modal fade new-client" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 ng-if="!cliente" class="modal-title" id="gridSystemModalLabel">Agregar cliente</h4>
+                        <h4 ng-if="cliente == 'Alba'" class="modal-title" id="gridSystemModalLabel">Editar cliente</h4>
+                      </div>
+                      <select class="select-client" ng-model="cliente">
+                           <option value="">Seleccionar cliente</option>
+                           <option value="Alba">Alba</option>
+                           <option value="Cinemark">Cinemark</option>
+                           <option value="Subes">Subes</option>
+                           <option value="Decameron">Decameron</option>
+                       </select>
+                    <div ng-if="!cliente">
+                        <center>
+                           <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
+                                <input fileread="fotito" type="file" class="file">
+                                <input placeholder="Empresa" class="author" type="text">
+                                <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
+<b>600px</b> x <b>400px</b>.</h4></div>
+                                <div style="float:right" class="pub-boton">Publicar</div>
+                            </div>
+                        </center>
+                    </div>
+                    <style>
+                        .no-client-old{
+                            background-image: url({{clientImg}}) !important;
+                        }
+                    </style>
+                    <div ng-if="cliente == 'Alba'">
+                        <center>
+                           <div ng-class="{'upload-input img-client': oldfotito ,'upload-input-old-client no-client-old': !oldfotito}" style="background-image: url({{oldfotito}});">
+                                <input fileread="oldfotito" type="file" class="file">
+                                <input placeholder="Empresa" value="Alba" class="author" type="text">
+                                <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
+<b>600px</b> x <b>400px</b>.</h4></div>
+                                <div style="float:right" class="pub-boton">Publicar</div>
+                            </div>
+                        </center>
+                    </div>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal -->
+<!-- modal -->
+<div class="modal fade new-adv" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Crear publicidad</h4>
+                      </div>
+                      <select class="select-client" ng-model="position">
+                           <option value="">Seleccionar posición</option>
+                           <option value="1">Posición 1</option>
+                           <option value="2">Posición 2</option>
+                           <option value="3">Posición 3</option>
+                           <option value="4">Posición 4</option>
+                           <option value="p">Posición post</option>
+                           <option value="m">Posición móvil</option>
+                       </select>
+                    <div>
+                        <center>
+                           <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
+                                <input fileread="fotito" type="file" class="file">
+                                <select style="margin-bottom:0px; margin-top:10px;" class="select-client" ng-model="client">
+                                   <option value="">Seleccionar cliente</option>
+                                   <option value="alba">Alba</option>
+                                   <option value="subes">Subes</option>
+                                   <option value="cinemark">Cinemark</option>
+                                   <option value="papa">Papa john's</option>
+                               </select>
+                                <input placeholder="Url" class="author" type="text">
+                                <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar el banner publicitario nada más puede estar en formato <b>png</b>, <b>jpg</b> ó <b>gif</b>.</h4></div>
+                                <div style="float:right" class="pub-boton">Publicar</div>
+                            </div>
+                        </center>
+                    </div>
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal -->

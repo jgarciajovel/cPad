@@ -1,0 +1,59 @@
+.text-red {
+	color:#E52A3A;
+}
+
+.text-gray {
+	color:#5f5f5f;
+}
+
+.text-center {
+	text-align: center;
+}
+
+/* Editor styling */
+
+.ta-toolbar {
+	background-color: transparent;
+	margin-left: 0px; /* Override bootstrap */
+    margin-left: -5px;
+    margin-top: 30px;
+}
+.fa-quote-right{
+    padding: 3px 0px;
+}
+.fa-bold, .fa-italic, .fa-underline, .fa-strikethrough, .fa-list-ul, .fa-list-ol, .fa-repeat, .fa-undo, .fa-ban, .fa-code, .fa-picture-o, .fa-link, .fa-youtube-play {
+    padding: 3px 0px;
+}
+.ta-toolbar .btn-group {
+	margin-bottom: 5px;
+}
+
+.ta-editor, .white-box {
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #EEE;
+}
+.ta-hidden-input{
+    display: none;
+}
+textarea.ta-bind {
+	width: 100%;
+}
+.new-article-editor .form-control{
+    height: auto; 
+    min-height: 300px;
+    border: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    font-size: 16px;
+    color: #000;
+}
+.ta-bind{
+    min-height: 300px;
+}
+.ng-valid:focus{
+    outline: none;
+}
+.ta-resizer-handle-overlay{
+    display: none;
+}

@@ -1,0 +1,139 @@
+    <!-- Menu Responsive 
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Reportar Error</a></li>
+            <li><a href="#">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
+<div class="sidebar">
+    <div class="sidebar-item-out">
+        <i class="ion-power"></i>
+    </div>
+    <a href="#/"><div class="sidebar-item">
+        <i class="ion-android-home"></i>
+    </div></a>
+    <a href="#/ads/"><div class="sidebar-item">
+        <i class="ion-connection-bars"></i>
+    </div></a>
+    <div class="sidebar-item-active pink">
+        <i class="ion-stats-bars"></i>
+    </div>
+</div>
+<div class="new-container">
+    <div class="row">
+        <div class="col-md-10">
+            <h1 class="main-title"><span>database:</span> cPad.</h1>
+            <h1 class="new-ads-h1">Publicidad</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg);">
+                <div class="transparency">
+                    <h4>Cliente más popular</h4>
+                    <div class="texto">
+                        <h6>9/01/2016</h6>
+                        <h1>Alba</h1>
+                        <h3>3,000 visitas</h3>
+                    </div>    
+                </div>
+            </div> 
+        </div>
+        <div class="col-md-6">
+            <div class="positions-sq">
+                <div class="transparency" style="width:{{pPorcentaje | number:0}}%;">  
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="texto6">
+                            <h2>POSICIONES OCUPADAS</h2>
+                            <h1>{{pOcupadas}}</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="texto6">
+                            <h2 class="txt-black">POSICIONES DISPONIBLES</h2>
+                            <h1 class="txt-black">{{pDisponibles}}</h1>
+                        </div>
+                    </div>
+                </div>  
+            </div> 
+        </div>
+        <div class="col-md-2">
+            <div class="old-album" style="background-image:url(img/ads/position-more.svg); background-size:contain; background-position:bottom;">
+                <h4 style="padding:10px 10px;">Posición más utilizada</h4>
+                <div class="texto">
+                    <h1>Posición 1</h1>
+                    <h3>Portada</h3>
+                </div>    
+            </div> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="old-album" style="background-image:url(http://www.contrapunto.com.sv/images/banners/aniversario-sitramss-contrapunto-2.png);">
+                <div class="transparency">
+                    <h4>Publicidad más vista</h4>
+                    <div class="texto">
+                        <h6>9/01/2016</h6>
+                        <h1>Subes</h1>
+                        <h3>7,832 visitas</h3>
+                    </div>    
+                </div>
+            </div> 
+        </div>
+        <div class="col-md-6">
+            <div class="positions-sq" style="background-image:url(img/ads/bottom-purple.svg);">
+                <div class="texto-2">
+                    <h2>Sección con más posiciones utilizadas</h2>
+                    <h1>Portada</h1>
+                    <h4>23 POSICIONES OCUPADAS DE 30</h4>
+                </div>
+            </div>    
+        </div>
+        <div class="col-md-2">
+            <div class="old-album" style="background-image:url(img/ads/position-minus.svg); background-size:contain; background-position:bottom;">
+                <h4 style="padding:10px 10px;">Posición menos utilizada</h4>
+                <div class="texto">
+                    <h1 style="color:#000; text-shadow:none; font-weight:normal;">Posición 1</h1>
+                    <h3 style="color:#000; text-shadow:none; font-weight:normal;">Portada</h3>
+                </div>    
+            </div> 
+        </div>
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-12">
+                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
