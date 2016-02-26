@@ -25,6 +25,11 @@ angular.module('cpad.controllers', [])
           name : 'Juan Carlos',
         }
     })
+    .filter('urlEncode', function() {
+        return function(input) {
+            return input.split(" ").join("-");
+        }
+    })
 
     .controller('mainController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -59,6 +64,14 @@ angular.module('cpad.controllers', [])
         //Tasas
         $scope.tasaNombre = 'TASA FED';
         $scope.tasaPorcentaje = '0.50';
+
+        $http.get("api/php/dashboard.php").success(function(response){
+          $scope.leidos = response.leidos;
+          $scope.sondeo = response.sondeo;
+          $scope.fotogaleria = response.fotogaleria;
+          $scope.cliente = response.cliente;
+        });
+
     })
     .controller('newArticleController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;

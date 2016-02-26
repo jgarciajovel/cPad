@@ -116,7 +116,7 @@ a:hover, a:focus, a:active{
     background-color: #fff;
     border-radius: 4px;
     margin-top: 20px;
-    padding: 10px 0px 0px 20px;
+    padding: 10px 10px 0px 20px;
     background-image: url(../img/squares/s-1.svg);
     background-size: contain;
     background-position: bottom;
@@ -156,7 +156,6 @@ a:hover, a:focus, a:active{
     background-color: #fff;
     border-radius: 4px;
     margin-top: 20px;
-    background-image: url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/11/JOV9352-copia.jpg);
     background-size: 600px;
     background-position: top;
     background-repeat: no-repeat;
@@ -371,7 +370,7 @@ a:hover, a:focus, a:active{
     padding-right: 30px;
 }
 .sondeo h4{
-    margin-top: 70px;
+    margin-top: 40px;
     font-size: 14px;
     font-weight: 300;
     color: #fff;
@@ -1201,3 +1200,6 @@ padding: 0px 10px;
   outline: none;
 }
 /* Sondeos */
+.urlvisto{
+  color:#000;
+}
