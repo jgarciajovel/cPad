@@ -746,6 +746,67 @@ input:-moz-placeholder { color:#777; }
     padding-bottom: 170px;
     background-color: #f1f1f1;
 }
+.modal-delete{
+    border-radius: 3px;
+    border: 0px;
+    box-shadow: none;
+    width: 400px !important;
+    padding: 20px 30px;
+    background-color: #fff;
+    text-align: center;
+}
+.modal-delete h3{
+  font-size: 16px;
+  margin: 0px 0px 30px 0px;
+}
+.modal-delete .eliminar{
+  font-size: 12px;
+  margin: 0px;
+  border: 0px;
+  padding: 8px 15px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: light;
+  color: #fff;
+  background-color: #FF6760;
+  transition: 0.5s;
+}
+.modal-delete .eliminar:hover{
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.30);
+  background-color: #FF4A42;
+}
+.modal-delete .cancelar{
+  font-size: 12px;
+  margin: 0px;
+  border: 0px;
+  padding: 8px 15px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: light;
+  color: #0096E2;
+  background-color: #fff;
+  transition: 0.5s;
+}
+.modal-delete .eliminar:focus{
+  outline: none;
+}
+.modal-delete .cancelar:focus{
+  outline: none;
+}
+.modal-delete .cancelar:hover{
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.30);
+}
+.modal-dialog-delete{
+    width: 400px !important;
+    margin: 30px auto !important;
+}
+.modal-content-sondeo{
+    border-radius: 3px;
+    border: 0px;
+    box-shadow: none;
+    padding-bottom: 10px;
+    background-color: #f1f1f1;
+}
 .modal-content-modulos{
     border-radius: 3px;
     border: 0px;
@@ -814,6 +875,7 @@ input:-moz-placeholder { color:#777; }
     padding: 5px 20px;
     background: #00BAD5;
     border-radius: 3px;
+    border: 0px;
 }
 /* Photogallery */
 /* Ads */
@@ -1096,15 +1158,6 @@ input:-moz-placeholder { color:#777; }
   border-radius: 3px 3px 0px 0px;
   overflow: hidden;
 }
-.edit-sondeo{
-  color: #fff;
-}
-.edit-sondeo:hover{
-  color: #fff;
-}
-.edit-sondeo:focus{
-  color: #fff;
-}
 .sondeo-4 .header h1{
   padding: 0 10px;
   margin-top: 18px;
@@ -1117,11 +1170,14 @@ input:-moz-placeholder { color:#777; }
 .sondeo-4 .header h1 i{
   float: right;
   color: white;
-  margin-top: -6px;
-  font-size: 15px;
+  margin-top: -10px;
+  font-size: 18px;
   padding: 10px;
   margin-left: -30px;
   opacity: 0;
+}
+.sondeo-4 .header h1 i:hover{
+  color:#ff817c;
 }
 .sondeo-4:hover .header i{
   opacity: 1;
@@ -1153,10 +1209,12 @@ input:-moz-placeholder { color:#777; }
 }
 .sondeo-4:hover{
   box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.20);
-  cursor: pointer;
 }
 .sondeo-4 .cuerpo{
   padding: 0px 10px;
+}
+.sondeo-4 .cuerpo:hover{
+  cursor: pointer;
 }
 .sondeo-4 .cuerpo h4{
   font-size: 16px;
@@ -1187,17 +1245,82 @@ padding: 0px 10px;
   float: right;
 }
 .pregunta-sondeo{
-  margin: 10px;
-  width: 80%;
+  margin-top: 10px;
   border: 0px;
   border-radius: 3px;
   padding: 5px 10px;
+  width: 250px;
+  height: auto;
 }
 .pregunta-sondeo .opciones input{
   border: 0px !important;
 }
 .pregunta-sondeo:focus{
   outline: none;
+}
+.sondeo-modal{
+  text-align: center;
+  padding-bottom: 40px;
+}
+.modal-container{
+  width: 250px;
+}
+.modal-container .options{
+  border: 0px;
+  border-radius: 3px;
+  width: 190px;
+  margin-left: 0px;
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+.modal-container .options:focus{
+  outline: none;
+}
+.modal-container .radio{
+  position: absolute;
+  margin-top: 18px;
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  border: 2px solid #f1f1f1;
+  background-color: #D4D8D8;
+}
+.modal-container .more i{
+  color: #B2C3C5;
+  position: absolute;
+  margin-top: 13px;
+  margin-left: 10px;
+  font-size: 25px;
+}
+.modal-container .more i:hover{
+  color: #00BAD5;
+}
+.divisor{
+  margin-top: 20px;
+  border-bottom:2px solid #E4E4E4;
+  border-radius: 30px;
+  width: 100%;
+}
+.modal-container .opciones h4{
+  margin-top: 0px;
+  float: left;
+  font-size: 14px;
+  width: 100%;
+  padding-left: 35px;
+}
+.modal-container .opciones{
+  text-align: left;
+  padding: 10px 0px;
+}
+.modal-container .opciones .delete{
+  font-size:20px;
+  float: right;
+  color: #B2C3C5;
+}
+.modal-container .opciones:hover .delete{
+  font-size:20px;
+  color: #ff817c;
+  cursor: pointer;
 }
 /* Sondeos */
 .urlvisto{

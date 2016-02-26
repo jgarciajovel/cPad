@@ -58,14 +58,13 @@
         </div>
         <!-- Sondeo Item-->
         <div class="col-md-4">
-          <a class="edit-sondeo" href="">
             <div class="sondeo-4">
               <div class="header">
-                <h1>Caso Jesuitas | <span>01/02/2016</span><a href="#"><i class="ion-edit"></i></a>
+              <h1>Caso Jesuitas | <span>01/02/2016</span><a data-toggle="modal" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
   </h1>
                 <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/02/JOV8638-copy.jpg);"></div>
               </div>
-              <div class="cuerpo">
+              <div class="cuerpo" data-toggle="modal" data-target=".edit-sondeo">
                 <h4>
                   ¿Está usted de acuerdo con que se lleven a españa a los militares involucrados en el caso Jesuita?
                 </h4>
@@ -83,15 +82,13 @@
                 </div>
               </div>
             </div>
-          </a>
         </div>
         <!-- Sondeo Item-->
         <!-- Sondeo Item-->
         <div class="col-md-4">
-          <a class="edit-sondeo" href="">
             <div class="sondeo-4">
               <div class="header">
-                <h1>Salarios de policias | <span>01/02/2016</span><a href="#"><i class="ion-edit"></i></a>
+                <h1>Salarios de policias | <span>01/02/2016</span><a data-toggle="modal" data-target=".delete-sondeo"><i class="ion-trash-a"></i></a>
   </h1>
                 <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/JOV6782-copy.jpg);"></div>
               </div>
@@ -113,7 +110,6 @@
                 </div>
               </div>
             </div>
-          </a>
         </div>
         <!-- Sondeo Item-->
     </div>
@@ -125,24 +121,99 @@
         </div>
     </div>
 </div>
-<!-- modal | Tasas del mundo -->
-<div class="modal fade new-sondeo-action" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div class="modal-dialog modal-xs">
-            <div class="modal-content-modulos">
-                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="gridSystemModalLabel">Nuevo sondeo</h4>
+<!-- modal | Sondeo nuevo -->
+<div class="modal fade new-sondeo-action sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content-sondeo">
+        <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Nuevo sondeo</h4>
+              </div>
+            <div>
+                <center>
+                   <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
+                        <input fileread="fotito" type="file" class="file">
+                        <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4></div>
                     </div>
-
-                    <textarea class="pregunta-sondeo" placeholder="¿Cúal es tu pregunta?"></textarea>
-                    <div class="opciones">
-                      <input type="text">
+                    <div class="modal-container">
+                      <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo"></textarea>
+                      <i class="radio"></i><input placeholder="Opciones" class="options" type="text"><a class="more" href=""><i class="ion-android-add-circle"></i></a>
+                      <!-- <div class="divisor"></div>
+                      <div class="opciones">
+                        <h4>Si estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
+                      </div>
+                      <div class="opciones">
+                        <h4>No estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
+                      </div> -->
+                      <div style="text-align:right; margin-top:35px;">
+                        <button class="pub-boton">Publicar</button>
+                      </div>
                     </div>
-                    <br>
-                    <button class="save-modal">Guardar</button>
-                </form>
-          </div>
-        </div>
+                </center>
+            </div>
+        </form>
+  </div>
+  </div>
 </div>
-<!-- modal | Tasas del mundo -->
+<!-- modal | Sondeo nuevo -->
+
+<!-- modal | Sondeo editar -->
+<div class="modal fade edit-sondeo sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content-sondeo">
+        <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">Editar sondeo</h4>
+              </div>
+            <div>
+                <center>
+                  <style>
+                  .oldSondeo{
+                    background-image: url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/02/JOV8638-copy.jpg) !important;
+                    background-size: cover !important;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                  }
+                  </style>
+                   <div ng-class="{'upload-input img-client': editFoto ,'upload-input oldSondeo': !editFoto}" style="background-image: url({{editFoto}});">
+                        <input fileread="editFoto" type="file" class="file">
+                        <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4></div>
+                    </div>
+                    <div class="modal-container">
+                      <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo">¿Está usted de acuerdo con que se lleven a españa a los militares involucrados en el caso Jesuita?</textarea>
+                      <i class="radio"></i><input placeholder="Opciones" class="options" type="text"><a class="more" href=""><i class="ion-android-add-circle"></i></a>
+                      <div class="divisor"></div>
+                      <div class="opciones">
+                        <h4>Si, estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
+                      </div>
+                      <div class="opciones">
+                        <h4>No, estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
+                      </div>
+                      <div style="text-align:right; margin-top:35px;">
+                        <button class="pub-boton">Publicar</button>
+                      </div>
+                    </div>
+                </center>
+            </div>
+        </form>
+  </div>
+  </div>
+</div>
+<!-- modal | Sondeo editar -->
+
+
+<!-- Delete -->
+<div class="modal fade delete-sondeo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete">
+    <h3>¿Está seguro que desea eliminar este sondeo?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button class="eliminar">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Delete -->
