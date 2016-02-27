@@ -32,6 +32,12 @@ angular.module('cpad.controllers', [])
         }
     })
 
+    .filter('startFrom', function(){
+        return function(data, start){
+            return data.slice(start);
+        }
+    })
+
     .controller('mainController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
@@ -91,9 +97,19 @@ angular.module('cpad.controllers', [])
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
-        // $http.get("api/php/history.php").succes(function(response){
-        //   $scope.contenido = response.contenido;
-        // });
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+        $scope.maxSize = 4;
+        $http.get("api/php/history.php").success(function(response){
+          $scope.contenido = response.contenido;
+        });
+        $scope.totalVisitas = function(articulos){
+          var total = 0;
+          for (var i = 0; i < articulos.length; i++) {
+            total += parseInt(articulos[i].total);
+          }
+          return total;
+        };
     })
     .controller('photogalleryController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -102,6 +118,12 @@ angular.module('cpad.controllers', [])
         $scope.upload = function(){
             console.log('upload');
         }
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.maxSize = 4;
+        $http.get('api/php/photogallery.php').success(function(response){
+          $scope.fotogalerias = response.fotogalerias;
+        });
     })
     .controller('adsController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -137,5 +159,11 @@ angular.module('cpad.controllers', [])
         $scope.pOcupadas = '120';
         $scope.pPorcentaje = ($scope.pOcupadas * 100) / $scope.pDisponibles;
         console.log($scope.pPorcentaje);
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.maxSize = 4;
+        $http.get('api/php/sondeos.php').success(function(response){
+          $scope.sondeos = response.sondeos;
+        });
 
     });

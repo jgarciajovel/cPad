@@ -382,7 +382,7 @@ a:hover, a:focus, a:active{
     text-align: center;
     margin-top: -10px;
     font-weight: 500;
-    font-size: 120px;
+    font-size: 110px;
     color: #6E89FF;
     margin-left: -35px !important;
 }
@@ -1328,4 +1328,33 @@ padding: 0px 10px;
 }
 .modalxl{
   width: 1000px !important;
+}
+/*Paginador*/
+.tab-subseccion li a{
+    margin-right: 10px;
+    border: none;
+    color:#000;
+    border-radius: 2px;
+    background-color: #EEF4F7;
+}
+.tab-subseccion .active a{
+    background-color: #333;
+    color:#fff;
+}
+.tab-subseccion .disabled a{
+    background-color: #EEF4F7;
+    color:#000;
+}
+.tab-subseccion .disabled a:hover{
+    background-color: #e0e0d1;
+    color:#000;
+}
+.pagination li a:hover{
+    background-color: #e0e0d1;
+    color:#000;
+    border: none;
+}
+.pagination .active a:hover{
+    background-color: #333;
+    color:#000;
 }

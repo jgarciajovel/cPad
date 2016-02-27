@@ -59,63 +59,19 @@
             <button class="upload-album" data-toggle="modal" data-target=".new-photogallery">
             </button>
         </div>
-        <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/8.jpg);">
+        <div ng-repeat="fotogaleria in fotogalerias | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
+            <div class="old-album" style="background-image:url({{fotogaleria.foto}});">
                 <div class="transparency">
                     <div class="texto">
-                        <h6>9/01/2016</h6>
-                        <h1>García desterrado del país que lo cobijó</h1>
-                        <h3>3,000 visitas</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/JOV5328-copy.jpg);">
-                <div class="transparency">
-                    <div class="texto">
-                        <h6>8/01/2016</h6>
-                        <h1>El nuevo Fiscal General</h1>
-                        <h3>2,000 visitas</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/8-Jessica-Orellana.jpg);">
-                <div class="transparency">
-                    <div class="texto">
-                        <h6>7/01/2016</h6>
-                        <h1>Expresidente de la FESFUT entregado a la
-    INTERPOL</h1>
-                        <h3>4,000 visitas</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/JOV3415-copy.jpg);">
-                <div class="transparency">
-                    <div class="texto">
-                        <h6>6/01/2016</h6>
-                        <h1>Star Wars: la fuerza acompañó al hospital Bloom</h1>
-                        <h3>2,000 visitas</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2015/12/FOTO-9.jpg);">
-                <div class="transparency">
-                    <div class="texto">
-                        <h6>6/01/2016</h6>
-                        <h1>Bailando con la Bella Durmiente</h1>
-                        <h3>1,800 visitas</h3>
+                        <h6>{{fotogaleria.fecha | date:'dd/MM/yyyy'}}</h6>
+                        <h1>{{fotogaleria.titulo}}</h1>
+                        <h3>{{fotogaleria.total}} visitas</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <uib-pagination total-items="fotogalerias.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
     <div class="footer">
         <div class="row">
             <div class="col-md-12">

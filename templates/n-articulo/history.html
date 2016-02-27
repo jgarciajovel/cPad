@@ -1,4 +1,4 @@
-    <!-- Menu Responsive 
+    <!-- Menu Responsive
     <div data-ng-include data-src="'templates/menu.html'"></div>
     Menu Section -->
 
@@ -59,207 +59,39 @@
      <div class="row">
         <div class="col-md-12">
             <h1 class="new-article-h1">Historial de articulos</h1>
-            <div class="history-table">
+            <div class="history-table" ng-repeat="(key, value) in contenido | groupBy: 'fecha'">
                 <div class="resumen">
                     <div class="row">
                         <div class="col-md-2">
-                            <h4 class="fecha">12/01/2016</h4>
+                            <h4 class="fecha">{{key | date:'dd/MM/yyyy'}}</h4>
                         </div>
                         <div class="col-md-10">
-                            <h4 class="visitantes">2,000 visitas en total</h4>
+                            <h4 class="visitantes">{{totalVisitas(value)}} visitas en total</h4>
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover responsive"> 
+                <table class="table table-hover responsive">
                     <tbody>
-                        <tr> 
-                            <th>Título</th> 
-                            <th>Sección</th> 
-                            <th>Autor</th> 
-                            <th>Creación</th> 
-                            <th>Visitas</th> 
-                            <th>Creador</th> 
-                        </tr> 
-                        <tr> 
-                            <td scope="row" char-limit="10">{{ "Meléndez: Seré fiscal del pueblo" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
+                        <tr>
+                            <th>Título</th>
+                            <th>Subsección</th>
+                            <th>Autor</th>
+                            <th>Hora</th>
+                            <th>Visitas</th>
+                            <th>Creador</th>
                         </tr>
-                        <tr> 
-                            <td scope="row">{{ "“Quiero, aunque sea, sepultar sus huesitos” Foto: agencia VIOLENCIA “Quiero, aunque sea, sepultar sus huesitos" | limitTo: 60 }}...</th> 
-                            <td style="">Violencia</td> 
-                            <td style="">Dora Reyes</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
+                        <tr ng-repeat="row in value | orderBy: '-total'">
+                            <td scope="row" char-limit="10">{{row.titulo}}</th>
+                            <td style="">{{row.subseccion}}</td>
+                            <td style="">{{row.autor}}</td>
+                            <td style="">{{row.hora}}</td>
+                            <td style="">{{row.total}} visitas</td>
+                            <td style="">{{row.creador}}</td>
                         </tr>
-                        <tr> 
-                            <td scope="row">{{ "Exguerrilla pide aclarar caso Jesuita" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "EU ampliaría programa de refugiados para migrantesa" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row" char-limit="10">{{ "Meléndez: Seré fiscal del pueblo" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "“Quiero, aunque sea, sepultar sus huesitos” Foto: agencia VIOLENCIA “Quiero, aunque sea, sepultar sus huesitos" | limitTo: 60 }}...</th> 
-                            <td style="">Violencia</td> 
-                            <td style="">Dora Reyes</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "Exguerrilla pide aclarar caso Jesuita" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "EU ampliaría programa de refugiados para migrantesa" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                    </tbody> 
+                    </tbody>
                 </table>
             </div>
-            <div class="history-table">
-                <div class="resumen">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h4 class="fecha">12/01/2016</h4>
-                        </div>
-                        <div class="col-md-10">
-                            <h4 class="visitantes">2,000 visitas en total</h4>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover responsive"> 
-                    <tbody>
-                        <tr> 
-                            <th>Título</th> 
-                            <th>Sección</th> 
-                            <th>Autor</th> 
-                            <th>Creación</th> 
-                            <th>Visitas</th> 
-                            <th>Creador</th> 
-                        </tr> 
-                        <tr> 
-                            <td scope="row" char-limit="10">{{ "Meléndez: Seré fiscal del pueblo" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "“Quiero, aunque sea, sepultar sus huesitos” Foto: agencia VIOLENCIA “Quiero, aunque sea, sepultar sus huesitos" | limitTo: 60 }}...</th> 
-                            <td style="">Violencia</td> 
-                            <td style="">Dora Reyes</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "Exguerrilla pide aclarar caso Jesuita" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "EU ampliaría programa de refugiados para migrantesa" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                    </tbody> 
-                </table>
-            </div>
-            <div class="history-table">
-                <div class="resumen">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h4 class="fecha">12/01/2016</h4>
-                        </div>
-                        <div class="col-md-10">
-                            <h4 class="visitantes">2,000 visitas en total</h4>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover responsive"> 
-                    <tbody>
-                        <tr> 
-                            <th>Título</th> 
-                            <th>Sección</th> 
-                            <th>Autor</th> 
-                            <th>Creación</th> 
-                            <th>Visitas</th> 
-                            <th>Creador</th> 
-                        </tr> 
-                        <tr> 
-                            <td scope="row" char-limit="10">{{ "Meléndez: Seré fiscal del pueblo" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "“Quiero, aunque sea, sepultar sus huesitos” Foto: agencia VIOLENCIA “Quiero, aunque sea, sepultar sus huesitos" | limitTo: 60 }}...</th> 
-                            <td style="">Violencia</td> 
-                            <td style="">Dora Reyes</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "Exguerrilla pide aclarar caso Jesuita" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                        <tr> 
-                            <td scope="row">{{ "EU ampliaría programa de refugiados para migrantesa" | limitTo: 60 }}...</th> 
-                            <td style="">Política</td> 
-                            <td style="">Laura Bernal</td> 
-                            <td style="">10/02/2016</td> 
-                            <td style="">2,000 visitas</td> 
-                            <td style="">Laura Bernal</td> 
-                        </tr>
-                    </tbody> 
-                </table>
-            </div>
-            
+          <!-- <uib-pagination total-items="contenido.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination> -->
         </div>
     </div>
     <div class="footer">
