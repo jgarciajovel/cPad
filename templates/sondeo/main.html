@@ -57,55 +57,21 @@
             </button>
         </div>
         <!-- Sondeo Item-->
-        <div class="col-md-4">
+        <div ng-repeat="sondeo in sondeos | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
             <div class="sondeo-4">
               <div class="header">
-              <h1>Caso Jesuitas | <span>01/02/2016</span><a data-toggle="modal" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
+              <h1>{{sondeo.titulo}} | <span>{{sondeo.fecha | date:'dd/MM/yyyy'}}</span><a data-toggle="modal" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
   </h1>
-                <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/02/JOV8638-copy.jpg);"></div>
+                <div class="img" style="background-image:url({{sondeo.foto}});"></div>
               </div>
               <div class="cuerpo" data-toggle="modal" data-target=".edit-sondeo">
                 <h4>
-                  ¿Está usted de acuerdo con que se lleven a españa a los militares involucrados en el caso Jesuita?
+                  {{sondeo.pregunta}}
                 </h4>
-                <div class="div-respuesta">
-                  <div class="text">                    Si, estoy de acuerdo <span>65% | 65 votos</span>
+                <div ng-repeat="respuesta in sondeo.respuestas" class="div-respuesta">
+                  <div class="text">{{respuesta.respuesta}}<span>{{(respuesta.total*100)/sondeo.total | number:2}}% | {{respuesta.total}} votos</span>
                   </div>
-                  <div style="width:60%;" class="color">
-                  </div>
-                </div>
-                <div class="div-respuesta">
-                  <div class="text">                    Si, estoy de acuerdo <span>65% | 65 votos</span>
-                  </div>
-                  <div style="width:30%;" class="color">
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- Sondeo Item-->
-        <!-- Sondeo Item-->
-        <div class="col-md-4">
-            <div class="sondeo-4">
-              <div class="header">
-                <h1>Salarios de policias | <span>01/02/2016</span><a data-toggle="modal" data-target=".delete-sondeo"><i class="ion-trash-a"></i></a>
-  </h1>
-                <div class="img" style="background-image:url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/01/JOV6782-copy.jpg);"></div>
-              </div>
-              <div class="cuerpo">
-                <h4>
-                  Esta usted de acuerdo con que le aumenten el salario a los agentes de la PNC?
-                </h4>
-                <div class="div-respuesta">
-                  <div class="text">Posiblemente <span>65% | 65 votos</span>
-                  </div>
-                  <div style="width:20%;" class="color">
-                  </div>
-                </div>
-                <div class="div-respuesta">
-                  <div class="text">No me interesa <span>65% | 65 votos</span>
-                  </div>
-                  <div style="width:80%;" class="color">
+                  <div style="width:{{(respuesta.total*100)/sondeo.total | number:2}}%;" class="color">
                   </div>
                 </div>
               </div>
@@ -113,6 +79,7 @@
         </div>
         <!-- Sondeo Item-->
     </div>
+    <uib-pagination total-items="sondeos.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
     <div class="footer">
         <div class="row">
             <div class="col-md-12">

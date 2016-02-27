@@ -45,7 +45,7 @@ function respuestas($id){
 
 function respuestaMax($id){
 	$resinfo = mysql_query("SELECT idRespuesta, idSondeo, respuesta
-												FROM respuesta");
+												FROM respuesta where idSondeo = $id");
 	while ($respreview = mysql_fetch_array($resinfo)) {
       if(total($respreview['idRespuesta'])>$min){
         $respuesta = array(
@@ -61,7 +61,11 @@ function total($id){
 	$resinfo = mysql_query("SELECT count(a.idRespuesta) as total
 												FROM resultado a where a.idRespuesta = $id group by a.idRespuesta");
 	$res = mysql_fetch_row($resinfo);
-	$respuestas = $res[0];
+	if($res[0]){
+		$respuestas = $res[0];
+	}else{
+		$respuestas = 0;
+	}
 	return $respuestas;
 }
 function maxTotal($id){
@@ -70,5 +74,31 @@ function maxTotal($id){
 	$res = mysql_fetch_row($resinfo);
 	$respuestas = $res[0];
 	return $respuestas;
+}
+function formatoFecha($fecha){
+	list($diaNombre, $dia, $mes, $anio) = explode(" ",date("l, d m Y", strtotime($fecha)));
+	$meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	if($diaNombre == "Sunday,"){
+		$nombre = "Domingo,";
+	}elseif($diaNombre == "Monday,"){
+		$nombre = "Lunes,";
+	}elseif($diaNombre == "Tuesday,"){
+		$nombre = "Martes,";
+	}elseif($diaNombre == "Wednesday,"){
+		$nombre = "Lunes,";
+	}elseif($diaNombre == "Thursday,"){
+		$nombre = "Jueves,";
+	}elseif($diaNombre == "Friday,"){
+		$nombre = "Lunes,";
+	}elseif($diaNombre == "Saturday,"){
+		$nombre = "Sabado,";
+	}
+	return $nombre." ".$dia." de ".$meses[$mes -1]." del ".$anio;
+}
+
+function formatoFecha2($fecha){
+	list($dia, $mes, $anio) = explode(" ",date("d m Y", strtotime($fecha)));
+	$meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	return $dia." de ".$meses[$mes -1]." del ".$anio;
 }
 ?>

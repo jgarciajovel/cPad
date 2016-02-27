@@ -21,13 +21,20 @@ angular.module('cpad.controllers', [])
 
     .factory('userFactory', function() {
     return{
-          photo: 'https://pbs.twimg.com/profile_images/681101205263757312/iZmn1nzS.jpg',
-          name : 'Juan Carlos',
+          id : 'Abc3214KB',
+          photo: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNJ4TdrDgFJM3LR4pYtbvCi_2WYZyQYDFPnlU6OlIMdi2zdku5',
+          name : 'Dora Reyes',
         }
     })
     .filter('urlEncode', function() {
         return function(input) {
             return input.split(" ").join("-");
+        }
+    })
+
+    .filter('startFrom', function(){
+        return function(data, start){
+            return data.slice(start);
         }
     })
 
@@ -37,9 +44,9 @@ angular.module('cpad.controllers', [])
         $scope.date = new Date();
 
         //Bolsas
-        $scope.bolsaNombre = 'Dow Jones';
-        $scope.bolsaPorcentaje = '2.39';
-        $scope.bolsaValor = '15,944.5';
+        // $scope.bolsaNombre = 'Dow Jones';
+        // $scope.bolsaPorcentaje = '2.39';
+        // $scope.bolsaValor = '15,944.5';
 
         //Mercados
         $scope.mercadosNombre = 'PETROLEO';
@@ -70,6 +77,11 @@ angular.module('cpad.controllers', [])
           $scope.sondeo = response.sondeo;
           $scope.fotogaleria = response.fotogaleria;
           $scope.cliente = response.cliente;
+          $scope.bolsas = response.bolsas;
+          $scope.mercados = response.mercados;
+          $scope.cifras = response.cifras;
+          $scope.divisas = response.divisas;
+          $scope.tasas = response.tasas;
         });
 
     })
@@ -85,6 +97,19 @@ angular.module('cpad.controllers', [])
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+        $scope.maxSize = 4;
+        $http.get("api/php/history.php").success(function(response){
+          $scope.contenido = response.contenido;
+        });
+        $scope.totalVisitas = function(articulos){
+          var total = 0;
+          for (var i = 0; i < articulos.length; i++) {
+            total += parseInt(articulos[i].total);
+          }
+          return total;
+        };
     })
     .controller('photogalleryController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -93,6 +118,12 @@ angular.module('cpad.controllers', [])
         $scope.upload = function(){
             console.log('upload');
         }
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.maxSize = 4;
+        $http.get('api/php/photogallery.php').success(function(response){
+          $scope.fotogalerias = response.fotogalerias;
+        });
     })
     .controller('adsController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -128,5 +159,11 @@ angular.module('cpad.controllers', [])
         $scope.pOcupadas = '120';
         $scope.pPorcentaje = ($scope.pOcupadas * 100) / $scope.pDisponibles;
         console.log($scope.pPorcentaje);
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.maxSize = 4;
+        $http.get('api/php/sondeos.php').success(function(response){
+          $scope.sondeos = response.sondeos;
+        });
 
     });
