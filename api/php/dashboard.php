@@ -40,10 +40,73 @@ $clientepreview = mysql_fetch_row($clienteinfo);
 $cliente = array('nombre' => $clientepreview[0], 'total' => $clientepreview[1]);
 // CLIENTE MAS VISTO
 
+$bolsainfo = mysql_query("SELECT idBolsa, nombre, porcentaje, valor from bolsa");
+while($bolsapreview = mysql_fetch_array($bolsainfo)){
+  $bolsas[] = array(
+    'id' => $bolsapreview['idBolsa'],
+    'nombre' => $bolsapreview['nombre'],
+    'porcentaje' => $bolsapreview['porcentaje'],
+    'valor' => $bolsapreview['valor']
+  );
+}
+// BOLSAS DEL MUNDO
+// MERCADOS DEL MUNDO
+$mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo from mercado");
+while($mercadopreview = mysql_fetch_array($mercadoinfo)){
+  $mercados[] = array(
+    'id' => $mercadopreview['idBolsa'],
+    'nombre' => $mercadopreview['nombre'],
+    'descripcion' => $mercadopreview['descripcion'],
+    'menor' => $mercadopreview['menor'],
+    'masAlto' => $mercadopreview['masAlto'],
+    'ultimo' => $mercadopreview['ultimo'],
+    'porcentaje' => $mercadopreview['porcentaje'],
+    'cambio' => $mercadopreview['cambio']
+  );
+}
+// MERCADOS DEL MUNDO
+// CIFRAS ECONOMICAS
+$cifrasinfo = mysql_query("SELECT idDatos, indicador, periodo, cifras, enlaceDetalles as enlace from datoseconomicos");
+while($cifraspreview = mysql_fetch_array($cifrasinfo)){
+  $cifras[] = array(
+    'id' => $cifraspreview['idDatos'],
+    'indicador' => $cifraspreview['indicador'],
+    'periodo' => $cifraspreview['periodo'],
+    'cifras' => $cifraspreview['cifras'],
+    'enlace' => $cifraspreview['enlace']
+  );
+}
+// CIFRAS ECONOMICAS
+// DIVISAS
+$divisasinfo = mysql_query("SELECT idDivisa, nombre, cambio, pais from divisa");
+while($divisaspreview = mysql_fetch_array($divisasinfo)){
+  $divisas[] = array(
+    'id' => $divisaspreview['idDivisa'],
+    'nombre' => $divisaspreview['nombre'],
+    'cambio' => $divisaspreview['cambio'],
+    'pais' => $divisaspreview['pais']
+  );
+}
+// DIVISAS
+// TASAS
+$tasasinfo = mysql_query("SELECT idTasa, nombre, porcentaje from tasainteres");
+while($tasaspreview = mysql_fetch_array($tasasinfo)){
+  $tasas[] = array(
+    'id' => $tasaspreview['idTasa'],
+    'nombre' => $tasaspreview['nombre'],
+    'porcentaje' => $tasaspreview['porcentaje']
+  );
+}
+// TASAS
 echo json_encode(array(
   'leidos' => $leido,
   'sondeo' => dashSondeo(),
   'fotogaleria' => $fotogaleria,
-  'cliente' => $cliente
+  'cliente' => $cliente,
+  'bolsas' => $bolsas,
+  'mercados' => $mercados,
+  'cifras' => $cifras,
+  'divisas' => $divisas,
+  'tasas' => $tasas
 ));
 ?>

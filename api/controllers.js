@@ -21,8 +21,9 @@ angular.module('cpad.controllers', [])
 
     .factory('userFactory', function() {
     return{
-          photo: 'https://pbs.twimg.com/profile_images/681101205263757312/iZmn1nzS.jpg',
-          name : 'Juan Carlos',
+          id : 'Abc3214KB',
+          photo: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNJ4TdrDgFJM3LR4pYtbvCi_2WYZyQYDFPnlU6OlIMdi2zdku5',
+          name : 'Dora Reyes',
         }
     })
     .filter('urlEncode', function() {
@@ -37,9 +38,9 @@ angular.module('cpad.controllers', [])
         $scope.date = new Date();
 
         //Bolsas
-        $scope.bolsaNombre = 'Dow Jones';
-        $scope.bolsaPorcentaje = '2.39';
-        $scope.bolsaValor = '15,944.5';
+        // $scope.bolsaNombre = 'Dow Jones';
+        // $scope.bolsaPorcentaje = '2.39';
+        // $scope.bolsaValor = '15,944.5';
 
         //Mercados
         $scope.mercadosNombre = 'PETROLEO';
@@ -70,6 +71,11 @@ angular.module('cpad.controllers', [])
           $scope.sondeo = response.sondeo;
           $scope.fotogaleria = response.fotogaleria;
           $scope.cliente = response.cliente;
+          $scope.bolsas = response.bolsas;
+          $scope.mercados = response.mercados;
+          $scope.cifras = response.cifras;
+          $scope.divisas = response.divisas;
+          $scope.tasas = response.tasas;
         });
 
     })
@@ -85,6 +91,9 @@ angular.module('cpad.controllers', [])
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
+        // $http.get("api/php/history.php").succes(function(response){
+        //   $scope.contenido = response.contenido;
+        // });
     })
     .controller('photogalleryController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;

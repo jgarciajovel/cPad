@@ -12,7 +12,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">cPad.</a>
+      <a class="navbar-brand" href="/#">cPad.</a>
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -245,49 +245,14 @@
                       <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
                         <table class="table table-striped">
                           <tr>
-                            <td><input ng-model="newBolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newBolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="newBolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newBolsaNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newBolsaPorcentaje" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="newBolsaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
                           </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
-                          </tr>
-                          <tr>
-                            <td><input ng-model="bolsaNombre" placeholder="Dow Jones" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="bolsaPorcentaje" placeholder="2.39%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
-                            <td><input ng-model="bolsaValor" placeholder="14,944.5" class="input-modal-economics" type="text"></td>
+                          <tr ng-repeat="bolsa in bolsas">
+                            <td><input value="{{bolsa.nombre}}" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{bolsa.porcentaje}}" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsa.porcentaje > 0, 'red': bolsa.porcentaje < 0}" type="text"></td>
+                            <td><input value="{{bolsa.valor}}" plceholder="Valor" class="input-modal-economics" type="text"></td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -298,7 +263,7 @@
 <!-- modal | Bolsas del mundo -->
 <!-- modal | Mercados del mundo -->
 <div class="modal fade new-mercados" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div class="modal-dialog modal-xs">
+          <div class="modal-dialog modal-xs modalxl">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                     <div class="modal-header">
@@ -316,14 +281,14 @@
                             <td><input ng-model="newMercadosMenor" placeholder="Menor" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newMercadosAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
                           </tr>
-                          <tr>
-                            <td><input ng-model="mercadosNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosContrato" placeholder="Contrato" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosUltimo" placeholder="Último" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosCambios" placeholder="Cambios" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosPorCambio" placeholder="%" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosMenor" placeholder="Menor" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="mercadosAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                          <tr ng-repeat="mercado in mercados">
+                            <td><input value="{{mercado.nombre}}" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.descripcion}}" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.ultimo}}" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.cambio}}" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.porcentaje}}" placeholder="%" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.menor}}" placeholder="Menor" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{mercado.masAlto}}" placeholder="Alto" class="input-modal-economics" type="text"></td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -346,14 +311,14 @@
                           <tr>
                             <td><input ng-model="newCifrasIndicador" placeholder="Nombre" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newCifrasPeriodo" placeholder="Contrato" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newCifrasCifras" placeholder="Último" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newCifrasDetalles" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newCifrasCifras" placeholder="Cifras" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newCifrasDetalles" placeholder="Enlace" class="input-modal-economics" type="text"></td>
                           </tr>
-                          <tr>
-                            <td><input ng-model="cifrasIndicador" placeholder="Nombre" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="cifrasPeriodo" placeholder="Contrato" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="cifrasCifras" placeholder="Último" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="cifrasDetalles" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                          <tr ng-repeat="cifra in cifras">
+                            <td><input value="{{cifra.indicador}}" placeholder="Indicador" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{cifra.periodo}}" placeholder="Periodo" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{cifra.cifras}}" placeholder="Cifras" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{cifra.enlace}}" placeholder="Enlace" class="input-modal-economics" type="text"></td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -375,13 +340,13 @@
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newDivisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newDivisaPais" placeholder="Región" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newDivisaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newDivisaPais" placeholder="País" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newDivisaValor" placeholder="Cambio" class="input-modal-economics" type="text"></td>
                           </tr>
-                          <tr>
-                            <td><input ng-model="divisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="divisaPais" placeholder="Región" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="divisaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
+                          <tr ng-repeat="divisa in divisas">
+                            <td><input value="{{divisa.nombre}}" placeholder="Divisa" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{divisa.pais}}" placeholder="País" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{divisa.cambio}}" placeholder="Cambio" class="input-modal-economics" type="text"></td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -405,9 +370,9 @@
                             <td><input ng-model="newBolsaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newBolsaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': newBolsaPorcentaje > 0, 'red': newBolsaPorcentaje < 0}" type="text"></td>
                           </tr>
-                          <tr>
-                            <td><input ng-model="tasaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="tasaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
+                          <tr ng-repeat="tasa in tasas">
+                            <td><input value="{{tasa.nombre}}" placeholder="Tasa" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{tasa.porcentaje}}" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': tasa.porcentaje > 0, 'red': tasa.porcentaje < 0}" type="text"></td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
