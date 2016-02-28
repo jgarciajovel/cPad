@@ -62,15 +62,15 @@
                 <div class="n-a">
                     <h1>Nuevo Articulo <i class="ion-edit"></i></h1>
                     <h4>tu articulo más leido</h4>
-                    <h2>{{leidos[0].titulo}}</h2>
-                    <h3>{{leidos[0].total}} visitas </h3>
+                    <h2>{{tops[0].titulo}}</h2>
+                    <h3>{{tops[0].total}} visitas </h3>
                 </div>
             </div></a>
         </div>
         <div class="col-md-4">
             <a href="#/photogallery">
                 <div class="square">
-                    <div id="move" style="background-image: url(../contrapunto/{{fotogaleria.foto}});" class="ft">
+                    <div id="move" style="background-image: url({{fotogaleria.foto}});" class="ft">
                         <div class="move-ft">
                             <h1>Fotogalería</h1>
                             <h4>Fotogalería más vista</h4>
@@ -161,50 +161,10 @@
                 <h1>Tus articulos más leidos</h1>
                 <table class="table table-hover">
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td style="min-width:80%;">Meléndez: Seré fiscal del pueblo</td>
-                            <td style="min-width:20%;">2,000 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td style="min-width:80%;">El Salvador se alista para traslado de cubanos</td>
-                            <td style="min-width:20%;">1,000 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td style="min-width:80%;">Afinan detalles en caso Flores</td>
-                            <td style="min-width:20%;">800 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td style="min-width:80%;">PDDH pide inmediata detención de exmilitares</td>
-                            <td style="min-width:20%;">790 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td style="min-width:80%;">¿Llegó el fiscal anticorrupción?</td>
-                            <td style="min-width:20%;">720 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td style="min-width:80%;">IUDOP: la gente vive con miedo</td>
-                            <td style="min-width:20%;">680 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td style="min-width:80%;">Crimen jesuita, ¿gatos o ratones?</td>
-                            <td style="min-width:20%;">654 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td style="min-width:80%;">SC empujará propuesta de reforma de Ley</td>
-                            <td style="min-width:20%;">564 visitas</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">9</th>
-                            <td style="min-width:80%;">Ficciones: el intelectual y el poder en El Salvador</td>
-                            <td style="min-width:20%;">417 visitas</td>
+                        <tr ng-repeat="top in tops">
+                            <th scope="row">{{tops.indexOf(top) +1}}</th>
+                            <td style="min-width:80%;"><a ng-href="http://www.contrapunto.com.sv/#/{{top.urlSeccion}}/{{top.urlSubseccion}}/{{top.titulo | urlEncode}}/{{top.id}}" class="urlvisto">{{top.titulo}}</a></td>
+                            <td style="min-width:20%;">{{top.total}} visitas</td>
                         </tr>
                     </tbody>
                 </table>

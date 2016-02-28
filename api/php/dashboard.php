@@ -1,9 +1,10 @@
 <?php
 include('connection.php');
 include('funciones.php');
-// $editdata = json_decode(file_get_contents("php://input"));
+$editdata = json_decode(file_get_contents("php://input"));
 date_default_timezone_set('America/El_Salvador');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
+$id = $_GET['id'];
 // TOP LEIDOS GLOBALES
 $leidoinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubseccion, se.url as urlSeccion, count(b.idArticulo) as total
                           from articulo a, subseccion s, seccion se, vistaarticulo b where a.idSubseccion = s.idSubseccion and a.activo = 1 and s.idSeccion = se.idSeccion and a.idArticulo = b.idArticulo
@@ -21,6 +22,23 @@ while($leidopreview = mysql_fetch_array($leidoinfo)){
   );
 }
 // TOP LEIDOS GLOBALES
+// TOP LEIDOS PERSONALES
+$topinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubseccion, se.url as urlSeccion, count(b.idArticulo) as total
+                          from articulo a, subseccion s, seccion se, vistaarticulo b where a.idSubseccion = s.idSubseccion and a.activo = 1 and s.idSeccion = se.idSeccion and a.idArticulo = b.idArticulo and a.idUsuario = '$id'
+                          group by b.idArticulo
+                          order by 5 desc
+                          limit 9");
+
+while($toppreview = mysql_fetch_array($topinfo)){
+  $top[] = array(
+      'id' => $toppreview['id'],
+      'titulo' => $toppreview['titulo'],
+      'urlSubseccion' => $toppreview['urlSubseccion'],
+      'urlSeccion' => $toppreview['urlSeccion'],
+      'total' => $toppreview['total'],
+  );
+}
+// TOP LEIDOS PERSONALES
 // FOTOGALERIA MAS VISTA
 $fotoinfo = mysql_query("SELECT a.rutaFoto as foto, a.titulo, count(b.id) as total
                         FROM fotogaleria a, vistafotogaleria b
@@ -31,14 +49,7 @@ $fotoinfo = mysql_query("SELECT a.rutaFoto as foto, a.titulo, count(b.id) as tot
 $fotopreview = mysql_fetch_row($fotoinfo);
 $fotogaleria = array('foto' => $fotopreview[0], 'titulo' => $fotopreview[1], 'total' => $fotopreview[2]);
 // FOTOGALERIA MAS VISTA
-// CLIENTE MAS VISTO
-$clienteinfo = mysql_query("SELECT a.nombre, (SELECT count(b.idBanner) from vistabanner b, banner c where b.idBanner = c.idBanner and c.idCliente = a.idCliente) as total
-                          FROM cliente a
-                          order by 2 desc
-                          limit 1");
-$clientepreview = mysql_fetch_row($clienteinfo);
-$cliente = array('nombre' => $clientepreview[0], 'total' => $clientepreview[1]);
-// CLIENTE MAS VISTO
+
 
 $bolsainfo = mysql_query("SELECT idBolsa, nombre, porcentaje, valor from bolsa");
 while($bolsapreview = mysql_fetch_array($bolsainfo)){
@@ -102,11 +113,12 @@ echo json_encode(array(
   'leidos' => $leido,
   'sondeo' => dashSondeo(),
   'fotogaleria' => $fotogaleria,
-  'cliente' => $cliente,
+  'cliente' => clientePopular(),
   'bolsas' => $bolsas,
   'mercados' => $mercados,
   'cifras' => $cifras,
   'divisas' => $divisas,
-  'tasas' => $tasas
+  'tasas' => $tasas,
+  'tops' => $top
 ));
 ?>

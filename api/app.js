@@ -1,4 +1,4 @@
-angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngular','ui.bootstrap'])
+angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngular','ui.bootstrap','ngCookies'])
     .config(function($routeProvider){
         $routeProvider
             .when("/", {
