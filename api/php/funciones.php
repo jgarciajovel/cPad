@@ -101,4 +101,13 @@ function formatoFecha2($fecha){
 	$meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 	return $dia." de ".$meses[$mes -1]." del ".$anio;
 }
+function clientePopular(){
+	$clienteinfo = mysql_query("SELECT a.nombre, (SELECT count(b.idBanner) from vistabanner b, banner c where b.idBanner = c.idBanner and c.idCliente = a.idCliente) as total, a.ingreso, a.rutaFoto
+	                          FROM cliente a
+	                          order by 2 desc
+	                          limit 1");
+	$clientepreview = mysql_fetch_row($clienteinfo);
+	$cliente = array('nombre' => $clientepreview[0], 'total' => $clientepreview[1], 'fecha' => $clientepreview[2], 'foto' => $clientepreview[3]);
+	return $cliente;
+}
 ?>
