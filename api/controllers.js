@@ -56,12 +56,7 @@ angular.module('cpad.controllers', [])
         }
     })
 
-<<<<<<< HEAD
-    .controller('mainController', function($scope, $http, $location, userFactory,uibDateParser){
-
-=======
     .controller('mainController', function($scope, $http, $location, userFactory, $cookies){
->>>>>>> origin/master
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.userId = userFactory.id;

@@ -25,6 +25,10 @@ angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngul
                 controller: "sondeoController",
                 templateUrl: "templates/sondeo/main.html"
             })
+            .when("/caricaturas", {
+                controller: "photogalleryController",
+                templateUrl: "templates/caricaturas/main.html"
+            })
             .when("/ads/:idPosition", {
                 controller: "positionController",
                 templateUrl: "templates/publicidad/posicion.html"

@@ -148,11 +148,13 @@
           </div>
         </a>
         <div class="col-md-3">
-            <div id="move-ca" class="caricatura" style="background-image: url(http://3.bp.blogspot.com/-_cHelgqWTDY/Tv2lI0VYnaI/AAAAAAAAAv4/k1-yvFQnYCo/s1600/8+de+enero+domingo.jpg);">
-                <div class="trans">
-                    <h1>Caricaturas</h1>
-                </div>
-            </div>
+            <a href="#/caricaturas">
+              <div id="move-ca" class="caricatura" style="background-image: url(http://3.bp.blogspot.com/-_cHelgqWTDY/Tv2lI0VYnaI/AAAAAAAAAv4/k1-yvFQnYCo/s1600/8+de+enero+domingo.jpg);">
+                  <div class="trans">
+                      <h1>Caricaturas</h1>
+                  </div>
+              </div>
+            </a>
         </div>
     </div>
     <div class="row">
@@ -163,8 +165,8 @@
                     <tbody>
                         <tr ng-repeat="top in tops">
                             <th scope="row">{{tops.indexOf(top) +1}}</th>
-                            <td style="min-width:80%;"><a ng-href="http://www.contrapunto.com.sv/#/{{top.urlSeccion}}/{{top.urlSubseccion}}/{{top.titulo | urlEncode}}/{{top.id}}" class="urlvisto">{{top.titulo}}</a></td>
-                            <td style="min-width:20%;">{{top.total}} visitas</td>
+                            <td style="max-width: 300px; display: inline-block;"><a ng-href="http://www.contrapunto.com.sv/#/{{top.urlSeccion}}/{{top.urlSubseccion}}/{{top.titulo | urlEncode}}/{{top.id}}" class="urlvisto">{{top.titulo}}</a></td>
+                            <td style="min-width:30%;">{{top.total}} visitas</td>
                         </tr>
                     </tbody>
                 </table>
