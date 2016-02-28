@@ -70,7 +70,7 @@
         <div class="col-md-4">
             <a href="#/photogallery">
                 <div class="square">
-                    <div id="move" style="background-image: url(../contrapunto/{{fotogaleria.foto}});" class="ft">
+                    <div id="move" style="background-image: url({{fotogaleria.foto}});" class="ft">
                         <div class="move-ft">
                             <h1>Fotogalería</h1>
                             <h4>Fotogalería más vista</h4>
@@ -217,7 +217,7 @@
                     <tbody>
                         <tr ng-repeat="leido in leidos">
                             <th scope="row">{{leidos.indexOf(leido) +1}}</th>
-                            <td style="max-width: 300px; display: inline-block;"><a ng-href="http://www.contrapunto.com.sv/#/{{leido.urlSeccion}}/{{leido.urlSubseccion}}/{{leido.titulo | urlEncode}}/{{leido.id}}" class="urlvisto">{{leido.titulo}}</a></td>
+                            <td style="max-width: 300px; display: inline-block;"><a target="_blank" ng-href="http://www.contrapunto.com.sv/#/{{leido.urlSeccion}}/{{leido.urlSubseccion}}/{{leido.titulo | urlEncode}}/{{leido.id}}" class="urlvisto">{{leido.titulo}}</a></td>
                             <td style="min-width:30%;">{{leido.total}} visitas</td>
                         </tr>
                     </tbody>
@@ -238,11 +238,10 @@
           <div class="modal-dialog modal-xs">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
-                      </div>
-                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                  <div class="modal-header h-economia">
+                      <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
+                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                    </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newBolsaNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
@@ -253,6 +252,10 @@
                             <td><input value="{{bolsa.nombre}}" placeholder="Nombre" class="input-modal-economics" type="text"></td>
                             <td><input value="{{bolsa.porcentaje}}" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsa.porcentaje > 0, 'red': bolsa.porcentaje < 0}" type="text"></td>
                             <td><input value="{{bolsa.valor}}" plceholder="Valor" class="input-modal-economics" type="text"></td>
+                            <td class="row-buttons">
+                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                            </td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -266,11 +269,10 @@
           <div class="modal-dialog modal-xs modalxl">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-header h-economia">
                         <h4 class="modal-title" id="gridSystemModalLabel">Mercados del mundo</h4>
+                        <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
                       </div>
-                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newMercadosNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
@@ -289,6 +291,10 @@
                             <td><input value="{{mercado.porcentaje}}" placeholder="%" class="input-modal-economics" type="text"></td>
                             <td><input value="{{mercado.menor}}" placeholder="Menor" class="input-modal-economics" type="text"></td>
                             <td><input value="{{mercado.masAlto}}" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                            <td class="row-buttons">
+                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                            </td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -302,11 +308,10 @@
           <div class="modal-dialog modal-xs">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Cifras económicas</h4>
-                      </div>
-                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                  <div class="modal-header h-economia">
+                      <h4 class="modal-title" id="gridSystemModalLabel">Cifras económicas</h4>
+                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                    </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newCifrasIndicador" placeholder="Nombre" class="input-modal-economics" type="text"></td>
@@ -319,6 +324,10 @@
                             <td><input value="{{cifra.periodo}}" placeholder="Periodo" class="input-modal-economics" type="text"></td>
                             <td><input value="{{cifra.cifras}}" placeholder="Cifras" class="input-modal-economics" type="text"></td>
                             <td><input value="{{cifra.enlace}}" placeholder="Enlace" class="input-modal-economics" type="text"></td>
+                            <td class="row-buttons">
+                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                            </td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -332,11 +341,10 @@
           <div class="modal-dialog modal-xs">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Divisas</h4>
-                      </div>
-                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                  <div class="modal-header h-economia">
+                      <h4 class="modal-title" id="gridSystemModalLabel">Divisas</h4>
+                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                    </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newDivisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
@@ -347,6 +355,10 @@
                             <td><input value="{{divisa.nombre}}" placeholder="Divisa" class="input-modal-economics" type="text"></td>
                             <td><input value="{{divisa.pais}}" placeholder="País" class="input-modal-economics" type="text"></td>
                             <td><input value="{{divisa.cambio}}" placeholder="Cambio" class="input-modal-economics" type="text"></td>
+                            <td class="row-buttons">
+                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                            </td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -360,11 +372,10 @@
           <div class="modal-dialog modal-xs">
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">Tasas de interés</h4>
-                      </div>
-                      <input placeholder="Fecha de cierre" type="text" class="fecha-cierre">
+                  <div class="modal-header h-economia">
+                      <h4 class="modal-title" id="gridSystemModalLabel">Tasas del mundo</h4>
+                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                    </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newBolsaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
@@ -373,6 +384,10 @@
                           <tr ng-repeat="tasa in tasas">
                             <td><input value="{{tasa.nombre}}" placeholder="Tasa" class="input-modal-economics" type="text"></td>
                             <td><input value="{{tasa.porcentaje}}" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': tasa.porcentaje > 0, 'red': tasa.porcentaje < 0}" type="text"></td>
+                            <td class="row-buttons">
+                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                            </td>
                           </tr>
                         </table>
                         <button class="save-modal">Guardar</button>
@@ -381,3 +396,16 @@
         </div>
 </div>
 <!-- modal | Tasas del mundo -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-m" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este Item?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button class="eliminar">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->

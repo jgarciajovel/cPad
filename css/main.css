@@ -313,7 +313,7 @@ a:hover, a:focus, a:active{
   width: 100%;
   border: 0px;
   padding: 5px 10px;
-  color: #222;
+  color: #999;
   font-size: 14px;
   border-radius: 2px;
   background-color: transparent;
@@ -335,6 +335,7 @@ a:hover, a:focus, a:active{
 }
 .input-modal-economics:focus{
   outline: none;
+  color: #222;
 }
 .tabel tr td{
   text-align: center;
@@ -370,21 +371,29 @@ a:hover, a:focus, a:active{
     padding-right: 30px;
 }
 .sondeo h4{
-    margin-top: 40px;
-    font-size: 14px;
-    font-weight: 300;
-    color: #fff;
-    line-height: 22px;
-    padding-right: 30px;
-    text-align: center;
+  margin-bottom: 130px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 22px;
+  padding-right: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  text-align: center;
 }
 .sondeo .respuesta{
-    text-align: center;
-    font-weight: 400;
-    font-size: 110px;
-    margin-top: -10px;
-    color: #6E89FF;
-    margin-left: -35px !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  font-weight: 400;
+  position: absolute;
+  font-size: 110px;
+  margin-top: -10px;
+  color: #6E89FF;
+  margin-left: -35px !important;
 }
 /* Sondeo */
 /* Caricatura */
@@ -644,6 +653,12 @@ input:-moz-placeholder { color:#777; }
 }
 /* History of articles */
 /* Photogallery */
+.top-texto{
+  padding: 10px 10px;
+}
+.top-texto .delete-button{
+  color: #fff;
+}
 .new-photogallery-h1{
     margin-top: 0px;
     font-size: 26px;
@@ -739,12 +754,29 @@ input:-moz-placeholder { color:#777; }
     font-weight:300;
     text-shadow: 1px 2px 1px rgba(0,0,0,0.3);
 }
+.h-economia{
+  background-color: #f9f9f9;
+  border-radius: 3px 3px 0px 0px;
+  text-align: left;
+  color: #fff;
+  background-image: url(../img/squares/EcoLogo.svg);
+  background-size:70px;
+  background-position: center;
+  padding: 24px 20px 20px 20px;
+  background-repeat: no-repeat;
+}
+.h-economia .modal-title{
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #00B765;
+}
 .modal-content{
     border-radius: 3px;
     border: 0px;
     box-shadow: none;
     padding-bottom: 170px;
-    background-color: #f1f1f1;
+    background-color: #f7f7f7;
 }
 .modal-delete{
     border-radius: 3px;
@@ -754,6 +786,10 @@ input:-moz-placeholder { color:#777; }
     padding: 20px 30px;
     background-color: #fff;
     text-align: center;
+}
+.sobre{
+    margin-top: 40px !important;
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.30) !important;
 }
 .modal-delete h3{
   font-size: 16px;
@@ -805,14 +841,14 @@ input:-moz-placeholder { color:#777; }
     border: 0px;
     box-shadow: none;
     padding-bottom: 10px;
-    background-color: #f1f1f1;
+    background-color: #f7f7f7;
 }
 .modal-content-modulos{
     border-radius: 3px;
     border: 0px;
     box-shadow: none;
     padding-bottom: 0px;
-    background-color: #f1f1f1;
+    background-color: #f6f6f6;
 }
 .upload-input{
     width: 250px;
@@ -856,15 +892,24 @@ input:-moz-placeholder { color:#777; }
     outline:none;
 }
 .fecha-cierre{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 250px;
-    height: 30px;
-    background-color: #fff;
+    margin-top: -22px;
+    width: 200px;
+    background-color: transparent;
     border: 0px;
-    border-radius: 1px;
-    padding-left: 10px;
+    color: #00B765;
+    text-transform: uppercase;
+    text-align: right;
+    border-radius: px;
+    padding-left: 5px;
+    float: right;
+    webkit-input-placeholder:#fff;
+    moz-input-placeholder:#fff;
 }
+.fecha-cierre::-webkit-input-placeholder { color: #00B765; }
+.fecha-cierre:-moz-placeholder { color: #00B765; }
+.fecha-cierre::-moz-placeholder { color: #00B765; }
+.fecha-cierre:-ms-input-placeholder { color: #00B765; }
+
 .fecha-cierre:focus{
     outline:none;
 }
@@ -1358,3 +1403,32 @@ padding: 0px 10px;
     background-color: #333;
     color:#000;
 }
+/* Buttons */
+.delete-button{
+  font-size:20px;
+  float: right;
+  color: #B2C3C5;
+  margin-top: 4px;
+  margin-right: 15px;
+}
+.delete-button:hover{
+  font-size:20px;
+  color: #ff817c;
+  cursor: pointer;
+}
+.add-button{
+  font-size:20px;
+  float: left;
+  color: #B2C3C5;
+  margin-top: 4px;
+  margin-right: 15px;
+}
+.add-button:hover{
+  font-size:20px;
+  color: #00B765;
+  cursor: pointer;
+}
+.row-buttons{
+  width: 100px;
+}
+/* Buttons */

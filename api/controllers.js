@@ -38,7 +38,8 @@ angular.module('cpad.controllers', [])
         }
     })
 
-    .controller('mainController', function($scope, $http, $location, userFactory){
+    .controller('mainController', function($scope, $http, $location, userFactory,uibDateParser){
+
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
