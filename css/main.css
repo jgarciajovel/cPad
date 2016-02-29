@@ -393,7 +393,7 @@ a:hover, a:focus, a:active{
   font-size: 110px;
   margin-top: -10px;
   color: #6E89FF;
-  margin-left: -35px !important;
+
 }
 /* Sondeo */
 /* Caricatura */
@@ -1134,6 +1134,7 @@ input:-moz-placeholder { color:#777; }
     color: #fff;
     letter-spacing: 0.5px;
     font-weight:400;
+    text-shadow:1px 2px 1px rgba(0,0,0,0.3);
 }
 .txt-black{
     color: #303030 !important;

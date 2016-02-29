@@ -143,11 +143,12 @@ angular.module('cpad.controllers', [])
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
 
-        $scope.pDisponibles = '315';
-        $scope.pOcupadas = '120';
-        $scope.pPorcentaje = ($scope.pOcupadas * 100) / $scope.pDisponibles;
         $http.get("api/php/analytics.php").success(function(response){
           $scope.clientePopular = response.clientePopular;
+          $scope.publicidadPopular = response.publicidadPopular;
+          $scope.posicionP = response.posicionP;
+          $scope.posicionM = response.posicionM;
+          $scope.total = response.total;
         });
 
     })

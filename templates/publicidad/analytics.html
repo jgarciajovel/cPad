@@ -69,19 +69,19 @@
         </div>
         <div class="col-md-6">
             <div class="positions-sq">
-                <div class="transparency" style="width:{{pPorcentaje | number:0}}%;">
+                <div class="transparency" style="width:{{(total.ocupadas*100)/total.total | number:0}}%;">
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="texto6">
                             <h2>POSICIONES OCUPADAS</h2>
-                            <h1>{{pOcupadas}}</h1>
+                            <h1>{{total.ocupadas}}</h1>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="texto6">
                             <h2 class="txt-black">POSICIONES DISPONIBLES</h2>
-                            <h1 class="txt-black">{{pDisponibles}}</h1>
+                            <h1 class="txt-black">{{total.total}}</h1>
                         </div>
                     </div>
                 </div>
@@ -91,21 +91,21 @@
             <div class="old-album" style="background-image:url(img/ads/position-more.svg); background-size:contain; background-position:bottom;">
                 <h4 style="padding:10px 10px;">Posición más utilizada</h4>
                 <div class="texto">
-                    <h1>Posición 1</h1>
-                    <h3>Portada</h3>
+                    <h1>Posición {{posicionP.posicion}}</h1>
+                    <h3>{{posicionP.seccion}}</h3>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="old-album" style="background-image:url(http://www.contrapunto.com.sv/images/banners/aniversario-sitramss-contrapunto-2.png);">
+            <div class="old-album" style="background-image:url({{publicidadPopular.foto}});">
                 <div class="transparency">
                     <h4>Publicidad más vista</h4>
                     <div class="texto">
-                        <h6>9/01/2016</h6>
-                        <h1>Subes</h1>
-                        <h3>7,832 visitas</h3>
+                        <h6>{{publicidadPopular.fecha | date:'dd/MM/yyyy'}}</h6>
+                        <h1>{{publicidadPopular.cliente}}</h1>
+                        <h3>{{publicidadPopular.total}} visitas</h3>
                     </div>
                 </div>
             </div>
@@ -123,8 +123,8 @@
             <div class="old-album" style="background-image:url(img/ads/position-minus.svg); background-size:contain; background-position:bottom;">
                 <h4 style="padding:10px 10px;">Posición menos utilizada</h4>
                 <div class="texto">
-                    <h1 style="color:#000; text-shadow:none; font-weight:normal;">Posición 1</h1>
-                    <h3 style="color:#000; text-shadow:none; font-weight:normal;">Portada</h3>
+                    <h1 style="color:#000; text-shadow:none; font-weight:normal;">Posición {{posicionM.posicion}}</h1>
+                    <h3 style="color:#000; text-shadow:none; font-weight:normal;">{{posicionM.seccion}}</h3>
                 </div>
             </div>
         </div>
