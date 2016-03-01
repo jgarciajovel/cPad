@@ -211,7 +211,7 @@
                             <td><input ng-model="newBolsaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
                           </tr>
                           <tr ng-repeat="bolsa in bolsas">
-                            <td><input value="{{bolsa.nombre}}" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{bolsa.nombre}}" ng-model="nombre" placeholder="Nombre" class="input-modal-economics" type="text" ng-initial></td>
                             <td><input value="{{bolsa.porcentaje}}" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsa.porcentaje > 0, 'red': bolsa.porcentaje < 0}" type="text"></td>
                             <td><input value="{{bolsa.valor}}" plceholder="Valor" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">

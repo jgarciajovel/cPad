@@ -79,6 +79,20 @@ angular.module('cpad.controllers', [])
         };
       })
 
+      .directive('ngInitial', function() {
+        return {
+          restrict: 'A',
+          controller: [
+            '$scope', '$element', '$attrs', '$parse', function($scope, $element, $attrs, $parse) {
+              var getter, setter, val;
+              val = $attrs.ngInitial || $attrs.value;
+              getter = $parse($attrs.ngModel);
+              setter = getter.assign;
+              setter($scope, val);
+            }
+          ]
+        };
+      })
     .controller('mainController', function($scope, $http, $location, uService, $cookies){
 
           $scope.logout = function(){
@@ -111,16 +125,12 @@ angular.module('cpad.controllers', [])
           });
 
           $scope.editBolsa = function(bolsa){
-            console.log(bolsa.id);
-            console.log(bolsa.nombre);
-            console.log(bolsa.porcentaje);
-            console.log(bolsa.valor);
-            // $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-            //   alert("Cambios guardados");
-            //   $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
-            //     $scope.bolsas = response.bolsas;
-            //   });
-            // });
+            $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+              alert("Cambios guardados");
+              $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
+              });
+            });
           }
 
     })

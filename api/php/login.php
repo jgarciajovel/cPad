@@ -8,7 +8,7 @@ if(isset($_GET['username']) && isset($_GET['password'])){
   $password = md5($_GET['password']);
 
 
-$firstQ = mysql_query("SELECT * FROM `usuario` WHERE `usuario` = '$username' AND `clave` = '$password'");
+$firstQ = mysql_query("SELECT idUsuario FROM `usuario` WHERE `usuario` = '$username' AND `clave` = '$password'");
 
 $firstValidation = mysql_fetch_row($firstQ);
 
