@@ -144,6 +144,18 @@ function caricaturap(){
 	}
 	return $caricatura;
 }
+
+function caricaturista(){
+	$caricainfo = mysql_query("SELECT idCaricaturista, CONCAT(nombres,' ', apellidos) as autor FROM `caricaturista`");
+	while($caricapreview = mysql_fetch_array($caricainfo)){
+		$caricaturista[] = array(
+				'idCaricaturista' => $caricapreview['idCaricaturista'],
+				'Caricaturista' => $caricapreview['autor'],
+				);
+	}
+	return $caricaturista;
+}
+
 function fotogaleriap(){
 	$fotoinfo = mysql_query("SELECT f.id, f.rutaFoto as foto, f.link, f.titulo, f.fecha, count(c.id) as total
 	                        FROM fotogaleria f, vistafotogaleria c

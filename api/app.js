@@ -1,6 +1,6 @@
 
 
-angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngular','ui.bootstrap','ngCookies'])
+angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngular','ui.bootstrap','ngCookies','ngFileUpload'])
     .config(function($routeProvider){
         $routeProvider
             .when("/", {

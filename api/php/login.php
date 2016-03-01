@@ -28,17 +28,17 @@ echo json_encode(
 
 }
 
-if(isset($_GET['id']) != null){
+if(isset($editdata->id) != null){
 
-  $id = $_GET['id'];
+  $idd = $editdata->id;
 
   $userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto
                           FROM usuario u, personal c
-                          WHERE u.idPersonal = c.idPersonal and u.idUsuario = '$id'");
+                          WHERE u.idPersonal = c.idPersonal and u.idUsuario = '$idd'");
   $userpreview = mysql_fetch_row($userinfo);
   echo json_encode(
     array(
-      'id' =>  $id,
+      'id' =>  $idd,
       'nombre' => $userpreview[0],
       'foto' => $userpreview[1]
     )

@@ -981,6 +981,9 @@ input:-moz-placeholder { color:#777; }
     border-radius: 3px;
     border: 0px;
 }
+.pub-boton:focus{
+  outline: none;
+}
 /* Photogallery */
 /* Ads */
 .settings{
