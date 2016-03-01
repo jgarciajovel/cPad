@@ -42,14 +42,6 @@ angular.module('cpad.controllers', [])
         }
     })
 
-<<<<<<< HEAD
-    .controller('mainController', function($scope, $http, $location, userFactory, $cookies){
-
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
-        $scope.userId = userFactory.id;
-        console.log($scope.userId);
-=======
     .service('userService',function($http){
 
         this.userSinfo = function(){
@@ -81,7 +73,7 @@ angular.module('cpad.controllers', [])
 
       $scope.logIn = function(){
         $http.get('api/php/login.php?username='+$scope.inUsername+'&password='+$scope.inPassword).success(function(response){
-          
+
         });
       }
 
@@ -99,7 +91,6 @@ angular.module('cpad.controllers', [])
 
     .controller('mainController', function($scope, $http, $location, uService, $cookies){
 
->>>>>>> origin/master
         $scope.date = new Date();
 
         // var now = new Date(),
@@ -108,6 +99,7 @@ angular.module('cpad.controllers', [])
         // $cookies.put('userId','do630s',{
         //   expires: exp
         // });
+        
           $http.get("api/php/dashboard.php?id="+userId).success(function(response){
             $scope.leidos = response.leidos;
             $scope.sondeo = response.sondeo;
