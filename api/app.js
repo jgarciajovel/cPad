@@ -1,9 +1,15 @@
+
+
 angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngular','ui.bootstrap','ngCookies'])
     .config(function($routeProvider){
         $routeProvider
             .when("/", {
                 controller: "mainController",
                 templateUrl: "templates/main.html"
+            })
+            .when("/login", {
+                controller: "loginController",
+                templateUrl: "templates/login.html"
             })
             .when("/new-article", {
                 controller: "newArticleController",

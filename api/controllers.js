@@ -19,30 +19,16 @@ angular.module('cpad.controllers', [])
     }
     }])
 
-    .factory('userFactory', function($http,$location,$cookies) {
-      // var userId = $cookies.get('userId');
-      // $http.post('api/php/login.php?id='+userId,{'selectSeccion':userId}).success(function(data,status,headers,config,response){
-      //   $http.get('api/php/login.php?id='+userId).success(function(response){
-      //     if(response){
-      //     return{
-      //           id : response.id,
-      //           photo: response.foto,
-      //           name : response.nombre
-      //       }
-      //     }else{
-      //       return{
-      //         id : 'sadasd',
-      //         photo: 'img/columnista1.jpg',
-      //         name : 'Jose Luis'
-      //       }
-      //     }
-      //   });
-      // });
-      return{
-        id : 'do630s',
-         photo: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNJ4TdrDgFJM3LR4pYtbvCi_2WYZyQYDFPnlU6OlIMdi2zdku5',
-         name : 'Dora Reyes',
-      }
+    .factory('userFactory', function($cookies) {
+        return {
+          nombre: function(nombreF){
+              return nombreF;
+          },
+          foto: function(fotoF){
+              return fotoF;
+          },
+        }
+
     })
     .filter('urlEncode', function() {
         return function(input) {
@@ -56,12 +42,64 @@ angular.module('cpad.controllers', [])
         }
     })
 
+<<<<<<< HEAD
     .controller('mainController', function($scope, $http, $location, userFactory, $cookies){
 
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.userId = userFactory.id;
         console.log($scope.userId);
+=======
+    .service('userService',function($http){
+
+        this.userSinfo = function(){
+
+            userId = 'do630s';
+
+              $http.get('api/php/login.php?id='+userId).success(function(response){
+              username = response.nombre;
+              fotos = response.foto;
+              // console.log(username);
+            });
+        }
+
+    })
+
+    .factory('uService', function($http){
+        return {
+          list: function(response){
+              userId = 'do630s';
+              $http.get('api/php/login.php?id='+userId).success(response);
+          }
+        };
+      })
+
+    .controller('loginController', function($scope, $http, $location, uService, $cookies){
+
+      $scope.inUsername;
+      $scope.inPassword;
+
+      $scope.logIn = function(){
+        $http.get('api/php/login.php?username='+$scope.inUsername+'&password='+$scope.inPassword).success(function(response){
+          
+        });
+      }
+
+      uService.list(function(uService) {
+        if(uService.nombre != ''){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          console.log(uService);
+        }
+      });
+
+
+    })
+
+    .controller('mainController', function($scope, $http, $location, uService, $cookies){
+
+>>>>>>> origin/master
         $scope.date = new Date();
 
         // var now = new Date(),
@@ -70,8 +108,7 @@ angular.module('cpad.controllers', [])
         // $cookies.put('userId','do630s',{
         //   expires: exp
         // });
-        $http.post('api/php/dashboard.php?id='+$scope.userId,{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-          $http.get("api/php/dashboard.php?id="+$scope.userId).success(function(response){
+          $http.get("api/php/dashboard.php?id="+userId).success(function(response){
             $scope.leidos = response.leidos;
             $scope.sondeo = response.sondeo;
             $scope.fotogaleria = response.fotogaleria;
@@ -83,12 +120,12 @@ angular.module('cpad.controllers', [])
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
           });
-        });
 
     })
     .controller('newArticleController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+        $scope.username = userFactory.nombre;
+        console.log($scope.username);
+        $scope.userphoto = userFactory.foto;
         $scope.date = new Date();
         $scope.upload = function(){
             console.log('upload');
@@ -191,7 +228,7 @@ angular.module('cpad.controllers', [])
 
     })
 
-    .controller('sondeoController', function($scope, $http, $location, userFactory){
+    .controller('sondeoController', function($scope, $http, $location){
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.date = new Date();
