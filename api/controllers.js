@@ -56,11 +56,15 @@ angular.module('cpad.controllers', [])
           var now = new Date(),
           exp = new Date(now.getFullYear(), now.getMonth()+6, now.getDate());
 
-          $cookies.put('usercpid',response.id,{
-            expires: exp
-          });
+          if(response.id != null){
+            $cookies.put('usercpid',response.id,{
+              expires: exp
+            });
+            $location.path('/');
+          }else{
+          $scope.error = "!Hay un problema con su usuario ó contraseña¡";
+          }
 
-          $location.path('/');
         });
       }
 
