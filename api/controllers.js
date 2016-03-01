@@ -19,17 +19,6 @@ angular.module('cpad.controllers', [])
     }
     }])
 
-    .factory('userFactory', function($cookies) {
-        return {
-          nombre: function(nombreF){
-              return nombreF;
-          },
-          foto: function(fotoF){
-              return fotoF;
-          },
-        }
-
-    })
     .filter('urlEncode', function() {
         return function(input) {
             return input.split(" ").join("-");
@@ -57,15 +46,6 @@ angular.module('cpad.controllers', [])
 
     })
 
-    .factory('uService', function($http){
-        return {
-          list: function(response){
-              userId = 'do630s';
-              $http.get('api/php/login.php?id='+userId).success(response);
-          }
-        };
-      })
-
     .controller('loginController', function($scope, $http, $location, uService, $cookies){
 
       $scope.inUsername;
@@ -73,33 +53,44 @@ angular.module('cpad.controllers', [])
 
       $scope.logIn = function(){
         $http.get('api/php/login.php?username='+$scope.inUsername+'&password='+$scope.inPassword).success(function(response){
+          var now = new Date(),
+          exp = new Date(now.getFullYear(), now.getMonth()+6, now.getDate());
 
+          $cookies.put('usercpid',response.id,{
+            expires: exp
+          });
+
+          $location.path('/');
         });
       }
 
-      uService.list(function(uService) {
-        if(uService.nombre != ''){
-          $scope.username = uService.nombre;
-          $scope.userphoto = uService.foto;
-        }else{
-          console.log(uService);
-        }
-      });
-
-
     })
+
+    .factory('uService', function($http,$cookies){
+        return {
+          list: function(response){
+              userId = $cookies.get('usercpid');
+              $http.get('api/php/login.php?id='+userId).success(response);
+          }
+        };
+      })
 
     .controller('mainController', function($scope, $http, $location, uService, $cookies){
 
-        $scope.date = new Date();
+          $scope.logout = function(){
+              $cookies.remove('usercpid');
+              $location.path('/login');
+          };
 
-        // var now = new Date(),
-        // exp = new Date(now.getFullYear(), now.getMonth()+6, now.getDate());
-        //
-        // $cookies.put('userId','do630s',{
-        //   expires: exp
-        // });
-        
+          uService.list(function(uService) {
+            if(userId){
+              $scope.username = uService.nombre;
+              $scope.userphoto = uService.foto;
+            }else{
+              $location.path('/login');
+            }
+          });
+
           $http.get("api/php/dashboard.php?id="+userId).success(function(response){
             $scope.leidos = response.leidos;
             $scope.sondeo = response.sondeo;
@@ -114,18 +105,37 @@ angular.module('cpad.controllers', [])
           });
 
     })
-    .controller('newArticleController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.nombre;
-        console.log($scope.username);
-        $scope.userphoto = userFactory.foto;
-        $scope.date = new Date();
-        $scope.upload = function(){
-            console.log('upload');
+    .controller('newArticleController', function($scope, $http, $location, uService, $cookies){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
         }
+      });
     })
-    .controller('historyArticlesController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('historyArticlesController', function($scope, $http, $location, uService, $cookies){
+
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
+        }
+      });
+
         $scope.date = new Date();
         $scope.currentPage = 1;
         $scope.pageSize = 10;
@@ -141,13 +151,21 @@ angular.module('cpad.controllers', [])
           return total;
         };
     })
-    .controller('photogalleryController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
-        $scope.date = new Date();
-        $scope.upload = function(){
-            console.log('upload');
+    .controller('photogalleryController', function($scope, $http, $location, uService, $cookies){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
         }
+      });
+        $scope.date = new Date();
         $scope.currentPage = 1;
         $scope.pageSize = 5;
         $scope.maxSize = 4;
@@ -166,9 +184,21 @@ angular.module('cpad.controllers', [])
           });
         };
     })
-    .controller('CaricaturasController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('CaricaturasController', function($scope, $http, $location, uService, $cookies){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
+        }
+      });
+
         $scope.control;
         $scope.date = new Date();
         $scope.upload = function(){
@@ -191,22 +221,55 @@ angular.module('cpad.controllers', [])
           });
         };
     })
-    .controller('adsController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('adsController', function($scope, $http, $location, uService, $cookies){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
+        }
+      });
         $scope.date = new Date();
     })
-    .controller('positionController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('positionController', function($scope, $http, $location, uService, $cookies){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
+        }
+      });
         $scope.date = new Date();
 
         $scope.clientImg = 'https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg';
     })
 
-    .controller('analyticsController', function($scope, $http, $location, userFactory){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('analyticsController', function($scope, $http, $location, uService, $cookies){
+        $scope.logout = function(){
+            $cookies.remove('usercpid');
+            $location.path('/login');
+        };
+
+        uService.list(function(uService) {
+          if(userId){
+            $scope.username = uService.nombre;
+            $scope.userphoto = uService.foto;
+          }else{
+            $location.path('/login');
+          }
+        });
         $scope.date = new Date();
 
         $http.get("api/php/analytics.php").success(function(response){
@@ -220,9 +283,21 @@ angular.module('cpad.controllers', [])
 
     })
 
-    .controller('sondeoController', function($scope, $http, $location){
-        $scope.username = userFactory.name;
-        $scope.userphoto = userFactory.photo;
+    .controller('sondeoController', function($scope, $http, $location, uService, $cookies){
+        $scope.logout = function(){
+            $cookies.remove('usercpid');
+            $location.path('/login');
+        };
+
+        uService.list(function(uService) {
+          if(userId){
+            $scope.username = uService.nombre;
+            $scope.userphoto = uService.foto;
+          }else{
+            $location.path('/login');
+          }
+        });
+
         $scope.date = new Date();
 
         $scope.pDisponibles = '315';
