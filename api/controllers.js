@@ -83,12 +83,12 @@ angular.module('cpad.controllers', [])
           };
 
           uService.list(function(uService) {
-            if(userId){
+            if(userId && userId != 'null'){
               $scope.username = uService.nombre;
               $scope.userphoto = uService.foto;
             }else{
-              $location.path('/login');
-            }
+              $cookies.remove('usercpid');
+              $location.path('/login');            }
           });
 
 
@@ -123,7 +123,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -139,7 +139,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -169,7 +169,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -202,7 +202,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -239,7 +239,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -255,7 +255,7 @@ angular.module('cpad.controllers', [])
       };
 
       uService.list(function(uService) {
-        if(userId){
+        if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
         }else{
@@ -274,7 +274,7 @@ angular.module('cpad.controllers', [])
         };
 
         uService.list(function(uService) {
-          if(userId){
+          if(userId && userId != 'null'){
             $scope.username = uService.nombre;
             $scope.userphoto = uService.foto;
           }else{
@@ -301,7 +301,7 @@ angular.module('cpad.controllers', [])
         };
 
         uService.list(function(uService) {
-          if(userId){
+          if(userId && userId != 'null'){
             $scope.username = uService.nombre;
             $scope.userphoto = uService.foto;
           }else{
