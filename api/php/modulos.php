@@ -9,22 +9,24 @@ $id = $_GET['id'];
 $tipo = $_GET['tipo'];
 $modulo = $_GET['modulo'];
 $fecha = date('Y-m-d');
-if(modulo == 1){
-  if(tipo == 1){
-    $nombre = $_GET['nombre'];
-    $porcentaje = $_GET['porcentaje'];
-    $valor = $_GET['valor'];
-    try{
-      mysql_query("update bolsa set nombre='$nombre',porcentaje=$porcentaje,valor=$valor where idBolsa=$id");
-    }catch(Exception $x){
-      echo 'No se pudo realizar la operación';
-    }
-  }else{
-
-  }
-}else{
-
+$nombre = $_GET['nombre'];
+$porcentaje = $_GET['porcentaje'];
+$valor = $_GET['valor'];
+try{
+  mysql_query("update bolsa set nombre='$nombre',porcentaje=$porcentaje,valor=$valor where idBolsa=$id");
+}catch(Exception $x){
+  echo 'No se pudo realizar la operación';
 }
+// if(modulo == 1){
+//   if(tipo == 1){
+//
+//
+//   }else{
+//
+//   }
+// }else{
+//
+// }
 
 echo json_encode(array(
   'bolsas' => bolsasp()

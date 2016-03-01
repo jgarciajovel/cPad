@@ -107,12 +107,16 @@ angular.module('cpad.controllers', [])
           });
 
           $scope.editBolsa = function(bolsa){
-            $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-              alert("Cambios guardados");
-              $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
-                $scope.bolsas = response.bolsas;
-              });
-            });
+            console.log(bolsa.id);
+            console.log(bolsa.nombre);
+            console.log(bolsa.porcentaje);
+            console.log(bolsa.valor);
+            // $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+            //   alert("Cambios guardados");
+            //   $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
+            //     $scope.bolsas = response.bolsas;
+            //   });
+            // });
           }
 
     })
