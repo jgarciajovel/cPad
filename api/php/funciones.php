@@ -163,4 +163,18 @@ function fotogaleriap(){
 	}
 	return $fotogalerias;
 }
+
+function bolsasp(){
+	$bolsainfo = mysql_query("SELECT idBolsa, nombre, porcentaje, valor, fecha from bolsa");
+	while($bolsapreview = mysql_fetch_array($bolsainfo)){
+	  $bolsas[] = array(
+	    'id' => $bolsapreview['idBolsa'],
+	    'nombre' => $bolsapreview['nombre'],
+	    'porcentaje' => $bolsapreview['porcentaje'],
+	    'valor' => $bolsapreview['valor'],
+	    'fecha' => $bolsapreview['fecha']
+	  );
+	}
+	return $bolsas;
+}
 ?>

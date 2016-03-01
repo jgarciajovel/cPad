@@ -99,8 +99,8 @@ angular.module('cpad.controllers', [])
         // $cookies.put('userId','do630s',{
         //   expires: exp
         // });
-        
-          $http.get("api/php/dashboard.php?id="+userId).success(function(response){
+
+          $http.get("api/php/dashboard.php?id=do630s").success(function(response){
             $scope.leidos = response.leidos;
             $scope.sondeo = response.sondeo;
             $scope.fotogaleria = response.fotogaleria;
@@ -112,6 +112,15 @@ angular.module('cpad.controllers', [])
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
           });
+
+          $scope.editBolsa = function(bolsa){
+            $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+              alert("Cambios guardados");
+              $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
+              });
+            });
+          }
 
     })
     .controller('newArticleController', function($scope, $http, $location, userFactory){

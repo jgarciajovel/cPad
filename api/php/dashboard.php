@@ -67,17 +67,6 @@ $fotopreview = mysql_fetch_row($fotoinfo);
 $fotogaleria = array('foto' => $fotopreview[0], 'titulo' => $fotopreview[1], 'total' => $fotopreview[2]);
 // FOTOGALERIA MAS VISTA
 
-
-$bolsainfo = mysql_query("SELECT idBolsa, nombre, porcentaje, valor from bolsa");
-while($bolsapreview = mysql_fetch_array($bolsainfo)){
-  $bolsas[] = array(
-    'id' => $bolsapreview['idBolsa'],
-    'nombre' => $bolsapreview['nombre'],
-    'porcentaje' => $bolsapreview['porcentaje'],
-    'valor' => $bolsapreview['valor']
-  );
-}
-// BOLSAS DEL MUNDO
 // MERCADOS DEL MUNDO
 $mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo from mercado");
 while($mercadopreview = mysql_fetch_array($mercadoinfo)){
@@ -131,7 +120,7 @@ echo json_encode(array(
   'sondeo' => dashSondeo(),
   'fotogaleria' => $fotogaleria,
   'cliente' => clientePopular(),
-  'bolsas' => $bolsas,
+  'bolsas' => bolsasp(),
   'mercados' => $mercados,
   'cifras' => $cifras,
   'divisas' => $divisas,

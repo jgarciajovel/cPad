@@ -202,7 +202,7 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
-                      <!-- <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">--><span class="fecha-cierre">{{bolsas[0].fecha | date:'dd/MM/yyyy'}}</span> 
+                      <input value="{{bolsas[0].fecha | date:'dd/MM/yyyy'}}" type="text" class="fecha-cierre" disabled>
                     </div>
                         <table class="table table-striped">
                           <tr>
@@ -215,12 +215,11 @@
                             <td><input value="{{bolsa.porcentaje}}" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsa.porcentaje > 0, 'red': bolsa.porcentaje < 0}" type="text"></td>
                             <td><input value="{{bolsa.valor}}" plceholder="Valor" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button"><i class="ion-edit"></i></a>
+                              <a class="add-button" ng-click="editBolsa(bolsa)"><i class="ion-edit"></i></a>
                               <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>
                         </table>
-                        <button class="save-modal">Guardar</button>
                 </form>
           </div>
         </div>
