@@ -42,11 +42,20 @@ while($colpreview = mysql_fetch_array($colinfo)){
     'creador' => $colpreview['creador']
   );
 }
+
+$qfechas = mysql_query("SELECT a.fecha as fecha, count(a.fecha) as total from articulo a group by a.fecha order by fecha desc");
+while($fechascol = mysql_fetch_array($qfechas)){
+  $paginador[] = array(
+    'fecha' => $fechascol['fecha'],
+    'cantidad' => $fechascol['total']
+  );
+}
 // $user = 'dorareyes';
 // $clave = '112358';
 // mysql_query("insert into usuario(idUsuario,idPersonal,usuario,clave) values('".substr($user,0,2).rand(100,999).$user[strlen($user)-1]."',14,'dorareyes','".md5($clave)."')");
 
 echo json_encode(array(
-  'contenido' => $contenido
+  'contenido' => $contenido,
+  'paginador' => $paginador
 ));
 ?>

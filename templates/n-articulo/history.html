@@ -27,7 +27,7 @@
      <div class="row">
         <div class="col-md-12">
             <h1 class="new-article-h1">Historial de articulos</h1>
-            <div class="history-table" ng-repeat="(key, value) in contenido | groupBy: 'fecha' | orderBy:'fecha'">
+            <div class="history-table" ng-repeat="(key, value) in contenido | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize | groupBy: 'fecha' | orderBy:'fecha'">
                 <div class="resumen">
                     <div class="row">
                         <div class="col-md-2">
@@ -59,7 +59,7 @@
                     </tbody>
                 </table>
             </div>
-          <!-- <uib-pagination total-items="contenido.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination> -->
+          <uib-pagination ng-click="top()" total-items="paginadorf.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
         </div>
     </div>
     <div class="footer">
