@@ -27,11 +27,7 @@
      <div class="row">
         <div class="col-md-12">
             <h1 class="new-article-h1">Historial de articulos</h1>
-<<<<<<< HEAD
-            <div class="history-table" ng-repeat="(key, value) in contenido | groupBy: 'fecha' | orderBy: '-fecha'">
-=======
             <div class="history-table" ng-repeat="(key, value) in contenido | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize | groupBy: 'fecha' | orderBy:'fecha'">
->>>>>>> origin/master
                 <div class="resumen">
                     <div class="row">
                         <div class="col-md-2">

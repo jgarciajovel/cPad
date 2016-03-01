@@ -167,7 +167,11 @@ angular.module('cpad.controllers', [])
         }
       });
     })
-    .controller('historyArticlesController', function($scope, $http, $location, uService, $cookies){
+    .controller('historyArticlesController', function($scope, $http, $location, uService, $cookies,$anchorScroll){
+
+      $scope.top = function(){
+        $anchorScroll();
+      };
 
       $scope.logout = function(){
           $cookies.remove('usercpid');
@@ -189,6 +193,8 @@ angular.module('cpad.controllers', [])
         $scope.maxSize = 4;
         $http.get("api/php/history.php").success(function(response){
           $scope.contenido = response.contenido;
+          $scope.paginadorf = response.paginador;
+          console.log($scope.paginadorf.length);
         });
         $scope.totalVisitas = function(articulos){
           var total = 0;
