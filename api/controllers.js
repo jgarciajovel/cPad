@@ -123,11 +123,29 @@ angular.module('cpad.controllers', [])
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
           });
-
-          $scope.editBolsa = function(bolsa){
-            $http.post("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+          $scope.control;
+          $scope.valor = function(val){
+            $scope.control = val;
+          }
+          $scope.editBolsa = function(id,nombre,porcentaje,valor){
+            $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
               alert("Cambios guardados");
-              $http.get("api/php/modulos.php?id="+bolsa.id+"&nombre="+bolsa.nombre+"&porcentaje="+bolsa.porcentaje+"&valor="+bolsa.valor+"&tipo=1&modulo=1").success(function(response){
+              $http.get("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
+              });
+            });
+          }
+          $scope.addBolsa = function(nombre,porcentaje,valor){
+
+              $http.get("api/php/modulos.php?nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=3&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
+              });
+            
+          }
+          $scope.borrarBolsa = function(id){
+            $http.post("api/php/modulos.php?id="+id+"&tipo=2&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+              alert("Cambios guardados");
+              $http.get("api/php/modulos.php?id="+id+"&tipo=2&modulo=1").success(function(response){
                 $scope.bolsas = response.bolsas;
               });
             });

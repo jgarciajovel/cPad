@@ -9,7 +9,8 @@ $continfo = mysql_query("SELECT a.idArticulo, a.titulo, s.nombre as subseccion, 
 (select CONCAT(d.nombres, ' ', d.apellidos) from personal d, usuario u where a.idUsuario = u.idUsuario and u.idPersonal = d.idPersonal) as creador, a.hora
 FROM articulo a, vistaarticulo b, subseccion s, personal c
 WHERE a.idPersonal=c.idPersonal and a.idArticulo = b.idArticulo and a.idSubseccion = s.idSubseccion
-GROUP BY b.idArticulo");
+GROUP BY b.idArticulo
+order by a.fecha desc");
 
 while($contpreview = mysql_fetch_array($continfo)){
   $contenido[] = array(
@@ -28,7 +29,8 @@ $colinfo = mysql_query("SELECT a.idColumna, a.titulo, CONCAT(c.nombres, ' ', c.a
 (select CONCAT(d.nombres, ' ', d.apellidos) from personal d, usuario u where a.idUsuario = u.idUsuario and u.idPersonal = d.idPersonal) as creador, a.hora
 FROM columna a, vistacolumna b, personal c
 WHERE a.idPersonal=c.idPersonal and a.idColumna = b.idColumna
-GROUP BY b.idColumna");
+GROUP BY b.idColumna
+order by a.fecha desc");
 
 while($colpreview = mysql_fetch_array($colinfo)){
   $contenido[] = array(
