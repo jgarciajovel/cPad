@@ -9,8 +9,7 @@ $continfo = mysql_query("SELECT a.idArticulo, a.titulo, s.nombre as subseccion, 
 (select CONCAT(d.nombres, ' ', d.apellidos) from personal d, usuario u where a.idUsuario = u.idUsuario and u.idPersonal = d.idPersonal) as creador, a.hora
 FROM articulo a, vistaarticulo b, subseccion s, personal c
 WHERE a.idPersonal=c.idPersonal and a.idArticulo = b.idArticulo and a.idSubseccion = s.idSubseccion
-GROUP BY b.idArticulo
-ORDER BY 6 desc");
+GROUP BY b.idArticulo");
 
 while($contpreview = mysql_fetch_array($continfo)){
   $contenido[] = array(
@@ -25,6 +24,24 @@ while($contpreview = mysql_fetch_array($continfo)){
   );
 }
 
+$colinfo = mysql_query("SELECT a.idColumna, a.titulo, CONCAT(c.nombres, ' ', c.apellidos) as autor, a.fecha, count(b.idColumna) as total,
+(select CONCAT(d.nombres, ' ', d.apellidos) from personal d, usuario u where a.idUsuario = u.idUsuario and u.idPersonal = d.idPersonal) as creador, a.hora
+FROM columna a, vistacolumna b, personal c
+WHERE a.idPersonal=c.idPersonal and a.idColumna = b.idColumna
+GROUP BY b.idColumna");
+
+while($colpreview = mysql_fetch_array($colinfo)){
+  $contenido[] = array(
+    'id' => $colpreview['idColumna'],
+    'titulo' => $colpreview['titulo'],
+    'subseccion' => 'Columnistas',
+    'autor' => $colpreview['autor'],
+    'fecha' => $colpreview['fecha'],
+    'hora' => $colpreview['hora'],
+    'total' => $colpreview['total'],
+    'creador' => $colpreview['creador']
+  );
+}
 // $user = 'dorareyes';
 // $clave = '112358';
 // mysql_query("insert into usuario(idUsuario,idPersonal,usuario,clave) values('".substr($user,0,2).rand(100,999).$user[strlen($user)-1]."',14,'dorareyes','".md5($clave)."')");

@@ -177,8 +177,8 @@
                 <h1>Los articulos más leidos</h1>
                 <table class="table table-hover">
                     <tbody>
-                        <tr ng-repeat="leido in leidos">
-                            <th scope="row">{{leidos.indexOf(leido) +1}}</th>
+                        <tr ng-repeat="leido in leidos | orderBy:'-total' | limitTo:9" ng-init="contador = 0 ">
+                            <th scope="row">{{1}}</th>
                             <td style="max-width: 300px; display: inline-block;"><a target="_blank" ng-href="http://www.contrapunto.com.sv/#/{{leido.urlSeccion}}/{{leido.urlSubseccion}}/{{leido.titulo | urlEncode}}/{{leido.id}}" class="urlvisto">{{leido.titulo}}</a></td>
                             <td style="min-width:30%;">{{leido.total}} visitas</td>
                         </tr>
@@ -202,7 +202,7 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
-                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                      <!-- <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">--><span class="fecha-cierre">{{bolsas[0].fecha | date:'dd/MM/yyyy'}}</span> 
                     </div>
                         <table class="table table-striped">
                           <tr>

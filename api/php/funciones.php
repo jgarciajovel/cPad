@@ -1,4 +1,23 @@
 <?php
+function sondeop(){
+	$soninfo = mysql_query("SELECT idSondeo, titulo, pregunta, fecha, rutaFoto as foto
+												FROM sondeo
+												where activo = 1
+												ORDER BY fecha desc, hora desc");
+
+	while ($sonpreview = mysql_fetch_array($soninfo)) {
+		$sondeo[] = array(
+								'idSondeo' => $sonpreview['idSondeo'],
+								'titulo' => $sonpreview['titulo'],
+								'pregunta' => $sonpreview['pregunta'],
+								'fecha' => $sonpreview['fecha'],
+								'foto' => $sonpreview['foto'],
+								'respuestas' => respuestas($sonpreview['idSondeo']),
+								'total' => maxTotal($sonpreview['idSondeo'])
+		);
+	}
+	return $sondeo;
+}
 function primerSondeo(){
 	$soninfo = mysql_query("SELECT idSondeo, pregunta
 												FROM sondeo
@@ -109,5 +128,39 @@ function clientePopular(){
 	$clientepreview = mysql_fetch_row($clienteinfo);
 	$cliente = array('nombre' => $clientepreview[0], 'total' => $clientepreview[1], 'fecha' => $clientepreview[2], 'foto' => $clientepreview[3]);
 	return $cliente;
+}
+
+function caricaturap(){
+	$carinfo = mysql_query("SELECT a.idCaricatura, a.rutaFoto as foto, a.fecha, CONCAT(c.nombres, ' ', c.apellidos) as caricaturista
+							from caricatura a, caricaturista c
+							where a.idCaricaturista = c.idCaricaturista
+							ORDER BY a.fecha desc, a.hora desc");
+	while($carpreview = mysql_fetch_array($carinfo)){
+		$caricatura[] = array(
+					'foto' => $carpreview['foto'],
+					'idCaricatura' => $carpreview['idCaricatura'],
+					'caricaturista' => $carpreview['caricaturista'],
+					'fecha' => $carpreview['fecha'],);
+	}
+	return $caricatura;
+}
+function fotogaleriap(){
+	$fotoinfo = mysql_query("SELECT f.id, f.rutaFoto as foto, f.link, f.titulo, f.fecha, count(c.id) as total
+	                        FROM fotogaleria f, vistafotogaleria c
+	                        WHERE f.id = c.id
+	                        GROUP BY c.id
+	                        ORDER BY f.fecha desc, f.hora desc");
+
+	while($fotopreview = mysql_fetch_array($fotoinfo)){
+	  $fotogalerias[] = array(
+	    'id' => $fotopreview['id'],
+	    'foto' => $fotopreview['foto'],
+	    'link' => $fotopreview['link'],
+	    'titulo' => $fotopreview['titulo'],
+	    'fecha' => $fotopreview['fecha'],
+	    'total' => $fotopreview['total']
+	  );
+	}
+	return $fotogalerias;
 }
 ?>

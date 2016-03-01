@@ -57,6 +57,7 @@ angular.module('cpad.controllers', [])
     })
 
     .controller('mainController', function($scope, $http, $location, userFactory, $cookies){
+
         $scope.username = userFactory.name;
         $scope.userphoto = userFactory.photo;
         $scope.userId = userFactory.id;
@@ -124,6 +125,42 @@ angular.module('cpad.controllers', [])
         $http.get('api/php/photogallery.php').success(function(response){
           $scope.fotogalerias = response.fotogalerias;
         });
+        $scope.control;
+        $scope.valor = function(val){
+          $scope.control = val;
+        }
+        $scope.borrarF = function(id,tipo){
+          $http.post('api/php/mantenimientoF.php?id='+id+"&tipo=2",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+            $http.get("api/php/mantenimientoF.php?id="+id+"&tipo=2").success(function(response){
+              $scope.fotogalerias = response.fotogalerias;
+            });
+          });
+        };
+    })
+    .controller('CaricaturasController', function($scope, $http, $location, userFactory){
+        $scope.username = userFactory.name;
+        $scope.userphoto = userFactory.photo;
+        $scope.control;
+        $scope.date = new Date();
+        $scope.upload = function(){
+            console.log('upload');
+        }
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.maxSize = 4;
+        $http.get('api/php/caricaturas.php').success(function(response){
+          $scope.caricaturas = response.caricaturas;
+        });
+        $scope.valor = function(val){
+          $scope.control = val;
+        }
+        $scope.borrarC = function(id,tipo){
+          $http.post('api/php/mantenimientoC.php?id='+id+"&tipo=2",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+            $http.get("api/php/mantenimientoC.php?id="+id+"&tipo=2").success(function(response){
+              $scope.caricaturas = response.caricaturas;
+            });
+          });
+        };
     })
     .controller('adsController', function($scope, $http, $location, userFactory){
         $scope.username = userFactory.name;
@@ -149,6 +186,7 @@ angular.module('cpad.controllers', [])
           $scope.posicionP = response.posicionP;
           $scope.posicionM = response.posicionM;
           $scope.total = response.total;
+          $scope.seccionPopular = response.seccionPopular;
         });
 
     })
@@ -168,5 +206,15 @@ angular.module('cpad.controllers', [])
         $http.get('api/php/sondeos.php').success(function(response){
           $scope.sondeos = response.sondeos;
         });
-
+        $scope.control;
+        $scope.valor = function(val){
+          $scope.control = val;
+        }
+        $scope.borrarS = function(id,tipo){
+          $http.post('api/php/mantenimientoS.php?id='+id+"&tipo=2",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+            $http.get("api/php/mantenimientoS.php?id="+id+"&tipo=2").success(function(response){
+              $scope.sondeos = response.sondeos;
+            });
+          });
+        };
     });

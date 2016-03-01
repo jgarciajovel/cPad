@@ -16,18 +16,22 @@ $publpreview = mysql_fetch_row($publinfo);
 $publicidad = array('foto' => $publpreview[0],'fecha' => $publpreview[1],'total' => $publpreview[2],'cliente'=>$publpreview[3]);
 //PUBLICIDAD MAS VISTA
 //SECCION POPULAR
-// $secinfo = mysql_query("SELECT sum(total) as total,
-//                         (SELECT count(d.idBanner)
-//                         FROM banner d
-//                         WHERE d.activo = 1) as ocupadas
-//                         FROM (SELECT count(b.idPosicion)*5 as total
-//                         FROM seccion se, posicion b
-//                         WHERE se.idSeccion = b.idSeccion
-//                         GROUP BY b.idPosicion) as A");
-$secinfo = mysql_query("SELECT se.nombre, count(p.idSeccion)*5 as total, (SELECT count(b.idBanner) from vistaBanner b, banner c where c.idBanner = b.idBanner and c.idPosicion = p.idPosicion)
+
+$secinfo = mysql_query("SELECT se.nombre, count(p.idSeccion)*5 as total, (SELECT count(b.idBanner) from banner b where (Select u.idSeccion from posicion u where u.idPosicion = b.idPosicion) = p.idSeccion) as ocupadas
                       FROM seccion se, posicion p
                       WHERE se.idSeccion = p.idSeccion
-                      GROUP BY p.idSeccion");
+                      GROUP BY p.idSeccion
+                      order by 3 desc, 2 desc");
+
+// $secpreview = mysql_fetch_row($secinfo);
+// $seccionPopular = array('nombre' => $secpreview[0], 'total' => $secpreview[1], 'ocupadas' => $secpreview[2]);
+while($secpreview = mysql_fetch_array($secinfo)){
+  $seccionPopular[]=array(
+    'nombre' => $secpreview['nombre'],
+    'total' => $secpreview['total'],
+    'ocupadas' => $secpreview['ocupadas']
+  );
+}
 //SECCION POPULAR
 //TOTAL
 $totalinfo = mysql_query("SELECT sum(total) as total,
@@ -66,6 +70,7 @@ echo json_encode(array(
   'publicidadPopular' => $publicidad,
   'posicionP' => $posicionp,
   'posicionM' => $posicionm,
-  'total' => $total
+  'total' => $total,
+  'seccionPopular' => $seccionPopular
 ));
 ?>

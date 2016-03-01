@@ -12,6 +12,12 @@ $leidoinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubse
                           order by 5 desc
                           limit 9");
 
+$leidocol = mysql_query("SELECT a.idColumna as id, a.titulo, count(b.idColumna) as total
+                          from columna a, vistacolumna b where a.activo = 1 and a.idColumna = b.idColumna
+                          group by b.idColumna
+                          order by 3 desc
+                          limit 9");
+
 while($leidopreview = mysql_fetch_array($leidoinfo)){
   $leido[] = array(
       'id' => $leidopreview['id'],
@@ -21,10 +27,20 @@ while($leidopreview = mysql_fetch_array($leidoinfo)){
       'total' => $leidopreview['total'],
   );
 }
+
+while($leidocolpreview = mysql_fetch_array($leidocol)){
+  $leido[] = array(
+      'id' => $leidocolpreview['id'],
+      'titulo' => $leidocolpreview['titulo'],
+      'urlSubseccion' => 'columnistas',
+      'urlSeccion' => 'opinion',
+      'total' => $leidocolpreview['total'],
+  );
+}
 // TOP LEIDOS GLOBALES
 // TOP LEIDOS PERSONALES
 $topinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubseccion, se.url as urlSeccion, count(b.idArticulo) as total
-                          from articulo a, subseccion s, seccion se, vistaarticulo b where a.idSubseccion = s.idSubseccion and a.activo = 1 and s.idSeccion = se.idSeccion and a.idArticulo = b.idArticulo and a.idUsuario = '$id'
+                          from articulo a, subseccion s, seccion se, vistaarticulo b where a.idSubseccion = s.idSubseccion and a.activo = 1 and s.idSeccion = se.idSeccion and a.idArticulo = b.idArticulo and (SELECT u.idUsuario FROM usuario u where a.idPersonal = u.idPersonal) = '$id'
                           group by b.idArticulo
                           order by 5 desc
                           limit 9");
@@ -38,6 +54,7 @@ while($toppreview = mysql_fetch_array($topinfo)){
       'total' => $toppreview['total'],
   );
 }
+
 // TOP LEIDOS PERSONALES
 // FOTOGALERIA MAS VISTA
 $fotoinfo = mysql_query("SELECT a.rutaFoto as foto, a.titulo, count(b.id) as total

@@ -62,7 +62,7 @@
         <div ng-repeat="fotogaleria in fotogalerias | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
             <div class="old-album" style="background-image:url({{fotogaleria.foto}});">
                 <div class="transparency">
-                    <div class="top-texto"><a class="delete-button" data-toggle="modal" data-target=".delete-photo"><i class="ion-trash-a"></i></a></div>
+                    <div class="top-texto"><a class="delete-button" ng-click="valor(fotogaleria.id)" data-toggle="modal" data-target=".delete-photo"><i class="ion-trash-a"></i></a></div>
                     <div class="texto">
                         <h6>{{fotogaleria.fecha | date:'dd/MM/yyyy'}}</h6>
                         <h1>{{fotogaleria.titulo}}</h1>
@@ -110,7 +110,7 @@
     <h3>¿Está seguro que desea eliminar la fotogalería?</h3>
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
-      <button class="eliminar">Eliminar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarF(control)">Eliminar</button>
     </div>
   </div>
   </div>

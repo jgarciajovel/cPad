@@ -43,9 +43,6 @@
     <div class="sidebar-item-active blue">
         <i class="ion-happy"></i>
     </div>
-    <div class="sidebar-item">
-        <i class="ion-stats-bars"></i>
-    </div>
 </div>
 <div class="new-container">
     <div class="row">
@@ -59,20 +56,19 @@
             <button class="upload-album" data-toggle="modal" data-target=".new-photogallery">
             </button>
         </div>
-        <div ng-repeat="fotogaleria in fotogalerias | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
-            <div class="old-album" style="background-image:url({{fotogaleria.foto}});">
+        <div ng-repeat="caricatura in caricaturas | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
+            <div class="old-album" style="background-image:url({{caricatura.foto}});">
                 <div class="transparency">
-                    <div class="top-texto"><a class="delete-button" data-toggle="modal" data-target=".delete-photo"><i class="ion-trash-a"></i></a></div>
+                    <div class="top-texto"><a class="delete-button" ng-click="valor(caricatura.idCaricatura)" data-toggle="modal" data-target=".delete-photo"><i class="ion-trash-a"></i></a></div>
                     <div class="texto">
-                        <h6>{{fotogaleria.fecha | date:'dd/MM/yyyy'}}</h6>
-                        <h1>{{fotogaleria.titulo}}</h1>
-                        <h3>{{fotogaleria.total}} visitas</h3>
+                        <h6>{{caricatura.fecha | date:'dd/MM/yyyy'}}</h6>
+                        <h1>{{caricatura.caricaturista}}</h1>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <uib-pagination total-items="fotogalerias.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
+    <uib-pagination total-items="caricaturas.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
     <div class="footer">
         <div class="row">
             <div class="col-md-12">
@@ -109,7 +105,7 @@
     <h3>¿Está seguro que desea eliminar esta caricatura?</h3>
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
-      <button class="eliminar">Eliminar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarC(control)">Eliminar</button>
     </div>
   </div>
   </div>

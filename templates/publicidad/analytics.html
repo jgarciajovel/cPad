@@ -81,7 +81,7 @@
                     <div class="col-md-6">
                         <div class="texto6">
                             <h2 class="txt-black">POSICIONES DISPONIBLES</h2>
-                            <h1 class="txt-black">{{total.total}}</h1>
+                            <h1 class="txt-black">{{total.total-total.ocupadas}}</h1>
                         </div>
                     </div>
                 </div>
@@ -114,8 +114,8 @@
             <div class="positions-sq" style="background-image:url(img/ads/bottom-purple.svg);">
                 <div class="texto-2">
                     <h2>Sección con más posiciones utilizadas</h2>
-                    <h1>Portada</h1>
-                    <h4>23 POSICIONES OCUPADAS DE 30</h4>
+                    <!-- <h1>{{seccionPopular.nombre}}</h1> -->
+                    <h4 ng-repeat="seccion in seccionPopular">{{seccion.nombre}}: {{seccion.ocupadas}} POSICIONES OCUPADAS DE {{seccion.total}}</h4>
                 </div>
             </div>
         </div>

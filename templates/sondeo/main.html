@@ -60,7 +60,7 @@
         <div ng-repeat="sondeo in sondeos | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
             <div class="sondeo-4">
               <div class="header">
-              <h1>{{sondeo.titulo}} | <span>{{sondeo.fecha | date:'dd/MM/yyyy'}}</span><a data-toggle="modal" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
+              <h1>{{sondeo.titulo}} | <span>{{sondeo.fecha | date:'dd/MM/yyyy'}}</span><a data-toggle="modal" ng-click="valor(sondeo.idSondeo)" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
   </h1>
                 <div class="img" style="background-image:url({{sondeo.foto}});"></div>
               </div>
@@ -178,7 +178,7 @@
     <h3>¿Está seguro que desea eliminar este sondeo?</h3>
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
-      <button class="eliminar">Eliminar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarS(control)">Eliminar</button>
     </div>
   </div>
   </div>
