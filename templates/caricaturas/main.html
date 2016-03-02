@@ -61,10 +61,16 @@
                         <select class="author" ng-model="idAutor" ng-options="caricaturista.Caricaturista for caricaturista in caricaturista">
                           <option value="">autor/foto</option>
                         </select>
-                        {{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                        <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                            <span class="progress" ng-show="f.progress >= 0">
+                                <div style="width:{{f.progress}}%"
+                                     ng-bind="f.progress + '%'"></div>
+                            </span>
+                        </div>
+                        {{filenamesave}}
                         <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
-                        <button ng-click="postCaricatura(idAutor.idCaricaturista,$file,$invalidFiles)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
+                        <button ng-click="postCaricatura(idAutor.idCaricaturista,filenamesave)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
                     </div></center>
                 </form>
           </div>

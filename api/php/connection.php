@@ -1,6 +1,6 @@
 <?php
 /*
-define('db_nombre','intulsco_available');
+define('db_nombre','intulsco_cpdb');
 define('db_usuario','intulsco');
 define('db_contrasena','garman107');
 define('db_host','localhost');
