@@ -6,13 +6,14 @@ $editdata = json_decode(file_get_contents("php://input"));
 date_default_timezone_set('America/El_Salvador');
 
 $autorId = $editdata->autor;
+$fileruta = $editdata->filer;
 
 $date = date('Y-m-d');
 $time = date('H:i:s');
 
 $filename = $_FILES['file']['name'];
-echo $destination = '../../img/'.$filename;
+$destination = '../../img/'.$filename;
 move_uploaded_file( $_FILES['file']['tmp_name'],$destination);
 
-mysql_query("INSERT INTO caricatura(rutaFoto, idCaricaturista, fecha, hora) values ('$destination','$autorId','$date','$time')");
+mysql_query("INSERT INTO caricatura(rutaFoto, idCaricaturista, fecha, hora) values ('$fileruta','$autorId','$date','$time')");
 ?>

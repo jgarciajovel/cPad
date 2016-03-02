@@ -107,196 +107,36 @@ angular.module('cpad.controllers', [])
             $scope.divisas = response.divisas;
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
-            var ar = $scope.bolsas[0].fecha.split("-");
-            $scope.fechaBolsadia = ar[2];
-            $scope.fechaBolsames = ar[1];
-            $scope.fechaBolsaanio = ar[0];
-            var er = $scope.mercados[0].fecha.split("-");
-            $scope.fechaMerdia = er[2];
-            $scope.fechaMermes = er[1];
-            $scope.fechaMeranio = er[0];
-            var dv = $scope.divisas[0].fecha.split("-");
-            $scope.fechaDivdia = dv[2];
-            $scope.fechaDivmes = dv[1];
-            $scope.fechaDivanio = dv[0];
-            var ta = $scope.divisas[0].fecha.split("-");
-            $scope.fechaTadia = ta[2];
-            $scope.fechaTames = ta[1];
-            $scope.fechaTaanio = ta[0];
             $scope.caricatura = response.caricatura;
-
           });
           $scope.control;
           $scope.valor = function(val){
             $scope.control = val;
           }
           $scope.editBolsa = function(id,nombre,porcentaje,valor){
-            // $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-            if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=1',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
-                alert("Cambios guardados");
-                  $scope.bolsas = response.bolsas;
+            $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+              alert("Cambios guardados");
+              $http.get("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
               });
-            }else{
-              alert("Ingrese contenido valido");
-            }
+            });
           }
           $scope.addBolsa = function(nombre,porcentaje,valor){
-              if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
-                $http.post('api/php/modulos.php?tipo=3&modulo=1',{'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
-                  $scope.bolsas = response.bolsas;
-                });
-              }else{
-                alert("Ingrese contenido valido");
-              }
+
+              $http.get("api/php/modulos.php?nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=3&modulo=1").success(function(response){
+                $scope.bolsas = response.bolsas;
+              });
+
           }
           $scope.borrarBolsa = function(id){
-            $http.post("api/php/modulos.php?tipo=2&modulo=1",{'id':id}).success(function(response){
-
+            $http.post("api/php/modulos.php?id="+id+"&tipo=2&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+              alert("Cambios guardados");
+              $http.get("api/php/modulos.php?id="+id+"&tipo=2&modulo=1").success(function(response){
                 $scope.bolsas = response.bolsas;
-
-            });
-
-          }
-          $scope.editFecha = function(dia,mes,anio){
-            var fecha = [anio,mes,dia];
-            var f = fecha.join("-");
-            console.log(f);
-            $http.post("api/php/modulos.php?tipo=4&modulo=1",{'fecha':f}).success(function(response){
-                alert("Cambios realizados correctamente");
-                $scope.bolsas = response.bolsas;
+              });
             });
           }
-          $scope.editMercado = function(id,nombre,descripcion,ultimo,cambio,porcentaje,menor,masAlto){
-            if(!isNaN(porcentaje) && !isNaN(ultimo) && !isNaN(cambio) && !isNaN(menor) && !isNaN(masAlto) && descripcion!= undefined && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=2',{'id':id, 'nombre': nombre, 'descripcion': descripcion, 'ultimo': ultimo,'cambio': cambio,'porcentaje': porcentaje,'menor': menor,'masAlto': masAlto}).success(function(response){
-                alert("Cambios guardados");
-                  $scope.mercados = response.mercados;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.borrarMercado = function(id){
 
-              $http.post('api/php/modulos.php?tipo=2&modulo=2',{'id':id}).success(function(response){
-                  $scope.mercados = response.mercados;
-              });
-
-          }
-          $scope.addMercado = function(nombre,descripcion,ultimo,cambio,porcentaje,menor,masAlto){
-            if(!isNaN(porcentaje) && !isNaN(ultimo) && !isNaN(cambio) && !isNaN(menor) && !isNaN(masAlto) && descripcion!= undefined && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=3&modulo=2',{'nombre': nombre, 'descripcion': descripcion, 'ultimo': ultimo,'cambio': cambio,'porcentaje': porcentaje,'menor': menor,'masAlto': masAlto}).success(function(response){
-                  $scope.mercados = response.mercados;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.editFechaM = function(dia,mes,anio){
-            var fecha = [anio,mes,dia];
-            var f = fecha.join("-");
-            console.log(f);
-            $http.post("api/php/modulos.php?tipo=4&modulo=2",{'fecha':f}).success(function(response){
-                alert("Cambios realizados correctamente");
-                $scope.mercados = response.mercados;
-            });
-          }
-          $scope.editCifra = function(id,indicador,periodo,cifras,enlace){
-            if(!isNaN(cifras) && indicador!= undefined && periodo!= undefined && enlace!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=3',{'id':id, 'indicador': indicador, 'periodo': periodo, 'cifras': cifras,'enlace': enlace}).success(function(response){
-                alert("Cambios guardados");
-                  $scope.cifras = response.cifras;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.borrarCifra = function(id){
-
-              $http.post('api/php/modulos.php?tipo=2&modulo=3',{'id':id}).success(function(response){
-                  $scope.cifras = response.cifras;
-              });
-
-          }
-          $scope.addCifra = function(indicador,periodo,cifras,enlace){
-            if(!isNaN(cifras) && indicador!= undefined && periodo!= undefined && enlace!= undefined){
-              $http.post('api/php/modulos.php?tipo=3&modulo=3',{'indicador': indicador, 'periodo': periodo, 'cifras': cifras,'enlace': enlace}).success(function(response){
-                  $scope.cifras = response.cifras;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.editDivisa = function(id,nombre,pais,cambio){
-            if(!isNaN(cambio) && nombre!= undefined && pais!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=4',{'id':id, 'nombre': nombre, 'pais': pais, 'cambio': cambio}).success(function(response){
-                alert("Cambios guardados");
-                  $scope.divisas = response.divisas;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.borrarDivisa = function(id){
-
-              $http.post('api/php/modulos.php?tipo=2&modulo=4',{'id':id}).success(function(response){
-                  $scope.divisas = response.divisas;
-              });
-
-          }
-          $scope.addDivisa = function(nombre,pais,cambio){
-            if(!isNaN(cambio) && nombre!= undefined && pais!= undefined){
-              $http.post('api/php/modulos.php?tipo=3&modulo=4',{ 'nombre': nombre, 'pais': pais, 'cambio': cambio}).success(function(response){
-                  $scope.divisas = response.divisas;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.editFechaD = function(dia,mes,anio){
-            var fecha = [anio,mes,dia];
-            var f = fecha.join("-");
-            $http.post("api/php/modulos.php?tipo=4&modulo=4",{'fecha':f}).success(function(response){
-                alert("Cambios realizados correctamente");
-                $scope.divisas = response.divisas;
-            });
-          }
-          $scope.editTasa = function(id,nombre,porcentaje){
-            if(!isNaN(porcentaje) && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=5',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje}).success(function(response){
-                alert("Cambios guardados");
-                  $scope.tasas = response.tasas;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.borrarTasa = function(id){
-
-              $http.post('api/php/modulos.php?tipo=2&modulo=5',{'id':id}).success(function(response){
-                  $scope.tasas = response.tasas;
-              });
-
-          }
-          $scope.addTasa = function(nombre,porcentaje){
-            if(!isNaN(porcentaje) && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=3&modulo=5',{ 'nombre': nombre, 'porcentaje': porcentaje}).success(function(response){
-                  $scope.tasas = response.tasas;
-              });
-            }else{
-              alert("Ingrese contenido valido");
-            }
-          }
-          $scope.editFechaT = function(dia,mes,anio){
-            var fecha = [anio,mes,dia];
-            var f = fecha.join("-");
-            console.log(f);
-            $http.post("api/php/modulos.php?tipo=4&modulo=5",{'fecha':f}).success(function(response){
-                alert("Cambios realizados correctamente");
-                $scope.tasas = response.tasas;
-            });
-          }
     })
     .controller('newArticleController', function($scope, $http, $location, uService, $cookies){
       $scope.logout = function(){
@@ -421,39 +261,41 @@ angular.module('cpad.controllers', [])
           });
         };
 
-        $scope.postCaricatura = function(idAutor){
-          $http.post('api/php/insertCaricatura.php',{autor: idAutor}).success(function(response){
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.filenamesave = 'img/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'http://intuls.com/cPad/api/php/insertCaricatura.php',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+
+        $scope.postCaricatura = function(idAutor,fileroot){
+          console.log(fileroot);
+          $http.post('api/php/insertCaricatura.php',{autor: idAutor, filer: fileroot}).success(function(response){
             $http.get('api/php/caricaturas.php').success(function(response){
               $scope.caricaturas = response.caricaturas;
               $scope.caricaturista = response.caricaturista;
+              $scope.fotito = '';
             });
           });
         };
-
-          $scope.uploadFiles = function(file, errFiles) {
-              $scope.f = file;
-              $scope.errFile = errFiles && errFiles[0];
-              if (file) {
-                  file.upload = Upload.upload({
-                      url: 'php/insertCaricatura.php',
-                      data: {file: file}
-                  });
-
-                  file.upload.then(function (response) {
-                      $timeout(function () {
-                          file.result = response.data;
-                      });
-                  }, function (response) {
-                      if (response.status > 0)
-                          $scope.errorMsg = response.status + ': ' + response.data;
-                  }, function (evt) {
-                      file.progress = Math.min(100, parseInt(100.0 *
-                                               evt.loaded / evt.total));
-                  });
-              }
-          };
-
-
     })
     .controller('adsController', function($scope, $http, $location, uService, $cookies){
       $scope.logout = function(){
