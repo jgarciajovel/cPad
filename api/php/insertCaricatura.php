@@ -11,8 +11,8 @@ $date = date('Y-m-d');
 $time = date('H:i:s');
 
 $filename = $_FILES['file']['name'];
-$destination = '../img/' . $filename;
-move_uploaded_file( $_FILES['file']['tmp_name'] , $destination);
+echo $destination = '../../img/'.$filename;
+move_uploaded_file( $_FILES['file']['tmp_name'],$destination);
 
 mysql_query("INSERT INTO caricatura(rutaFoto, idCaricaturista, fecha, hora) values ('$destination','$autorId','$date','$time')");
 ?>
