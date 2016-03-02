@@ -107,14 +107,24 @@ angular.module('cpad.controllers', [])
             $scope.divisas = response.divisas;
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
-<<<<<<< HEAD
             var ar = $scope.bolsas[0].fecha.split("-");
             $scope.fechaBolsadia = ar[2];
             $scope.fechaBolsames = ar[1];
             $scope.fechaBolsaanio = ar[0];
-=======
+            var er = $scope.mercados[0].fecha.split("-");
+            $scope.fechaMerdia = er[2];
+            $scope.fechaMermes = er[1];
+            $scope.fechaMeranio = er[0];
+            var dv = $scope.divisas[0].fecha.split("-");
+            $scope.fechaDivdia = dv[2];
+            $scope.fechaDivmes = dv[1];
+            $scope.fechaDivanio = dv[0];
+            var ta = $scope.divisas[0].fecha.split("-");
+            $scope.fechaTadia = ta[2];
+            $scope.fechaTames = ta[1];
+            $scope.fechaTaanio = ta[0];
             $scope.caricatura = response.caricatura;
->>>>>>> origin/master
+
           });
           $scope.control;
           $scope.valor = function(val){
@@ -182,6 +192,110 @@ angular.module('cpad.controllers', [])
             }else{
               alert("Ingrese contenido valido");
             }
+          }
+          $scope.editFechaM = function(dia,mes,anio){
+            var fecha = [anio,mes,dia];
+            var f = fecha.join("-");
+            console.log(f);
+            $http.post("api/php/modulos.php?tipo=4&modulo=2",{'fecha':f}).success(function(response){
+                alert("Cambios realizados correctamente");
+                $scope.mercados = response.mercados;
+            });
+          }
+          $scope.editCifra = function(id,indicador,periodo,cifras,enlace){
+            if(!isNaN(cifras) && indicador!= undefined && periodo!= undefined && enlace!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=3',{'id':id, 'indicador': indicador, 'periodo': periodo, 'cifras': cifras,'enlace': enlace}).success(function(response){
+                alert("Cambios guardados");
+                  $scope.cifras = response.cifras;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.borrarCifra = function(id){
+
+              $http.post('api/php/modulos.php?tipo=2&modulo=3',{'id':id}).success(function(response){
+                  $scope.cifras = response.cifras;
+              });
+
+          }
+          $scope.addCifra = function(indicador,periodo,cifras,enlace){
+            if(!isNaN(cifras) && indicador!= undefined && periodo!= undefined && enlace!= undefined){
+              $http.post('api/php/modulos.php?tipo=3&modulo=3',{'indicador': indicador, 'periodo': periodo, 'cifras': cifras,'enlace': enlace}).success(function(response){
+                  $scope.cifras = response.cifras;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.editDivisa = function(id,nombre,pais,cambio){
+            if(!isNaN(cambio) && nombre!= undefined && pais!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=4',{'id':id, 'nombre': nombre, 'pais': pais, 'cambio': cambio}).success(function(response){
+                alert("Cambios guardados");
+                  $scope.divisas = response.divisas;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.borrarDivisa = function(id){
+
+              $http.post('api/php/modulos.php?tipo=2&modulo=4',{'id':id}).success(function(response){
+                  $scope.divisas = response.divisas;
+              });
+
+          }
+          $scope.addDivisa = function(nombre,pais,cambio){
+            if(!isNaN(cambio) && nombre!= undefined && pais!= undefined){
+              $http.post('api/php/modulos.php?tipo=3&modulo=4',{ 'nombre': nombre, 'pais': pais, 'cambio': cambio}).success(function(response){
+                  $scope.divisas = response.divisas;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.editFechaD = function(dia,mes,anio){
+            var fecha = [anio,mes,dia];
+            var f = fecha.join("-");
+            $http.post("api/php/modulos.php?tipo=4&modulo=4",{'fecha':f}).success(function(response){
+                alert("Cambios realizados correctamente");
+                $scope.divisas = response.divisas;
+            });
+          }
+          $scope.editTasa = function(id,nombre,porcentaje){
+            if(!isNaN(porcentaje) && nombre!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=5',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje}).success(function(response){
+                alert("Cambios guardados");
+                  $scope.tasas = response.tasas;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.borrarTasa = function(id){
+
+              $http.post('api/php/modulos.php?tipo=2&modulo=5',{'id':id}).success(function(response){
+                  $scope.tasas = response.tasas;
+              });
+
+          }
+          $scope.addTasa = function(nombre,porcentaje){
+            if(!isNaN(porcentaje) && nombre!= undefined){
+              $http.post('api/php/modulos.php?tipo=3&modulo=5',{ 'nombre': nombre, 'porcentaje': porcentaje}).success(function(response){
+                  $scope.tasas = response.tasas;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.editFechaT = function(dia,mes,anio){
+            var fecha = [anio,mes,dia];
+            var f = fecha.join("-");
+            console.log(f);
+            $http.post("api/php/modulos.php?tipo=4&modulo=5",{'fecha':f}).success(function(response){
+                alert("Cambios realizados correctamente");
+                $scope.tasas = response.tasas;
+            });
           }
     })
     .controller('newArticleController', function($scope, $http, $location, uService, $cookies){

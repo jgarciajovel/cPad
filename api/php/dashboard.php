@@ -67,39 +67,8 @@ $fotopreview = mysql_fetch_row($fotoinfo);
 $fotogaleria = array('foto' => $fotopreview[0], 'titulo' => $fotopreview[1], 'total' => $fotopreview[2]);
 // FOTOGALERIA MAS VISTA
 
-// CIFRAS ECONOMICAS
-$cifrasinfo = mysql_query("SELECT idDatos, indicador, periodo, cifras, enlaceDetalles as enlace from datoseconomicos");
-while($cifraspreview = mysql_fetch_array($cifrasinfo)){
-  $cifras[] = array(
-    'id' => $cifraspreview['idDatos'],
-    'indicador' => $cifraspreview['indicador'],
-    'periodo' => $cifraspreview['periodo'],
-    'cifras' => $cifraspreview['cifras'],
-    'enlace' => $cifraspreview['enlace']
-  );
-}
-// CIFRAS ECONOMICAS
-// DIVISAS
-$divisasinfo = mysql_query("SELECT idDivisa, nombre, cambio, pais from divisa");
-while($divisaspreview = mysql_fetch_array($divisasinfo)){
-  $divisas[] = array(
-    'id' => $divisaspreview['idDivisa'],
-    'nombre' => $divisaspreview['nombre'],
-    'cambio' => $divisaspreview['cambio'],
-    'pais' => $divisaspreview['pais']
-  );
-}
-// DIVISAS
-// TASAS
-$tasasinfo = mysql_query("SELECT idTasa, nombre, porcentaje from tasainteres");
-while($tasaspreview = mysql_fetch_array($tasasinfo)){
-  $tasas[] = array(
-    'id' => $tasaspreview['idTasa'],
-    'nombre' => $tasaspreview['nombre'],
-    'porcentaje' => $tasaspreview['porcentaje']
-  );
-}
-// TASAS
+
+
 // CARICATURA
   $cariq = mysql_query("SELECT `rutaFoto` FROM `caricatura` ORDER BY fecha DESC, hora DESC LIMIT 1");
   $caricol = mysql_fetch_row($cariq);
@@ -112,9 +81,9 @@ echo json_encode(array(
   'cliente' => clientePopular(),
   'bolsas' => bolsasp(),
   'mercados' => mercadosp(),
-  'cifras' => $cifras,
-  'divisas' => $divisas,
-  'tasas' => $tasas,
+  'cifras' => cifrap(),
+  'divisas' => divisap(),
+  'tasas' => tasap(),
   'tops' => $top,
   'caricatura' => $caricatura
 ));

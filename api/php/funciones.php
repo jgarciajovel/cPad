@@ -191,7 +191,7 @@ function bolsasp(){
 }
 function mercadosp(){
 	// MERCADOS DEL MUNDO
-	$mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo from mercado");
+	$mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo, fecha from mercado");
 	while($mercadopreview = mysql_fetch_array($mercadoinfo)){
 	  $mercados[] = array(
 	    'id' => $mercadopreview['idMercado'],
@@ -201,10 +201,55 @@ function mercadosp(){
 	    'masAlto' => $mercadopreview['masAlto'],
 	    'ultimo' => $mercadopreview['ultimo'],
 	    'porcentaje' => $mercadopreview['porcentaje'],
-	    'cambio' => $mercadopreview['cambio']
+	    'cambio' => $mercadopreview['cambio'],
+			'fecha' => $mercadopreview['fecha']
 	  );
 	}
 	return $mercados;
 	// MERCADOS DEL MUNDO
+}
+function cifrap(){
+	// CIFRAS ECONOMICAS
+	$cifrasinfo = mysql_query("SELECT idDatos, indicador, periodo, cifras, enlaceDetalles as enlace from datoseconomicos");
+	while($cifraspreview = mysql_fetch_array($cifrasinfo)){
+	  $cifras[] = array(
+	    'id' => $cifraspreview['idDatos'],
+	    'indicador' => $cifraspreview['indicador'],
+	    'periodo' => $cifraspreview['periodo'],
+	    'cifras' => $cifraspreview['cifras'],
+	    'enlace' => $cifraspreview['enlace']
+	  );
+	}
+	return $cifras;
+	// CIFRAS ECONOMICAS
+}
+function divisap(){
+	// DIVISAS
+	$divisasinfo = mysql_query("SELECT idDivisa, nombre, cambio, pais, fecha from divisa");
+	while($divisaspreview = mysql_fetch_array($divisasinfo)){
+	  $divisas[] = array(
+	    'id' => $divisaspreview['idDivisa'],
+	    'nombre' => $divisaspreview['nombre'],
+	    'cambio' => $divisaspreview['cambio'],
+	    'fecha' => $divisaspreview['fecha'],
+	    'pais' => $divisaspreview['pais']
+	  );
+	}
+	return $divisas;
+	// DIVISAS
+}
+function tasap(){
+	// TASAS
+	$tasasinfo = mysql_query("SELECT idTasa, nombre, porcentaje, fecha from tasainteres");
+	while($tasaspreview = mysql_fetch_array($tasasinfo)){
+	  $tasas[] = array(
+	    'id' => $tasaspreview['idTasa'],
+	    'nombre' => $tasaspreview['nombre'],
+	    'porcentaje' => $tasaspreview['porcentaje'],
+	    'fecha' => $tasaspreview['fecha']
+	  );
+	}
+	return $tasas;
+	// TASAS
 }
 ?>

@@ -241,10 +241,10 @@
                     <div class="modal-header h-economia">
                         <h4 class="modal-title" id="gridSystemModalLabel">Mercados del mundo</h4>
                         <div class="fecha-mod">
-                          <input ng-model="fechaBolsadia" placeholder="dia" type="text" class="fecha-cierre dt">
-                          <input ng-model="fechaBolsames" placeholder="mes" type="text" class="fecha-cierre dt">
-                          <input ng-model="fechaBolsaanio" placeholder="año" type="text" class="fecha-cierre">
-                          <a class="add-button" ng-click="editFecha(fechaBolsadia,fechaBolsames,fechaBolsaanio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
+                          <input ng-model="fechaMerdia" placeholder="dia" type="text" class="fecha-cierre dt">
+                          <input ng-model="fechaMermes" placeholder="mes" type="text" class="fecha-cierre dt">
+                          <input ng-model="fechaMeranio" placeholder="año" type="text" class="fecha-cierre">
+                          <a class="add-button" ng-click="editFechaM(fechaMerdia,fechaMermes,fechaMeranio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
                         </div>
                       </div>
                         <table class="table table-striped">
@@ -284,7 +284,6 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Cifras económicas</h4>
-                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
                     </div>
                         <table class="table table-striped">
                           <tr>
@@ -292,19 +291,19 @@
                             <td><input ng-model="newCifrasPeriodo" placeholder="Contrato" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newCifrasCifras" placeholder="Cifras" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newCifrasDetalles" placeholder="Enlace" class="input-modal-economics" type="text"></td>
+                            <td><a class="add-button" ng-click="addCifra(newCifrasIndicador,newCifrasPeriodo,newCifrasCifras,newCifrasDetalles)"><i class="ion-android-add-circle"></i></a></td>
                           </tr>
                           <tr ng-repeat="cifra in cifras">
-                            <td><input value="{{cifra.indicador}}" placeholder="Indicador" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{cifra.periodo}}" placeholder="Periodo" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{cifra.cifras}}" placeholder="Cifras" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{cifra.enlace}}" placeholder="Enlace" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifra.indicador" placeholder="Indicador" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifra.periodo" placeholder="Periodo" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifra.cifras" placeholder="Cifras" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="cifra.enlace" placeholder="Enlace" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button"><i class="ion-edit"></i></a>
-                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                              <a class="add-button" ng-click="editCifra(cifra.id,cifra.indicador,cifra.periodo,cifra.cifras,cifra.enlace)"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" ng-click="valor(cifra.id)" data-target=".delete-cifra"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>
                         </table>
-                        <button class="save-modal">Guardar</button>
                 </form>
           </div>
         </div>
@@ -317,25 +316,30 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Divisas</h4>
-                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                      <div class="fecha-mod">
+                        <input ng-model="fechaDivdia" placeholder="dia" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaDivmes" placeholder="mes" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaDivanio" placeholder="año" type="text" class="fecha-cierre">
+                        <a class="add-button" ng-click="editFechaD(fechaDivdia,fechaDivmes,fechaDivanio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
+                      </div>
                     </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newDivisaNombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newDivisaPais" placeholder="País" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newDivisaValor" placeholder="Cambio" class="input-modal-economics" type="text"></td>
+                            <td><a class="add-button" ng-click="addDivisa(newDivisaNombre,newDivisaPais,newDivisaValor)"><i class="ion-android-add-circle"></i></a></td>
                           </tr>
                           <tr ng-repeat="divisa in divisas">
-                            <td><input value="{{divisa.nombre}}" placeholder="Divisa" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{divisa.pais}}" placeholder="País" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{divisa.cambio}}" placeholder="Cambio" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="divisa.nombre" placeholder="Divisa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="divisa.pais" placeholder="País" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="divisa.cambio" placeholder="Cambio" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button"><i class="ion-edit"></i></a>
-                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                              <a class="add-button" ng-click="editDivisa(divisa.id,divisa.nombre,divisa.pais,divisa.cambio)"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" ng-click="valor(divisa.id)" data-target=".delete-divisa"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>
                         </table>
-                        <button class="save-modal">Guardar</button>
                 </form>
           </div>
         </div>
@@ -348,23 +352,28 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Tasas del mundo</h4>
-                      <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                      <div class="fecha-mod">
+                        <input ng-model="fechaTadia" placeholder="dia" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaTames" placeholder="mes" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaTaanio" placeholder="año" type="text" class="fecha-cierre">
+                        <a class="add-button" ng-click="editFechaT(fechaTadia,fechaTames,fechaTaanio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
+                      </div>
                     </div>
                         <table class="table table-striped">
                           <tr>
-                            <td><input ng-model="newBolsaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newBolsaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': newBolsaPorcentaje > 0, 'red': newBolsaPorcentaje < 0}" type="text"></td>
+                            <td><input ng-model="newTasaNombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newTasaPorcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': newTasaPorcentaje > 0, 'red': newTasaPorcentaje < 0}" type="text"></td>
+                            <td><a class="add-button" ng-click="addTasa(newTasaNombre,newTasaPorcentaje)"><i class="ion-android-add-circle"></i></a></td>
                           </tr>
                           <tr ng-repeat="tasa in tasas">
-                            <td><input value="{{tasa.nombre}}" placeholder="Tasa" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{tasa.porcentaje}}" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': tasa.porcentaje > 0, 'red': tasa.porcentaje < 0}" type="text"></td>
+                            <td><input ng-model="tasa.nombre" placeholder="Tasa" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="tasa.porcentaje" placeholder="Porcentaje" class="input-modal-economics" ng-class="{'green': tasa.porcentaje > 0, 'red': tasa.porcentaje < 0}" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button"><i class="ion-edit"></i></a>
-                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                              <a class="add-button" ng-click="editTasa(tasa.id,tasa.nombre,tasa.porcentaje)"><i class="ion-edit"></i></a>
+                              <a class="delete-button" data-toggle="modal" ng-click="valor(tasa.id)" data-target=".delete-tasa"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>
                         </table>
-                        <button class="save-modal">Guardar</button>
                 </form>
           </div>
         </div>
@@ -427,6 +436,45 @@
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
       <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarMercado(control)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-cifra" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este Item?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarCifra(control)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-divisa" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este Item?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarDivisa(control)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-tasa" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este Item?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarTasa(control)">Eliminar</button>
     </div>
   </div>
   </div>
