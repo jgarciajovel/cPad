@@ -35,7 +35,7 @@ angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngul
                 controller: "CaricaturasController",
                 templateUrl: "templates/caricaturas/main.html"
             })
-            .when("/ads/:idPosition", {
+            .when("/ads/:posicion", {
                 controller: "positionController",
                 templateUrl: "templates/publicidad/posicion.html"
             })

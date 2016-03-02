@@ -145,6 +145,9 @@ angular.module('cpad.controllers', [])
               if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
                 $http.post('api/php/modulos.php?tipo=3&modulo=1',{'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
                   $scope.bolsas = response.bolsas;
+                  $scope.newBolsaNombre ="";
+                  $scope.newBolsaPorcentaje ="";
+                  $scope.newBolsaValor ="";
                 });
               }else{
                 alert("Ingrese contenido valido");
@@ -188,6 +191,13 @@ angular.module('cpad.controllers', [])
             if(!isNaN(porcentaje) && !isNaN(ultimo) && !isNaN(cambio) && !isNaN(menor) && !isNaN(masAlto) && descripcion!= undefined && nombre!= undefined){
               $http.post('api/php/modulos.php?tipo=3&modulo=2',{'nombre': nombre, 'descripcion': descripcion, 'ultimo': ultimo,'cambio': cambio,'porcentaje': porcentaje,'menor': menor,'masAlto': masAlto}).success(function(response){
                   $scope.mercados = response.mercados;
+                  $scope.newMercadosNombre = "";
+                  $scope.newMercadosDes = "";
+                  $scope.newMercadosUltimo = "";
+                  $scope.newMercadosCambio = "";
+                  $scope.newMercadosPorcentaje = "";
+                  $scope.newMercadosMenor = "";
+                  $scope.newMercadosAlto = "";
               });
             }else{
               alert("Ingrese contenido valido");
@@ -223,6 +233,10 @@ angular.module('cpad.controllers', [])
             if(!isNaN(cifras) && indicador!= undefined && periodo!= undefined && enlace!= undefined){
               $http.post('api/php/modulos.php?tipo=3&modulo=3',{'indicador': indicador, 'periodo': periodo, 'cifras': cifras,'enlace': enlace}).success(function(response){
                   $scope.cifras = response.cifras;
+                  $scope.newCifrasIndicador = "";
+                  $scope.newCifrasPeriodo ="";
+                  $scope.newCifrasCifras = "";
+                  $scope.newCifrasDetalles = "";
               });
             }else{
               alert("Ingrese contenido valido");
@@ -249,6 +263,9 @@ angular.module('cpad.controllers', [])
             if(!isNaN(cambio) && nombre!= undefined && pais!= undefined){
               $http.post('api/php/modulos.php?tipo=3&modulo=4',{ 'nombre': nombre, 'pais': pais, 'cambio': cambio}).success(function(response){
                   $scope.divisas = response.divisas;
+                  $scope.newDivisaNombre ="";
+                  $scope.newDivisaPais = "";
+                  $scope.newDivisaValor = "";
               });
             }else{
               alert("Ingrese contenido valido");
@@ -283,6 +300,8 @@ angular.module('cpad.controllers', [])
             if(!isNaN(porcentaje) && nombre!= undefined){
               $http.post('api/php/modulos.php?tipo=3&modulo=5',{ 'nombre': nombre, 'porcentaje': porcentaje}).success(function(response){
                   $scope.tasas = response.tasas;
+                  $scope.newTasaNombre = "";
+                  $scope.newTasaPorcentaje = "";
               });
             }else{
               alert("Ingrese contenido valido");
@@ -471,7 +490,7 @@ angular.module('cpad.controllers', [])
       });
         $scope.date = new Date();
     })
-    .controller('positionController', function($scope, $http, $location, uService, $cookies){
+    .controller('positionController', function($scope, $http, $location, uService, $cookies, $routeParams){
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
@@ -486,6 +505,10 @@ angular.module('cpad.controllers', [])
         }
       });
         $scope.date = new Date();
+        var posicion = $routeParams.posicion;
+        $http.get("api/php/posicion.php?posicion=" + posicion).success(function(response){
+          $scope.banners = response.banners;
+        });
 
         $scope.clientImg = 'https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg';
     })
