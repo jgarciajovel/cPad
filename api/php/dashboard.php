@@ -67,21 +67,6 @@ $fotopreview = mysql_fetch_row($fotoinfo);
 $fotogaleria = array('foto' => $fotopreview[0], 'titulo' => $fotopreview[1], 'total' => $fotopreview[2]);
 // FOTOGALERIA MAS VISTA
 
-// MERCADOS DEL MUNDO
-$mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo from mercado");
-while($mercadopreview = mysql_fetch_array($mercadoinfo)){
-  $mercados[] = array(
-    'id' => $mercadopreview['idBolsa'],
-    'nombre' => $mercadopreview['nombre'],
-    'descripcion' => $mercadopreview['descripcion'],
-    'menor' => $mercadopreview['menor'],
-    'masAlto' => $mercadopreview['masAlto'],
-    'ultimo' => $mercadopreview['ultimo'],
-    'porcentaje' => $mercadopreview['porcentaje'],
-    'cambio' => $mercadopreview['cambio']
-  );
-}
-// MERCADOS DEL MUNDO
 // CIFRAS ECONOMICAS
 $cifrasinfo = mysql_query("SELECT idDatos, indicador, periodo, cifras, enlaceDetalles as enlace from datoseconomicos");
 while($cifraspreview = mysql_fetch_array($cifrasinfo)){
@@ -121,7 +106,7 @@ echo json_encode(array(
   'fotogaleria' => $fotogaleria,
   'cliente' => clientePopular(),
   'bolsas' => bolsasp(),
-  'mercados' => $mercados,
+  'mercados' => mercadosp(),
   'cifras' => $cifras,
   'divisas' => $divisas,
   'tasas' => $tasas,

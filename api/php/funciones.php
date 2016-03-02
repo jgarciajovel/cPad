@@ -177,4 +177,22 @@ function bolsasp(){
 	}
 	return $bolsas;
 }
+function mercadosp(){
+	// MERCADOS DEL MUNDO
+	$mercadoinfo = mysql_query("SELECT idMercado, nombre, descripcion, cambio, porcentaje, menor, masAlto, ultimo from mercado");
+	while($mercadopreview = mysql_fetch_array($mercadoinfo)){
+	  $mercados[] = array(
+	    'id' => $mercadopreview['idMercado'],
+	    'nombre' => $mercadopreview['nombre'],
+	    'descripcion' => $mercadopreview['descripcion'],
+	    'menor' => $mercadopreview['menor'],
+	    'masAlto' => $mercadopreview['masAlto'],
+	    'ultimo' => $mercadopreview['ultimo'],
+	    'porcentaje' => $mercadopreview['porcentaje'],
+	    'cambio' => $mercadopreview['cambio']
+	  );
+	}
+	return $mercados;
+	// MERCADOS DEL MUNDO
+}
 ?>

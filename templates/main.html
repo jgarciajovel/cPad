@@ -1,6 +1,38 @@
-<!-- Menu Responsive -->
-<div data-ng-include data-src="'templates/menu.html'"></div>
-<!-- Menu Section -->
+<!-- Menu Responsive
+    <div data-ng-include data-src="'templates/menu.html'"></div>
+    Menu Section -->
+
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="">Reportar Error</a></li>
+            <li><a href="" data-toggle="modal" data-target=".o-settings">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="" ng-click="logout()">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
+</nav>
+<!-- Top Menu -->
 <div class="sidebar">
     <div class="sidebar-item-out">
         <i class="ion-power"></i>
@@ -170,7 +202,12 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-economia">
                       <h4 class="modal-title" id="gridSystemModalLabel">Bolsas del mundo</h4>
-                      <input value="{{bolsas[0].fecha | date:'dd/MM/yyyy'}}" type="text" class="fecha-cierre" disabled>
+                      <div class="fecha-mod">
+                        <input ng-model="fechaBolsadia" placeholder="dia" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaBolsames" placeholder="mes" type="text" class="fecha-cierre dt">
+                        <input ng-model="fechaBolsaanio" placeholder="año" type="text" class="fecha-cierre">
+                        <a class="add-button" ng-click="editFecha(fechaBolsadia,fechaBolsames,fechaBolsaanio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
+                      </div>
                     </div>
                         <table class="table table-striped">
                           <tr>
@@ -203,33 +240,38 @@
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                     <div class="modal-header h-economia">
                         <h4 class="modal-title" id="gridSystemModalLabel">Mercados del mundo</h4>
-                        <input placeholder="dd/mm/yyyy" type="text" class="fecha-cierre">
+                        <div class="fecha-mod">
+                          <input ng-model="fechaBolsadia" placeholder="dia" type="text" class="fecha-cierre dt">
+                          <input ng-model="fechaBolsames" placeholder="mes" type="text" class="fecha-cierre dt">
+                          <input ng-model="fechaBolsaanio" placeholder="año" type="text" class="fecha-cierre">
+                          <a class="add-button" ng-click="editFecha(fechaBolsadia,fechaBolsames,fechaBolsaanio)" style="position: absolute; right: 5px; top: 20;"><i class="ion-edit"></i></a>
+                        </div>
                       </div>
                         <table class="table table-striped">
                           <tr>
                             <td><input ng-model="newMercadosNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newMercadosContrato" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosDes" placeholder="Contrato" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newMercadosUltimo" placeholder="Último" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newMercadosCambios" placeholder="Cambios" class="input-modal-economics" type="text"></td>
-                            <td><input ng-model="newMercadosPorCambio" placeholder="%" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosCambio" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newMercadosPorcentaje" placeholder="%" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newMercadosMenor" placeholder="Menor" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newMercadosAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                            <td><a class="add-button" ng-click="addMercado(newMercadosNombre,newMercadosDes,newMercadosUltimo,newMercadosCambio,newMercadosPorcentaje,newMercadosMenor,newMercadosAlto)"><i class="ion-android-add-circle"></i></a></td>
                           </tr>
                           <tr ng-repeat="mercado in mercados">
-                            <td><input value="{{mercado.nombre}}" placeholder="Nombre" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.descripcion}}" placeholder="Contrato" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.ultimo}}" placeholder="Último" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.cambio}}" placeholder="Cambios" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.porcentaje}}" placeholder="%" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.menor}}" placeholder="Menor" class="input-modal-economics" type="text"></td>
-                            <td><input value="{{mercado.masAlto}}" placeholder="Alto" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.nombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.descripcion" placeholder="Contrato" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.ultimo" placeholder="Último" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.cambio" placeholder="Cambios" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.porcentaje" placeholder="%" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.menor" placeholder="Menor" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="mercado.masAlto" placeholder="Alto" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button"><i class="ion-edit"></i></a>
-                              <a class="delete-button" data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
+                              <a class="add-button" ng-click="editMercado(mercado.id,mercado.nombre,mercado.descripcion,mercado.ultimo,mercado.cambio,mercado.porcentaje,mercado.menor,mercado.masAlto)"><i class="ion-edit"></i></a>
+                              <a class="delete-button" ng-click="valor(mercado.id)" data-toggle="modal" data-target=".delete-mercado"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>
                         </table>
-                        <button class="save-modal">Guardar</button>
                 </form>
           </div>
         </div>
@@ -372,6 +414,19 @@
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
       <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarBolsa(control)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-mercado" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este Item?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarMercado(control)">Eliminar</button>
     </div>
   </div>
   </div>

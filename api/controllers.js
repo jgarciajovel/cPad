@@ -122,35 +122,77 @@ angular.module('cpad.controllers', [])
             $scope.divisas = response.divisas;
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
+            var ar = $scope.bolsas[0].fecha.split("-");
+            $scope.fechaBolsadia = ar[2];
+            $scope.fechaBolsames = ar[1];
+            $scope.fechaBolsaanio = ar[0];
           });
           $scope.control;
           $scope.valor = function(val){
             $scope.control = val;
           }
           $scope.editBolsa = function(id,nombre,porcentaje,valor){
-            $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-              alert("Cambios guardados");
-              $http.get("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1").success(function(response){
-                $scope.bolsas = response.bolsas;
+            // $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
+            if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=1',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
+                alert("Cambios guardados");
+                  $scope.bolsas = response.bolsas;
               });
-            });
+            }else{
+              alert("Ingrese contenido valido");
+            }
           }
           $scope.addBolsa = function(nombre,porcentaje,valor){
-
-              $http.get("api/php/modulos.php?nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=3&modulo=1").success(function(response){
-                $scope.bolsas = response.bolsas;
-              });
-            
+              if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
+                $http.post('api/php/modulos.php?tipo=3&modulo=1',{'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
+                  $scope.bolsas = response.bolsas;
+                });
+              }else{
+                alert("Ingrese contenido valido");
+              }
           }
           $scope.borrarBolsa = function(id){
-            $http.post("api/php/modulos.php?id="+id+"&tipo=2&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-              alert("Cambios guardados");
-              $http.get("api/php/modulos.php?id="+id+"&tipo=2&modulo=1").success(function(response){
+            $http.post("api/php/modulos.php?tipo=2&modulo=1",{'id':id}).success(function(response){
+
                 $scope.bolsas = response.bolsas;
-              });
+
             });
           }
+          $scope.editFecha = function(dia,mes,anio){
+            var fecha = [anio,mes,dia];
+            var f = fecha.join("-");
+            console.log(f);
+            $http.post("api/php/modulos.php?tipo=4&modulo=1",{'fecha':f}).success(function(response){
+                alert("Cambios realizados correctamente");
+                $scope.bolsas = response.bolsas;
+            });
+          }
+          $scope.editMercado = function(id,nombre,descripcion,ultimo,cambio,porcentaje,menor,masAlto){
+            if(!isNaN(porcentaje) && !isNaN(ultimo) && !isNaN(cambio) && !isNaN(menor) && !isNaN(masAlto) && descripcion!= undefined && nombre!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=2',{'id':id, 'nombre': nombre, 'descripcion': descripcion, 'ultimo': ultimo,'cambio': cambio,'porcentaje': porcentaje,'menor': menor,'masAlto': masAlto}).success(function(response){
+                alert("Cambios guardados");
+                  $scope.mercados = response.mercados;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
+          $scope.borrarMercado = function(id){
 
+              $http.post('api/php/modulos.php?tipo=2&modulo=2',{'id':id}).success(function(response){
+                  $scope.mercados = response.mercados;
+              });
+
+          }
+          $scope.addMercado = function(nombre,descripcion,ultimo,cambio,porcentaje,menor,masAlto){
+            if(!isNaN(porcentaje) && !isNaN(ultimo) && !isNaN(cambio) && !isNaN(menor) && !isNaN(masAlto) && descripcion!= undefined && nombre!= undefined){
+              $http.post('api/php/modulos.php?tipo=3&modulo=2',{'nombre': nombre, 'descripcion': descripcion, 'ultimo': ultimo,'cambio': cambio,'porcentaje': porcentaje,'menor': menor,'masAlto': masAlto}).success(function(response){
+                  $scope.mercados = response.mercados;
+              });
+            }else{
+              alert("Ingrese contenido valido");
+            }
+          }
     })
     .controller('newArticleController', function($scope, $http, $location, uService, $cookies){
       $scope.logout = function(){
