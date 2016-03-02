@@ -1,10 +1,10 @@
 <?php
 include('connection.php');
 include('funciones.php');
-$editdata = json_decode(file_get_contents("php://input"));
+$objDatos = json_decode(file_get_contents("php://input"));
 date_default_timezone_set('America/El_Salvador');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
-$id = $_GET['id'];
+$id = $objDatos->id;
 // TOP LEIDOS GLOBALES
 $leidoinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubseccion, se.url as urlSeccion, count(b.idArticulo) as total
                           from articulo a, subseccion s, seccion se, vistaarticulo b where a.idSubseccion = s.idSubseccion and a.activo = 1 and s.idSeccion = se.idSeccion and a.idArticulo = b.idArticulo
@@ -100,6 +100,11 @@ while($tasaspreview = mysql_fetch_array($tasasinfo)){
   );
 }
 // TASAS
+// CARICATURA
+  $cariq = mysql_query("SELECT `rutaFoto` FROM `caricatura` ORDER BY fecha DESC, hora DESC LIMIT 1");
+  $caricol = mysql_fetch_row($cariq);
+  $caricatura = $caricol[0];
+// CARICATURA
 echo json_encode(array(
   'leidos' => $leido,
   'sondeo' => dashSondeo(),
@@ -110,6 +115,7 @@ echo json_encode(array(
   'cifras' => $cifras,
   'divisas' => $divisas,
   'tasas' => $tasas,
-  'tops' => $top
+  'tops' => $top,
+  'caricatura' => $caricatura
 ));
 ?>

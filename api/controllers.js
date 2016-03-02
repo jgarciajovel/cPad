@@ -31,21 +31,6 @@ angular.module('cpad.controllers', [])
         }
     })
 
-    .service('userService',function($http){
-
-        this.userSinfo = function(){
-
-            userId = 'do630s';
-
-              $http.get('api/php/login.php?id='+userId).success(function(response){
-              username = response.nombre;
-              fotos = response.foto;
-              // console.log(username);
-            });
-        }
-
-    })
-
     .controller('loginController', function($scope, $http, $location, uService, $cookies){
 
       $scope.inUsername;
@@ -74,7 +59,7 @@ angular.module('cpad.controllers', [])
         return {
           list: function(response){
               userId = $cookies.get('usercpid');
-              $http.get('api/php/login.php?id='+userId).success(response);
+              $http.post('api/php/login.php',{id: userId}).success(response);
           }
         };
       })
@@ -110,7 +95,7 @@ angular.module('cpad.controllers', [])
           });
 
 
-          $http.get("api/php/dashboard.php?id="+userId).success(function(response){
+          $http.post("api/php/dashboard.php",{id: userId}).success(function(response){
 
             $scope.leidos = response.leidos;
             $scope.sondeo = response.sondeo;
@@ -122,10 +107,14 @@ angular.module('cpad.controllers', [])
             $scope.divisas = response.divisas;
             $scope.tasas = response.tasas;
             $scope.tops = response.tops;
+<<<<<<< HEAD
             var ar = $scope.bolsas[0].fecha.split("-");
             $scope.fechaBolsadia = ar[2];
             $scope.fechaBolsames = ar[1];
             $scope.fechaBolsaanio = ar[0];
+=======
+            $scope.caricatura = response.caricatura;
+>>>>>>> origin/master
           });
           $scope.control;
           $scope.valor = function(val){
@@ -157,6 +146,7 @@ angular.module('cpad.controllers', [])
                 $scope.bolsas = response.bolsas;
 
             });
+
           }
           $scope.editFecha = function(dia,mes,anio){
             var fecha = [anio,mes,dia];
@@ -279,7 +269,7 @@ angular.module('cpad.controllers', [])
           });
         };
     })
-    .controller('CaricaturasController', function($scope, $http, $location, uService, $cookies){
+    .controller('CaricaturasController', function($scope, $http, $location, uService, $cookies, Upload, $timeout){
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
@@ -304,6 +294,7 @@ angular.module('cpad.controllers', [])
         $scope.maxSize = 4;
         $http.get('api/php/caricaturas.php').success(function(response){
           $scope.caricaturas = response.caricaturas;
+          $scope.caricaturista = response.caricaturista;
         });
         $scope.valor = function(val){
           $scope.control = val;
@@ -315,6 +306,40 @@ angular.module('cpad.controllers', [])
             });
           });
         };
+
+        $scope.postCaricatura = function(idAutor){
+          $http.post('api/php/insertCaricatura.php',{autor: idAutor}).success(function(response){
+            $http.get('api/php/caricaturas.php').success(function(response){
+              $scope.caricaturas = response.caricaturas;
+              $scope.caricaturista = response.caricaturista;
+            });
+          });
+        };
+
+          $scope.uploadFiles = function(file, errFiles) {
+              $scope.f = file;
+              $scope.errFile = errFiles && errFiles[0];
+              if (file) {
+                  file.upload = Upload.upload({
+                      url: 'php/insertCaricatura.php',
+                      data: {file: file}
+                  });
+
+                  file.upload.then(function (response) {
+                      $timeout(function () {
+                          file.result = response.data;
+                      });
+                  }, function (response) {
+                      if (response.status > 0)
+                          $scope.errorMsg = response.status + ': ' + response.data;
+                  }, function (evt) {
+                      file.progress = Math.min(100, parseInt(100.0 *
+                                               evt.loaded / evt.total));
+                  });
+              }
+          };
+
+
     })
     .controller('adsController', function($scope, $http, $location, uService, $cookies){
       $scope.logout = function(){
