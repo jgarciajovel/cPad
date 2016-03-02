@@ -440,39 +440,41 @@ angular.module('cpad.controllers', [])
           });
         };
 
-        $scope.postCaricatura = function(idAutor){
-          $http.post('api/php/insertCaricatura.php',{autor: idAutor}).success(function(response){
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.filenamesave = 'img/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'http://intuls.com/cPad/api/php/insertCaricatura.php',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+
+        $scope.postCaricatura = function(idAutor,fileroot){
+          console.log(fileroot);
+          $http.post('api/php/insertCaricatura.php',{autor: idAutor, filer: fileroot}).success(function(response){
             $http.get('api/php/caricaturas.php').success(function(response){
               $scope.caricaturas = response.caricaturas;
               $scope.caricaturista = response.caricaturista;
+              $scope.fotito = '';
             });
           });
         };
-
-          $scope.uploadFiles = function(file, errFiles) {
-              $scope.f = file;
-              $scope.errFile = errFiles && errFiles[0];
-              if (file) {
-                  file.upload = Upload.upload({
-                      url: 'php/insertCaricatura.php',
-                      data: {file: file}
-                  });
-
-                  file.upload.then(function (response) {
-                      $timeout(function () {
-                          file.result = response.data;
-                      });
-                  }, function (response) {
-                      if (response.status > 0)
-                          $scope.errorMsg = response.status + ': ' + response.data;
-                  }, function (evt) {
-                      file.progress = Math.min(100, parseInt(100.0 *
-                                               evt.loaded / evt.total));
-                  });
-              }
-          };
-
-
     })
     .controller('adsController', function($scope, $http, $location, uService, $cookies){
       $scope.logout = function(){
