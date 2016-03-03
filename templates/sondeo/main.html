@@ -30,9 +30,9 @@
               <div class="header">
               <h1>{{sondeo.titulo}} | <span>{{sondeo.fecha | date:'dd/MM/yyyy'}}</span><a data-toggle="modal" ng-click="valor(sondeo.idSondeo)" data-target=".delete-sondeo"><i cl class="ion-trash-a"></i></a>
   </h1>
-                <div class="img" style="background-image:url({{sondeo.foto}});"></div>
+                <div class="img" style="background-image:url(../{{sondeo.foto}});"></div>
               </div>
-              <div class="cuerpo" data-toggle="modal" data-target=".edit-sondeo">
+              <div class="cuerpo" data-toggle="modal" data-target=".edit-sondeo-{{sondeo.idSondeo}}">
                 <h4>
                   {{sondeo.pregunta}}
                 </h4>
@@ -44,6 +44,53 @@
                 </div>
               </div>
             </div>
+
+            <!-- modal | Sondeo editar -->
+            <div class="modal fade edit-sondeo-{{sondeo.idSondeo}} sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-xs">
+                <div class="modal-content-sondeo">
+                    <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="gridSystemModalLabel">Editar sondeo</h4>
+                          </div>
+                        <div>
+                            <center>
+                              <style>
+                              .oldSondeo-{{sondeo.idSondeo}}{
+                                background-image: url(../{{sondeo.foto}}) !important;
+                                background-size: cover !important;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                              }
+                              </style>
+                               <div ng-class="{'upload-input img-client': editFoto ,'upload-input oldSondeo-{{sondeo.idSondeo}}': !editFoto}" style="background-image: url({{editFoto}}); cursor:normal;">
+                                 <input fileread="fotito" type="file" ngf-select="editUploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file" disabled>
+                                    <h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4>
+                                    </div>
+                                </div>
+                                <center>
+                                  <div class="modal-container">
+                                    <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo" disabled>{{sondeo.pregunta}}</textarea>
+                                    <i class="radio"></i><input ng-model="nuevaRespuesta" placeholder="Opciones" class="options" type="text"><a data-dismiss="modal" aria-label="Close" ng-click="addOpcion(sondeo.idSondeo,nuevaRespuesta);" class="more"><i class="ion-android-add-circle"></i></a>
+                                    <div style="margin-bottom:10px;" class="divisor"></div>
+                                    <div ng-repeat="respuesta in sondeo.respuestas" class="div-respuesta">
+                                      <i style="margin-top:10px;" class="radio"></i><input style="margin-top:0px;margin-bottom:-8px;background-color:transparent;" ng-model="respuesta.respuesta" class="options" type="text" disabled>
+                                      <a data-dismiss="modal" aria-label="Close" ng-click="delOpcion(respuesta.idRespuesta);" class="sondeo-delete"><i class="ion-trash-a"></i></a></h4>
+                                    </div>
+                                    <div style="text-align:right; margin-top:35px;">
+                                      <button class="pub-boton">Publicar</button>
+                                    </div>
+                                  </div>
+                                </center>
+                            </center>
+                        </div>
+                    </form>
+              </div>
+              </div>
+            </div>
+            <!-- modal | Sondeo editar -->
+
         </div>
         <!-- Sondeo Item-->
     </div>
@@ -59,21 +106,30 @@
 <!-- modal | Sondeo nuevo -->
 <div class="modal fade new-sondeo-action sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-xs">
-    <div class="modal-content-sondeo">
-        <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+    <div class="modal-content-sondeo" style="padding-bottom:65px;">
+        <form class="text-center" name="insertForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="gridSystemModalLabel">Nuevo sondeo</h4>
               </div>
             <div>
                 <center>
+                  <input ng-model="titulo" placeholder="Título" class="input-modal" type="text">
                    <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
-                        <input fileread="fotito" type="file" class="file">
-                        <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4></div>
+                     <input fileread="fotito" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                             accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
+                             <span ng-show="f.progress >= 0">
+                                 <div style="width:{{f.progress}}%;"
+                                      ng-bind="f.progress + '%'"></div>
+                             </span>
+                        <div style="float:left; text-align:left; margin-top:-5px !important;">
+                          <h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4></div>
                     </div>
                     <div class="modal-container">
-                      <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo"></textarea>
-                      <i class="radio"></i><input placeholder="Opciones" class="options" type="text"><a class="more" href=""><i class="ion-android-add-circle"></i></a>
+                      <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo" ng-model="pregunta"></textarea>
+                      <i class="radio"></i><input ng-model="opcion1" placeholder="Opciones" class="options" type="text">
+                      <i class="radio"></i><input ng-model="opcion2" placeholder="Opciones" class="options" type="text">
+
                       <!-- <div class="divisor"></div>
                       <div class="opciones">
                         <h4>Si estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
@@ -81,8 +137,8 @@
                       <div class="opciones">
                         <h4>No estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
                       </div> -->
-                      <div style="text-align:right; margin-top:35px;">
-                        <button class="pub-boton">Publicar</button>
+                      <div style="text-align:right; margin-top:10px;">
+                        <button ng-click="postSondeo(titulo,filenamesave,pregunta,opcion1,opcion2)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
                       </div>
                     </div>
                 </center>
@@ -92,52 +148,6 @@
   </div>
 </div>
 <!-- modal | Sondeo nuevo -->
-
-<!-- modal | Sondeo editar -->
-<div class="modal fade edit-sondeo sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-xs">
-    <div class="modal-content-sondeo">
-        <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Editar sondeo</h4>
-              </div>
-            <div>
-                <center>
-                  <style>
-                  .oldSondeo{
-                    background-image: url(http://www.contrapuntotv.net/cptvesa/wp-content/uploads/2016/02/JOV8638-copy.jpg) !important;
-                    background-size: cover !important;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                  }
-                  </style>
-                   <div ng-class="{'upload-input img-client': editFoto ,'upload-input oldSondeo': !editFoto}" style="background-image: url({{editFoto}});">
-                        <input fileread="editFoto" type="file" class="file">
-                        <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que la imagen nada más puede estar en formato <b>png, jpg</b> ó <b>gif</b>.</h4></div>
-                    </div>
-                    <div class="modal-container">
-                      <textarea placeholder="¿Cúal es tu pregunta?" class="pregunta-sondeo">¿Está usted de acuerdo con que se lleven a españa a los militares involucrados en el caso Jesuita?</textarea>
-                      <i class="radio"></i><input placeholder="Opciones" class="options" type="text"><a class="more" href=""><i class="ion-android-add-circle"></i></a>
-                      <div class="divisor"></div>
-                      <div class="opciones">
-                        <h4>Si, estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
-                      </div>
-                      <div class="opciones">
-                        <h4>No, estoy de acuerdo<a class="delete"><i class="ion-trash-a"></i></a></h4>
-                      </div>
-                      <div style="text-align:right; margin-top:35px;">
-                        <button class="pub-boton">Publicar</button>
-                      </div>
-                    </div>
-                </center>
-            </div>
-        </form>
-  </div>
-  </div>
-</div>
-<!-- modal | Sondeo editar -->
-
 
 <!-- Delete -->
 <div class="modal fade delete-sondeo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

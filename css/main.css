@@ -950,6 +950,19 @@ input:-moz-placeholder { color:#777; }
 .upload-input .author:focus{
     outline:none;
 }
+.input-modal{
+    margin-left: -2px;
+    margin-top: 10px;
+    width: 250px;
+    height: 30px;
+    background-color: #fff;
+    border: 0px;
+    border-radius: 1px;
+    padding-left: 10px;
+}
+.input-modal:focus{
+    outline:none;
+}
 .fecha-cierre{
     margin-top: -22px;
     width: 200px;
@@ -1435,6 +1448,18 @@ padding: 0px 10px;
   color: #B2C3C5;
 }
 .modal-container .opciones:hover .delete{
+  font-size:20px;
+  color: #ff817c;
+  cursor: pointer;
+}
+.sondeo-delete{
+  font-size:20px;
+  float: right;
+  color: #B2C3C5;
+  margin-top: 6px;
+  margin-left: -14px;
+}
+.sondeo-delete:hover{
   font-size:20px;
   color: #ff817c;
   cursor: pointer;

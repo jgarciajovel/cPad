@@ -369,7 +369,7 @@ angular.module('cpad.controllers', [])
           return total;
         };
     })
-    .controller('photogalleryController', function($scope, $http, $location, uService, $cookies){
+    .controller('photogalleryController', function($scope, $http, $location, uService, $cookies, Upload, $timeout){
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
@@ -389,6 +389,8 @@ angular.module('cpad.controllers', [])
         $scope.maxSize = 4;
         $http.get('api/php/photogallery.php').success(function(response){
           $scope.fotogalerias = response.fotogalerias;
+          $scope.fotografos = response.fotografos;
+          $scope.fotito = '';
         });
         $scope.control;
         $scope.valor = function(val){
@@ -398,6 +400,44 @@ angular.module('cpad.controllers', [])
           $http.post('api/php/mantenimientoF.php?id='+id+"&tipo=2",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
             $http.get("api/php/mantenimientoF.php?id="+id+"&tipo=2").success(function(response){
               $scope.fotogalerias = response.fotogalerias;
+            });
+          });
+        };
+
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.filenamesave = 'img/fotogalerias/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoF.php?tipo=1',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+
+        $scope.postFotogaleria = function(idAutor,fileroot,titulo,link){
+          console.log(fileroot);
+          $http.post('api/php/mantenimientoF.php?tipo=1',{autor: idAutor, filer: fileroot, tituloF: titulo, linkF: link}).success(function(response){
+            $http.get('api/php/photogallery.php').success(function(response){
+              $scope.fotogalerias = response.fotogalerias;
+              $scope.fotografos = response.fotografos;
+              $scope.fotito = '';
+              $scope.link = '';
+              $scope.titulo = '';
             });
           });
         };
@@ -442,12 +482,12 @@ angular.module('cpad.controllers', [])
 
         $scope.uploadFiles = function(file, errFiles) {
             $scope.f = file;
-            $scope.filenamesave = 'img/'+file.name;
+            $scope.filenamesave = 'img/caricaturas/'+file.name;
 
             $scope.errFile = errFiles && errFiles[0];
             if (file) {
                 file.upload = Upload.upload({
-                    url: 'http://intuls.com/cPad/api/php/insertCaricatura.php',
+                    url: 'api/php/mantenimientoC.php?tipo=1',
                     data: {file: file}
                 });
 
@@ -467,7 +507,7 @@ angular.module('cpad.controllers', [])
 
         $scope.postCaricatura = function(idAutor,fileroot){
           console.log(fileroot);
-          $http.post('api/php/insertCaricatura.php',{autor: idAutor, filer: fileroot}).success(function(response){
+          $http.post('api/php/mantenimientoC.php?tipo=1',{autor: idAutor, filer: fileroot}).success(function(response){
             $http.get('api/php/caricaturas.php').success(function(response){
               $scope.caricaturas = response.caricaturas;
               $scope.caricaturista = response.caricaturista;
@@ -542,7 +582,7 @@ angular.module('cpad.controllers', [])
 
     })
 
-    .controller('sondeoController', function($scope, $http, $location, uService, $cookies){
+    .controller('sondeoController', function($scope, $http, $location, uService, $cookies, Upload, $timeout){
         $scope.logout = function(){
             $cookies.remove('usercpid');
             $location.path('/login');
@@ -575,9 +615,66 @@ angular.module('cpad.controllers', [])
         }
         $scope.borrarS = function(id,tipo){
           $http.post('api/php/mantenimientoS.php?id='+id+"&tipo=2",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-            $http.get("api/php/mantenimientoS.php?id="+id+"&tipo=2").success(function(response){
+            $http.get('api/php/sondeos.php').success(function(response){
               $scope.sondeos = response.sondeos;
             });
           });
         };
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.filenamesave = 'img/sondeos/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoS.php?tipo=img',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+
+        $scope.postSondeo = function(titulo,fileroot,pregunta,opcion1,opcion2){
+          $http.post('api/php/mantenimientoS.php?tipo=1',{iTitulo: titulo, filer: fileroot, iPregunta: pregunta, iOpcion1: opcion1, iOpcion2: opcion2}).success(function(response){
+            $http.get('api/php/sondeos.php').success(function(response){
+              $scope.sondeos = response.sondeos;
+              $scope.titulo = null;
+              $scope.pregunta = null;
+              $scope.opcion1 = null;
+              $scope.opcion2 = null;
+              $scope.fotito = null;
+            });
+          });
+        };
+
+
+        /*edit sondeo*/
+        $scope.delOpcion = function(idRespuesta){
+          $http.post('api/php/mantenimientoS.php?tipo=delRespuesta',{idres: idRespuesta}).success(function(response){
+            $http.get('api/php/sondeos.php').success(function(response){
+              $scope.sondeos = response.sondeos;
+              $scope.nuevaRespuesta = null;
+            });
+          });
+        }
+        $scope.addOpcion = function(sondeoId, nRespuesta){
+          $http.post('api/php/mantenimientoS.php?tipo=addRespuesta',{nres: nRespuesta, nidsondeo: sondeoId}).success(function(response){
+            $http.get('api/php/sondeos.php').success(function(response){
+              $scope.sondeos = response.sondeos;
+              $scope.nuevaRespuesta = null;
+            });
+          });
+        }
+
     });

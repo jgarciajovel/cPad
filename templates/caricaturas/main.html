@@ -25,7 +25,7 @@
             </button>
         </div>
         <div ng-repeat="caricatura in caricaturas | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize" class="col-md-4">
-            <div class="old-album" style="background-image:url({{caricatura.foto}});">
+            <div class="old-album" style="background-image:url(../{{caricatura.foto}});">
                 <div class="transparency">
                     <div class="top-texto"><a class="delete-button" ng-click="valor(caricatura.idCaricatura)" data-toggle="modal" data-target=".delete-photo"><i class="ion-trash-a"></i></a></div>
                     <div class="texto">
@@ -55,23 +55,23 @@
                         <h4 class="modal-title" id="gridSystemModalLabel">Nueva caricatura</h4>
                       </div>
                     <center>
+                      <div class="modal-container">
                       <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
                         <input fileread="fotito" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
                                 accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
-                        <select class="author" ng-model="idAutor" ng-options="caricaturista.Caricaturista for caricaturista in caricaturista">
+                        </div>
+                        <select class="input-modal" ng-model="idAutor" ng-options="caricaturista.Caricaturista for caricaturista in caricaturista">
                           <option value="">autor/foto</option>
                         </select>
-                        <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-                            <span class="progress" ng-show="f.progress >= 0">
-                                <div style="width:{{f.progress}}%"
+                            <span ng-show="f.progress >= 0">
+                                <div style="width:{{f.progress}}%;"
                                      ng-bind="f.progress + '%'"></div>
                             </span>
-                        </div>
-                        {{filenamesave}}
                         <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
                         <button ng-click="postCaricatura(idAutor.idCaricaturista,filenamesave)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
-                    </div></center>
+                      </div>
+                    </center>
                 </form>
           </div>
         </div>

@@ -96,7 +96,7 @@ function maxTotal($id){
 }
 function formatoFecha($fecha){
 	list($diaNombre, $dia, $mes, $anio) = explode(" ",date("l, d m Y", strtotime($fecha)));
-	$meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	if($diaNombre == "Sunday,"){
 		$nombre = "Domingo,";
 	}elseif($diaNombre == "Monday,"){
@@ -117,7 +117,7 @@ function formatoFecha($fecha){
 
 function formatoFecha2($fecha){
 	list($dia, $mes, $anio) = explode(" ",date("d m Y", strtotime($fecha)));
-	$meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	return $dia." de ".$meses[$mes -1]." del ".$anio;
 }
 function clientePopular(){
