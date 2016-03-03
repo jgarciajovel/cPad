@@ -30,43 +30,16 @@
             <div class="choose-position">
                 <h6>Posiciones</h6>
                 <select ng-model="adsPosition" multiple>
-                    <option value="position1">Posición 1</option>
-                    <option value="position2">Posición 2</option>
-                    <option value="position3">Posición 3</option>
-                    <option value="position4">Posición 4</option>
-                    <option value="positionPost">Posición post</option>
-                    <option value="positionMovil">Posición móvil</option>
+                    <option ng-repeat="posicion in posiciones" ng-value="{{posicion.idPosicion}}">Posición {{posicion.posicion}}</option>
                 </select>
             </div>
-            <div ng-if="adsPosition == 'position1'" class="details-position">
-                <h6>Resumen</h6>
-                <h1 class="item">Espacios disponibles: 3</h1>
+            <div ng-repeat="posicion in posiciones" ng-if="adsPosition == posicion.idPosicion" class="details-position">
+                <h6>Resumen {{posicion.posicion}}</h6>
+                <h1 class="item">Espacios disponibles: {{5-posicion.ocupados}}</h1>
                 <h6>Clientes</h6>
-                <h1 class="item-2">Alba</h1>
-                <h1 class="item-2">Subes</h1>
+                <h1 ng-repeat="cliente in posicion.clientes" class="item-2">{{cliente}}</h1>
                 <h6>Cliente más visto</h6>
-                <h1 class="item">Alba</h1>
-            </div>
-            <div ng-if="adsPosition == 'position2'" class="details-position">
-                <h6>Resumen</h6>
-                <h1 class="item">Espacios disponibles: 5</h1>
-            </div>
-            <div ng-if="adsPosition == 'position3'" class="details-position">
-                <h6>Resumen</h6>
-                <h1 class="item">Espacios disponibles: 3</h1>
-                <h6>Clientes</h6>
-                <h1 class="item-2">Cinemark</h1>
-                <h1 class="item-2">Super Selectos</h1>
-                <h6>Cliente más visto</h6>
-                <h1 class="item">Super Selectos</h1>
-            </div>
-            <div ng-if="adsPosition == 'positionMovil'" class="details-position">
-                <h6>Resumen</h6>
-                <h1 class="item">Espacios disponibles: 4</h1>
-                <h6>Clientes</h6>
-                <h1 class="item-2">Decameron</h1>
-                <h6>Cliente más visto</h6>
-                <h1 class="item">Decameron</h1>
+                <h1 class="item">{{posicion.maxCliente}}</h1>
             </div>
         </div>
         <div ng-if="!adsPosition" class="col-md-8">
@@ -81,62 +54,16 @@
                 <h4>No hay clientes para esta posición</h4>
             </div>
         </div>
-        <div ng-if="adsPosition == 'position1'">
-            <div class="col-md-4">
-                <div class="old-album" style="background-image:url(https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg);">
+        <div ng-repeat="posicion in posiciones" ng-if="adsPosition == posicion.idPosicion">
+            <div ng-repeat="banner in banners" ng-if="posicion.idPosicion == banner.idPosicion" class="col-md-4">
+                <div class="old-album" style="background-image:url({{banner.foto}});">
                     <div class="transparency">
+                      <div class="bottom-texto"><a class="active-button" ng-click ="activeBanner(banner.id,banner.activo,pos)"><i ng-class="{'ion-toggle-filled':banner.activo==1,'ion-toggle':banner.activo == 0}"></i></a></div>
+                        <div class="top-texto"><a class="delete-button" data-toggle="modal" ng-click ="valor(banner.id)" data-target=".delete-banner"><i class="ion-trash-a"></i></a></div>
                         <div class="texto">
-                            <h6>9/01/2016</h6>
-                            <h1>Cliente: Alba</h1>
-                            <h3>3,000 clicks</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="old-album" style="background-image:url(http://sitramssdebecontinuar.com/wp-content/uploads/2015/08/rsz_screen_shot_2015-08-31_at_95311_am-680x330.jpg);">
-                    <div class="transparency">
-                        <div class="texto">
-                            <h6>9/01/2016</h6>
-                            <h1>Cliente: SUBES</h1>
-                            <h3>1,000 clicks</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="adsPosition == 'position3'">
-            <div class="col-md-4">
-                <div class="old-album" style="background-image:url(http://www.ofertasahora.com/wp-content/uploads/2013/11/supermercado-super-selectos-el-salvador.jpg);">
-                    <div class="transparency">
-                        <div class="texto">
-                            <h6>18/01/2016</h6>
-                            <h1>Cliente: Super Selectos</h1>
-                            <h3>4,230 clicks</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="old-album" style="background-image:url(http://pastoempresa.com/wp-content/uploads/2015/06/CInemark.jpg);">
-                    <div class="transparency">
-                        <div class="texto">
-                            <h6>9/01/2016</h6>
-                            <h1>Cliente: CineMark</h1>
-                            <h3>1,000 clicks</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="adsPosition == 'positionMovil'">
-            <div class="col-md-4">
-                <div class="old-album" style="background-image:url(http://hotelperunews.com/wp-content/uploads/2015/07/Decameron-Hotel-Punta-Sal.jpg);">
-                    <div class="transparency">
-                        <div class="texto">
-                            <h6>18/01/2016</h6>
-                            <h1>Cliente: Decameron</h1>
-                            <h3>8,130 clicks</h3>
+                            <h6>{{banner.fecha | date:'dd/MM/yyyy'}}</h6>
+                            <h1>Cliente: {{banner.cliente}}</h1>
+                            <h3>{{banner.total}} clicks</h3>
                         </div>
                     </div>
                 </div>
@@ -159,23 +86,19 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 ng-if="!cliente" class="modal-title" id="gridSystemModalLabel">Agregar cliente</h4>
-                        <h4 ng-if="cliente == 'Alba'" class="modal-title" id="gridSystemModalLabel">Editar cliente</h4>
+                        <h4 ng-if="cliente" class="modal-title" id="gridSystemModalLabel">Editar cliente</h4>
                       </div>
-                      <select class="select-client" ng-model="cliente">
-                           <option value="">Seleccionar cliente</option>
-                           <option value="Alba">Alba</option>
-                           <option value="Cinemark">Cinemark</option>
-                           <option value="Subes">Subes</option>
-                           <option value="Decameron">Decameron</option>
+                      <select class="select-client" ng-model="cliente" ng-options="cliente.nombre for cliente in clientes track by cliente.id">
+                           <option value="">Nuevo cliente</option>
                        </select>
                     <div ng-if="!cliente">
                         <center>
                            <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
                                 <input fileread="fotito" type="file" class="file">
-                                <input placeholder="Empresa" class="author" type="text">
+                                <input placeholder="Empresa" ng-model="nuevoNombre" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
-                                <div style="float:right" class="pub-boton">Publicar</div>
+                                <button style="float:right" ng-click="addCliente(nuevoNombre,pos)" class="pub-boton">Publicar</button>
                             </div>
                         </center>
                     </div>
@@ -184,14 +107,15 @@
                             background-image: url({{clientImg}}) !important;
                         }
                     </style>
-                    <div ng-if="cliente == 'Alba'">
+                    <div ng-if="cliente">
                         <center>
-                           <div ng-class="{'upload-input img-client': oldfotito ,'upload-input-old-client no-client-old': !oldfotito}" style="background-image: url({{oldfotito}});">
-                                <input fileread="oldfotito" type="file" class="file">
-                                <input placeholder="Empresa" value="Alba" class="author" type="text">
+                           <div ng-class="{'upload-input img-client': cliente.foto ,'upload-input-old-client no-client-old': !cliente.foto}" style="background-image: url({{cliente.foto}});">
+                                <input fileread="cliente.foto" type="file" class="file">
+                                <input placeholder="Empresa" ng-model="cliente.nombre" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
-                                <div style="float:right" class="pub-boton">Publicar</div>
+                                <button ng-click="valor(cliente.id)" data-toggle="modal" data-target=".delete-m" class="pub-boton pub-delete">Borrar</button>
+                                <button style="float:right" ng-click="editCliente(cliente.id,cliente.nombre,pos)" class="pub-boton">Editar</button>
                             </div>
                         </center>
                     </div>
@@ -209,29 +133,19 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="gridSystemModalLabel">Crear publicidad</h4>
                       </div>
-                      <select class="select-client" ng-model="position">
-                           <option value="">Seleccionar posición</option>
-                           <option value="1">Posición 1</option>
-                           <option value="2">Posición 2</option>
-                           <option value="3">Posición 3</option>
-                           <option value="4">Posición 4</option>
-                           <option value="p">Posición post</option>
-                           <option value="m">Posición móvil</option>
+                      <select class="select-client" ng-model="position" ng-options="posicion.posicion for posicion in posiciones track by posicion.idPosicion">
+                           <option value="" disabled>Seleccionar posición</option>
                        </select>
                     <div>
                         <center>
                            <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
                                 <input fileread="fotito" type="file" class="file">
-                                <select style="margin-bottom:0px; margin-top:10px;" class="select-client" ng-model="client">
-                                   <option value="">Seleccionar cliente</option>
-                                   <option value="alba">Alba</option>
-                                   <option value="subes">Subes</option>
-                                   <option value="cinemark">Cinemark</option>
-                                   <option value="papa">Papa john's</option>
+                                <select style="margin-bottom:0px; margin-top:10px;" class="select-client" ng-model="client" ng-options="cliente.nombre for cliente in clientes track by cliente.id">
+                                   <option value="" disabled>Seleccionar cliente</option>
                                </select>
-                                <input placeholder="Url" class="author" type="text">
+                                <input placeholder="Url" ng-model="newUrl" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar el banner publicitario nada más puede estar en formato <b>png</b>, <b>jpg</b> ó <b>gif</b>.</h4></div>
-                                <div style="float:right" class="pub-boton">Publicar</div>
+                                <button style="float:right" class="pub-boton" ng-click="addBanner(position.idPosicion,client.id,newUrl,pos)">Publicar</button>
                             </div>
                         </center>
                     </div>
@@ -240,3 +154,29 @@
         </div>
 </div>
 <!-- modal -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-m" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete sobre">
+    <h3>¿Está seguro que desea eliminar este cliente?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarCliente(control,pos)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->
+<!-- Modulos | Delete -->
+<div class="modal fade delete-banner" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete">
+    <h3>¿Está seguro que desea eliminar este banner</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="borrarBanner(control,pos)">Eliminar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Delete -->

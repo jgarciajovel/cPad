@@ -1513,6 +1513,25 @@ padding: 0px 10px;
   color: #ff817c;
   cursor: pointer;
 }
+.active-button{
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  cursor: pointer;
+  text-shadow: 1px 1px 5px #000;
+  font-size:28px;
+  color:#fff;
+}
+.ion-toggle-filled{
+  color: #fff;
+}
+.ion-toggle-filled:hover{
+  color: #c9c9c9;
+}
+.ion-toggle:hover{
+  color: #B6B6B6;
+}
+
 .add-button{
   font-size:20px;
   float: left;
@@ -1632,5 +1651,9 @@ padding: 0px 10px;
   height: 70px;
   border-radius: 100%;
   position: absolute;
+}
+.pub-delete{
+  background-color:#D32F2F;
+  float:left;
 }
 /* Settings */

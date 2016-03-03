@@ -547,12 +547,90 @@ angular.module('cpad.controllers', [])
         }
       });
         $scope.date = new Date();
-        var posicion = $routeParams.posicion;
-        $http.get("api/php/posicion.php?posicion=" + posicion).success(function(response){
+        $scope.pos = $routeParams.posicion;
+        $http.get("api/php/posicion.php?posicion=" + $scope.pos).success(function(response){
           $scope.banners = response.banners;
+          $scope.posiciones = response.posiciones;
+          $scope.clientes = response.clientes;
         });
 
         $scope.clientImg = 'https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg';
+        $scope.control;
+        $scope.valor = function(val){
+          $scope.control = val;
+        }
+        $scope.editCliente = function(id,nombre,pos){
+          if(nombre != undefined){
+            $http.post('api/php/mantenimientoClientes.php?tipo=1',{'id':id,'nombre':nombre}).success(function(response){
+              $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+                $scope.banners = response.banners;
+                $scope.posiciones = response.posiciones;
+                $scope.clientes = response.clientes;
+                alert("Cambios realizados exitosamente");
+              });
+            });
+          }else{
+            alert("Ingrese contenido valido");
+          }
+        }
+        $scope.borrarCliente = function(id,pos){
+          $http.post('api/php/mantenimientoClientes.php?tipo=2',{'id':id}).success(function(response){
+            $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+              $scope.banners = response.banners;
+              $scope.posiciones = response.posiciones;
+              $scope.clientes = response.clientes;
+              alert("Cambios realizados exitosamente");
+            });
+          });
+        }
+        $scope.addCliente = function(nombre,pos){
+          if(nombre != undefined){
+            $http.post('api/php/mantenimientoClientes.php?tipo=3',{'nombre':nombre}).success(function(response){
+              $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+                $scope.banners = response.banners;
+                $scope.posiciones = response.posiciones;
+                $scope.clientes = response.clientes;
+                alert("Cambios realizados exitosamente");
+              });
+            });
+          }else{
+            alert("Ingrese contenido valido");
+          }
+        }
+        $scope.borrarBanner = function(id,pos){
+          $http.post('api/php/mantenimientoBanner.php?tipo=2',{'id':id}).success(function(response){
+            $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+              $scope.banners = response.banners;
+              $scope.posiciones = response.posiciones;
+              $scope.clientes = response.clientes;
+            });
+          });
+        }
+        $scope.activeBanner = function(id,act,pos){
+          if(act == 1){
+            act = 0;
+          }else{
+            act = 1;
+          }
+          $http.post('api/php/mantenimientoBanner.php?tipo=3',{'id':id,'act':act}).success(function(response){
+            $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+              $scope.banners = response.banners;
+              $scope.posiciones = response.posiciones;
+              $scope.clientes = response.clientes;
+            });
+          });
+        }
+        $scope.addBanner = function(posicion,cliente,url,pos){
+          alert("entro");
+          $http.post('api/php/mantenimientoBanner.php?tipo=1',{'posicion':posicion,'cliente':cliente,'url':url}).success(function(response){
+            $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+              alert("ya");
+              $scope.banners = response.banners;
+              $scope.posiciones = response.posiciones;
+              $scope.clientes = response.clientes;
+            });
+          });
+        }
     })
 
     .controller('analyticsController', function($scope, $http, $location, uService, $cookies){
