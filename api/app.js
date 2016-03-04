@@ -15,6 +15,10 @@ angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngul
                 controller: "newArticleController",
                 templateUrl: "templates/n-articulo/new.html"
             })
+            .when("/edit-article/:tipo/:id", {
+                controller: "editArticleController",
+                templateUrl: "templates/n-articulo/edit.html"
+            })
             .when("/history", {
                 controller: "historyArticlesController",
                 templateUrl: "templates/n-articulo/history.html"

@@ -327,10 +327,122 @@ angular.module('cpad.controllers', [])
         if(userId && userId != 'null'){
           $scope.username = uService.nombre;
           $scope.userphoto = uService.foto;
+          $scope.userid = uService.id;
         }else{
           $location.path('/login');
         }
       });
+      $scope.destacado = 0;
+      $http.get('api/php/article.php').success(function(response){
+          $scope.subsecciones = response.subsecciones;
+          $scope.autores = response.autores;
+          $scope.fotografos = response.fotografos;
+       });
+       $scope.newArticle = function(categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta){
+         if(categoria != 2){
+           if(categoria == 1 || categoria == 3 || categoria == 4){
+             if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
+               $http.post('api/php/marticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'creador':$scope.userid,'titulo':title}).success(function(response){
+               alert("Nuevo articulo registrado");
+               $scope.htmlContent = "";
+               $scope.title = "";
+               $scope.entradilla = "";
+              });
+             }else{
+               alert("Complete todos los campos");
+             }
+           }else{
+             if(title != undefined && entradilla != undefined && contenido != undefined && categoria != undefined && autor != undefined && fotografo != undefined && ruta != undefined){
+               $http.post('api/php/marticulo.php?tipo=1',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':checkbox,'creador':$scope.userid,'titulo':title,'fotografo':fotografo,'ruta':ruta}).success(function(response){
+               alert("Nuevo articulo registrado");
+               $scope.htmlContent = "";
+               $scope.title = "";
+               $scope.entradilla = "";
+              });
+             }else{
+               alert("Complete todos los campos");
+             }
+           }
+         }else{
+           if(title != undefined  && contenido != undefined && autor != undefined && columna != undefined){
+             $http.post('api/php/marticulo.php?tipo=3',{'autor':autor,'contenido':contenido,'creador':$scope.userid,'titulo':title, 'columna':columna}).success(function(response){
+             alert("Nuevo articulo registrado");
+             $scope.htmlContent = "";
+             $scope.title = "";
+             $scope.entradilla = "";
+            });
+           }else{
+             alert("Complete todos los campos");
+           }
+         }
+       }
+    })
+    .controller('editArticleController', function($scope, $http, $location, uService, $cookies, $routeParams){
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId && userId != 'null'){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+          $scope.userid = uService.id;
+        }else{
+          $location.path('/login');
+        }
+      });
+      $scope.destacado = 0;
+      var tipo = $routeParams.tipo;
+      var id = $routeParams.id;
+      if(tipo == 'articulo' || tipo == 'columnistas'){
+        $http.get('api/php/edit-article.php?tipo='+tipo).success(function(response){
+            $scope.subsecciones = response.subsecciones;
+            $scope.autores = response.autores;
+            $scope.fotografos = response.fotografos;
+         });
+      }else{
+        alert("No se ha encontrado el articulo buscado");
+        $location.path('/');
+      }
+       $scope.newArticle = function(categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta){
+         if(categoria != 2){
+           if(categoria == 1 || categoria == 3 || categoria == 4){
+             if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
+               $http.post('api/php/marticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'creador':$scope.userid,'titulo':title}).success(function(response){
+               alert("Nuevo articulo registrado");
+               $scope.htmlContent = "";
+               $scope.title = "";
+               $scope.entradilla = "";
+              });
+             }else{
+               alert("Complete todos los campos");
+             }
+           }else{
+             if(title != undefined && entradilla != undefined && contenido != undefined && categoria != undefined && autor != undefined && fotografo != undefined && ruta != undefined){
+               $http.post('api/php/marticulo.php?tipo=1',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':checkbox,'creador':$scope.userid,'titulo':title,'fotografo':fotografo,'ruta':ruta}).success(function(response){
+               alert("Nuevo articulo registrado");
+               $scope.htmlContent = "";
+               $scope.title = "";
+               $scope.entradilla = "";
+              });
+             }else{
+               alert("Complete todos los campos");
+             }
+           }
+         }else{
+           if(title != undefined  && contenido != undefined && autor != undefined && columna != undefined){
+             $http.post('api/php/marticulo.php?tipo=3',{'autor':autor,'contenido':contenido,'creador':$scope.userid,'titulo':title, 'columna':columna}).success(function(response){
+             alert("Nuevo articulo registrado");
+             $scope.htmlContent = "";
+             $scope.title = "";
+             $scope.entradilla = "";
+            });
+           }else{
+             alert("Complete todos los campos");
+           }
+         }
+       }
     })
     .controller('historyArticlesController', function($scope, $http, $location, uService, $cookies,$anchorScroll){
 

@@ -63,7 +63,7 @@ function maxCliente($idPoscion){
   return $clpreview[0];
 }
 function clientes($idPosicion){
-  $clinfo = mysql_query("SELECT a.nombre from cliente a, banner b where b.idCliente = a.idCliente and b.idPosicion = $idPosicion order by 1");
+  $clinfo = mysql_query("SELECT a.nombre from cliente a, banner b where b.idCliente = a.idCliente and b.idPosicion = $idPosicion group by a.nombre order by 1");
   $i=0;
   while($clipreview = mysql_fetch_array($clinfo)){
     $clientes[$i] = $clipreview['nombre'];

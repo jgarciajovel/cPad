@@ -252,4 +252,37 @@ function tasap(){
 	return $tasas;
 	// TASAS
 }
+function subsecciones(){
+	$subinfo = mysql_query("SELECT idSubseccion, nombre from subseccion order by nombre");
+
+	while($subpreview = mysql_fetch_array($subinfo)){
+	  $subseccion[] = array(
+	    'id' => $subpreview['idSubseccion'],
+	    'nombre' => $subpreview['nombre']
+	  );
+	}
+	return $subseccion;
+}
+function autores(){
+	$autinfo = mysql_query("SELECT idPersonal, CONCAT(nombres,' ',apellidos) as nombre from personal order by nombre ");
+
+	while($autpreview = mysql_fetch_array($autinfo)){
+	  $autor[] = array(
+	    'id' => $autpreview['idPersonal'],
+	    'nombre' => $autpreview['nombre']
+	  );
+	}
+	return $autor;
+}
+function fotografos(){
+	$fotinfo = mysql_query("SELECT idFotografo, nombre from fotografo order by nombre");
+
+	while($fotpreview = mysql_fetch_array($fotinfo)){
+	  $fotografo[] = array(
+	    'id' => $fotpreview['idFotografo'],
+	    'nombre' => $fotpreview['nombre']
+	  );
+	}
+	return $fotografo;
+}
 ?>
