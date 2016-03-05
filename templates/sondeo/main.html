@@ -93,16 +93,15 @@
 
         </div>
         <!-- Sondeo Item-->
-      <uib-pagination total-items="sondeos.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>  
+      <uib-pagination total-items="sondeos.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
+      <div class="footer">
+          <div class="row">
+              <div class="col-md-12">
+                  © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
+              </div>
+          </div>
+      </div>
     </div>
-    <div class="footer">
-        <div class="row">
-            <div class="col-md-12">
-                © Grupo Dalton, ContraPunto Diario El Salvador | 2008 – {{date | date:'yyyy'}}
-            </div>
-        </div>
-    </div>
-</div>
 <!-- modal | Sondeo nuevo -->
 <div class="modal fade new-sondeo-action sondeo-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-xs">

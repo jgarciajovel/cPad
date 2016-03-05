@@ -79,6 +79,7 @@ angular.module('cpad.controllers', [])
         };
       })
     .controller('mainController', function($scope, $http, $location, uService, $cookies){
+          $scope.date = new Date();
 
           $scope.logout = function(){
               $cookies.remove('usercpid');
@@ -318,6 +319,8 @@ angular.module('cpad.controllers', [])
           }
     })
     .controller('newArticleController', function($scope, $http, $location, uService, $cookies){
+      $scope.date = new Date();
+
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
