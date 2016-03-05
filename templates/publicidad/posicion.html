@@ -56,7 +56,7 @@
         </div>
         <div ng-repeat="posicion in posiciones" ng-if="adsPosition == posicion.idPosicion">
             <div ng-repeat="banner in banners" ng-if="posicion.idPosicion == banner.idPosicion" class="col-md-4">
-                <div class="old-album" style="background-image:url({{banner.foto}});">
+                <div class="old-album" style="background-image:url(../{{banner.foto}});">
                     <div class="transparency">
                       <div class="bottom-texto"><a class="active-button" ng-click ="activeBanner(banner.id,banner.activo,pos)"><i ng-class="{'ion-toggle-filled':banner.activo==1,'ion-toggle':banner.activo == 0}"></i></a></div>
                         <div class="top-texto"><a class="delete-button" data-toggle="modal" ng-click ="valor(banner.id)" data-target=".delete-banner"><i class="ion-trash-a"></i></a></div>
@@ -94,28 +94,47 @@
                     <div ng-if="!cliente">
                         <center>
                            <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
-                                <input fileread="fotito" type="file" class="file">
+                               <input fileread="fotito" type="file" ngf-select="uploadFilesCliente($file, $invalidFiles)"
+                                     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
+                                     <span ng-show="f.progress >= 0">
+                                         <div style="width:{{f.progress}}%;"
+                                              ng-bind="f.progress + '%'"></div>
+                                     </span>
                                 <input placeholder="Empresa" ng-model="nuevoNombre" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
-                                <button style="float:right" ng-click="addCliente(nuevoNombre,pos)" class="pub-boton">Publicar</button>
+                                <button data-dismiss="modal" aria-label="Close" style="float:right" ng-click="addCliente(nuevoNombre,pos,clienteimg)" class="pub-boton">Publicar</button>
                             </div>
                         </center>
                     </div>
                     <style>
                         .no-client-old{
-                            background-image: url({{clientImg}}) !important;
+                            background-image: url(../{{cliente.foto}});
+                            background-size: cover;
+			    background-position: center;
+			    background-repeat: no-repeat;
+                        }
+                        .si-client-old{
+                            background-image: url({{cliente.foto}});
                         }
                     </style>
                     <div ng-if="cliente">
                         <center>
-                           <div ng-class="{'upload-input img-client': cliente.foto ,'upload-input-old-client no-client-old': !cliente.foto}" style="background-image: url({{cliente.foto}});">
-                                <input fileread="cliente.foto" type="file" class="file">
+                           <!-- <div ng-class="{'upload-input no-client-old': clientesin.foto ,'upload-input-old-client ': !clientesin.foto}" style="background-image: url(../{{cliente.foto}});"> -->
+                           {{f.name}}
+                           <div ng-class="{'upload-input img-client si-client-old': f.name ,'upload-input no-client-old': !f.name}">
+                                <input fileread="cliente.foto" type="file" ngf-select="editFilesCliente($file, $invalidFiles,cliente.id)"
+                                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
+                                      {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                        <span ng-show="f.progress >= 0">
+                                            <div style="width:{{f.progress}}%;"
+                                                 ng-bind="f.progress + '%'"></div>
+                                        </span>
                                 <input placeholder="Empresa" ng-model="cliente.nombre" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4></div>
                                 <button ng-click="valor(cliente.id)" data-toggle="modal" data-target=".delete-m" class="pub-boton pub-delete">Borrar</button>
-                                <button style="float:right" ng-click="editCliente(cliente.id,cliente.nombre,pos)" class="pub-boton">Editar</button>
+                                <button style="float:right" ng-click="editCliente(cliente.id,cliente.nombre,pos,editclienteimg)" class="pub-boton">Editar</button>
                             </div>
                         </center>
                     </div>
@@ -139,13 +158,18 @@
                     <div>
                         <center>
                            <div ng-class="{'upload-input img-client': fotito ,'upload-input no-client': !fotito}" style="background-image: url({{fotito}});">
-                                <input fileread="fotito" type="file" class="file">
+                             <input fileread="fotito" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                                     accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
+                                     <span ng-show="f.progress >= 0">
+                                         <div style="width:{{f.progress}}%;"
+                                              ng-bind="f.progress + '%'"></div>
+                                     </span>
                                 <select style="margin-bottom:0px; margin-top:10px;" class="select-client" ng-model="client" ng-options="cliente.nombre for cliente in clientes track by cliente.id">
                                    <option value="" disabled>Seleccionar cliente</option>
                                </select>
                                 <input placeholder="Url" ng-model="newUrl" class="author" type="text">
                                 <div style="float:left; text-align:left; margin-top:-5px !important;"><h4 style="font-size:12px !important;" class="aviso-img">Por favor recordar el banner publicitario nada más puede estar en formato <b>png</b>, <b>jpg</b> ó <b>gif</b>.</h4></div>
-                                <button style="float:right" class="pub-boton" ng-click="addBanner(position.idPosicion,client.id,newUrl,pos)">Publicar</button>
+                                <button data-dismiss="modal" aria-label="Close" class="pub-boton" ng-click="addBanner(position.idPosicion,client.id,newUrl,pos,filenamesave)">Publicar</button>
                             </div>
                         </center>
                     </div>

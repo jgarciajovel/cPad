@@ -644,7 +644,7 @@ angular.module('cpad.controllers', [])
       });
         $scope.date = new Date();
     })
-    .controller('positionController', function($scope, $http, $location, uService, $cookies, $routeParams){
+    .controller('positionController', function($scope, $http, $location, uService, $cookies, $routeParams, Upload, $timeout, $window){
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
@@ -666,21 +666,68 @@ angular.module('cpad.controllers', [])
           $scope.clientes = response.clientes;
         });
 
-        $scope.clientImg = 'https://yt3.ggpht.com/-JFUghiFoWZE/AAAAAAAAAAI/AAAAAAAAAAA/dQEFJROgpdU/s900-c-k-no/photo.jpg';
         $scope.control;
         $scope.valor = function(val){
           $scope.control = val;
         }
-        $scope.editCliente = function(id,nombre,pos){
+        $scope.uploadFilesCliente = function(file, errFiles) {
+            $scope.f = file;
+            $scope.clienteimg = 'img/clientes/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoClientes.php?tipo=clienteimg',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+        $scope.editFilesCliente = function(file, errFiles, ideditcliente) {
+            $scope.f = file;
+            $scope.editclienteimg = 'img/clientes/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoClientes.php?tipo=editclienteimgss&editid='+ideditcliente,
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+        $scope.editCliente = function(id,nombre,pos,editclienteimg){
           if(nombre != undefined){
-            $http.post('api/php/mantenimientoClientes.php?tipo=1',{'id':id,'nombre':nombre}).success(function(response){
+            $http.post('api/php/mantenimientoClientes.php?tipo=1',{'id':id,'nombre':nombre,'editruta':editclienteimg}).success(function(response){
               $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
-                $scope.banners = response.banners;
                 $scope.posiciones = response.posiciones;
                 $scope.clientes = response.clientes;
-                alert("Cambios realizados exitosamente");
+                $scope.cliente = '';
               });
             });
+            $window.location.reload();
           }else{
             alert("Ingrese contenido valido");
           }
@@ -691,20 +738,27 @@ angular.module('cpad.controllers', [])
               $scope.banners = response.banners;
               $scope.posiciones = response.posiciones;
               $scope.clientes = response.clientes;
-              alert("Cambios realizados exitosamente");
+              $scope.cliente = '';
+              $scope.fotito = '';
+              $scope.cliente.foto = '';
+              $scope.f.progress = '';
             });
           });
         }
-        $scope.addCliente = function(nombre,pos){
+        $scope.addCliente = function(nombre,pos,clienteimg){
           if(nombre != undefined){
-            $http.post('api/php/mantenimientoClientes.php?tipo=3',{'nombre':nombre}).success(function(response){
+            $http.post('api/php/mantenimientoClientes.php?tipo=3',{'nombre':nombre,'clientefoto':clienteimg}).success(function(response){
               $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
                 $scope.banners = response.banners;
                 $scope.posiciones = response.posiciones;
                 $scope.clientes = response.clientes;
+                $scope.cliente.nombre = '';
+                $scope.cliente = '';
+                $scope.cliente.foto = '';
                 alert("Cambios realizados exitosamente");
               });
             });
+            $window.location.reload();
           }else{
             alert("Ingrese contenido valido");
           }
@@ -732,17 +786,70 @@ angular.module('cpad.controllers', [])
             });
           });
         }
-        $scope.addBanner = function(posicion,cliente,url,pos){
-          alert("entro");
-          $http.post('api/php/mantenimientoBanner.php?tipo=1',{'posicion':posicion,'cliente':cliente,'url':url}).success(function(response){
+        $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.filenamesave = 'img/banners/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoBanner.php?tipo=banner',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+        $scope.addBanner = function(posicion,cliente,url,pos,bannerurl){
+          $http.post('api/php/mantenimientoBanner.php?tipo=1',{'posicion':posicion,'cliente':cliente,'url':url,'banner':bannerurl}).success(function(response){
             $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
-              alert("ya");
               $scope.banners = response.banners;
               $scope.posiciones = response.posiciones;
               $scope.clientes = response.clientes;
+              $scope.client = null;
+              $scope.position = null;
+              $scope.fotito = null;
+              $scope.newUrl = null;
+              $scope.f.progress = '';
             });
           });
         }
+
+        $scope.uploadFilesCliente = function(file, errFiles) {
+            $scope.f = file;
+            $scope.clienteimg = 'img/clientes/'+file.name;
+
+            $scope.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: 'api/php/mantenimientoClientes.php?tipo=clienteimg',
+                    data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        };
+
     })
 
     .controller('analyticsController', function($scope, $http, $location, uService, $cookies){

@@ -176,6 +176,18 @@ function fotogaleriap(){
 	return $fotogalerias;
 }
 
+function fotoAutores(){
+	$autorfoto = mysql_query("SELECT `idFotografo`, `nombre` FROM `fotografo`");
+	while($autorfotorow = mysql_fetch_array($autorfoto)){
+		$autorfotogaleria[] = array(
+				'idFotografo' => $autorfotorow['idFotografo'],
+				'nombre' => $autorfotorow['nombre'],
+				);
+	}
+	return $autorfotogaleria;
+}
+
+
 function bolsasp(){
 	$bolsainfo = mysql_query("SELECT idBolsa, nombre, porcentaje, valor, fecha from bolsa");
 	while($bolsapreview = mysql_fetch_array($bolsainfo)){

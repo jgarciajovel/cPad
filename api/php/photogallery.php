@@ -7,6 +7,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 
 echo json_encode(array(
-  'fotogalerias' => fotogaleriap()
+  'fotogalerias' => fotogaleriap(),
+  'fotografos' => fotoAutores()
 ));
 ?>
