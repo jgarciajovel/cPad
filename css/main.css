@@ -660,6 +660,8 @@ input:-moz-placeholder { color:#777; }
 }
 .destacado{
     margin-top: 15px;
+    display: inline-block;
+    margin-right: 30px;
 }
 .destacado span{
     margin-left: 10px;
@@ -675,6 +677,11 @@ input:-moz-placeholder { color:#777; }
     background-color: #334750;
     color: #fff;
     padding: 8px 20px;
+    margin-left: 10px;
+}
+.publicar .borrar{
+    color: #FF4A42;
+    background-color: transparent;
 }
 /* New article */
 /* History of articles */
@@ -854,7 +861,7 @@ input:-moz-placeholder { color:#777; }
   font-size: 16px;
   margin: 0px 0px 30px 0px;
 }
-.modal-delete .eliminar{
+.modal-delete .eliminar, .modal-delete .editar{
   font-size: 12px;
   margin: 0px;
   border: 0px;
@@ -865,6 +872,9 @@ input:-moz-placeholder { color:#777; }
   color: #fff;
   background-color: #FF6760;
   transition: 0.5s;
+}
+.modal-delete .editar{
+  background-color: #0096E2 !important;
 }
 .modal-delete .eliminar:hover{
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.30);
@@ -1655,5 +1665,8 @@ padding: 0px 10px;
 .pub-delete{
   background-color:#D32F2F;
   float:left;
+}
+.checks div{
+  display: inline-block;
 }
 /* Settings */

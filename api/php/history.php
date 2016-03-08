@@ -20,7 +20,8 @@ while($contpreview = mysql_fetch_array($continfo)){
     'fecha' => $contpreview['fecha'],
     'hora' => $contpreview['hora'],
     'total' => $contpreview['total'],
-    'creador' => $contpreview['creador']
+    'creador' => $contpreview['creador'],
+    'tipo' => 'articulo'
   );
 }
 
@@ -39,7 +40,8 @@ while($colpreview = mysql_fetch_array($colinfo)){
     'fecha' => $colpreview['fecha'],
     'hora' => $colpreview['hora'],
     'total' => $colpreview['total'],
-    'creador' => $colpreview['creador']
+    'creador' => $colpreview['creador'],
+    'tipo' => 'columnistas'
   );
 }
 

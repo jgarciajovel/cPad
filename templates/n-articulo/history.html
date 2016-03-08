@@ -27,7 +27,8 @@
      <div class="row">
         <div class="col-md-12">
             <h1 class="new-article-h1">Historial de articulos</h1>
-            <div class="history-table" ng-repeat="(key, value) in contenido | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize | groupBy: 'fecha' | orderBy:'fecha'">
+             <!-- | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize | -->
+            <div class="history-table" ng-repeat="(key, value) in contenido | groupBy: 'fecha' | orderBy:'fecha'">
                 <div class="resumen">
                     <div class="row">
                         <div class="col-md-2">
@@ -49,7 +50,7 @@
                             <th>Creador</th>
                         </tr>
                         <tr ng-repeat="row in value | orderBy: '-total'">
-                            <td style="width: 450px; display: inline-block;">{{row.titulo}}</th>
+                            <td style="width: 450px; display: inline-block;"><a ng-href="#/edit-article/{{row.tipo}}/{{row.id}}">{{row.titulo}}</a></th>
                             <td style="">{{row.subseccion}}</td>
                             <td style="">{{row.autor}}</td>
                             <td style="">{{row.hora}}</td>
@@ -59,7 +60,7 @@
                     </tbody>
                 </table>
             </div>
-          <uib-pagination ng-click="top()" total-items="paginadorf.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
+          <!-- <uib-pagination ng-click="top()" total-items="paginadorf.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination> -->
         </div>
     </div>
     <div class="footer">

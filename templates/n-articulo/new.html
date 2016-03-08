@@ -25,8 +25,9 @@
         </div>
     </div>
      <div class="row">
-        <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4" class="col-md-4">
+        <div ng-class="{'col-md-2': category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4, 'col-md-4':category.id != 1 || category.id != 2 || category.id != 3 || category.id != 4}">
             <h1 class="new-article-h1">Nuevo articulo</h1>
+            <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4">
             <div ng-class="{'upload-image img-fill': imagenNueva ,'upload-image no-photo': !imagenNueva}" style="background-image: url({{imagenNueva}});">
               <input fileread="imagenNueva" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
                       accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
@@ -40,6 +41,7 @@
             </select>
             <h4 class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4>
+            </div>
         </div>
         <div class="col-md-8">
             <div class="new-article-inputs">

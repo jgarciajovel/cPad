@@ -25,46 +25,52 @@
         </div>
     </div>
      <div class="row">
-        <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4" class="col-md-4">
+        <div ng-class="{'col-md-2': articulo.idSubseccion == 1 || articulo.idSubseccion == 2 || articulo.idSubseccion == 3 || articulo.idSubseccion == 4, 'col-md-4':articulo.idSubseccion != 1 || articulo.idSubseccion != 2 || articulo.idSubseccion != 3 || articulo.idSubseccion != 4}">
             <h1 class="new-article-h1">Editar articulo</h1>
-            <div ng-class="{'upload-image img-fill': imagenNueva ,'upload-image no-photo': !imagenNueva}" style="background-image: url({{imagenNueva}});">
-                <input fileread="imagenNueva" type="file">
+            <div  ng-hide="articulo.idSubseccion == 1 || articulo.idSubseccion == 2 || articulo.idSubseccion == 3 || articulo.idSubseccion == 4">
+            <div ng-class="{'upload-image img-fill': articulo.imagen.foto ,'upload-image no-photo': !articulo.imagen.foto}" style="background-image: url({{articulo.imagen.foto}});">
+                <input fileread="articulo.imagen.foto" type="file">
             </div>
-            <select class="autor-photo" ng-model="fotografo" ng-options="fotografo.nombre for fotografo in fotografos track by fotografo.id">
+            <select class="autor-photo" ng-model="articulo.imagen.idFotografo" ng-options="fotografo.id as fotografo.nombre for fotografo in fotografos">
                 <option value="" disabled>autor/foto</option>
             </select>
             <h4 class="aviso-img">Por favor recordar que el tamaño minimo para la imágen es de
 <b>600px</b> x <b>400px</b>.</h4>
+          </div>
         </div>
         <div class="col-md-8">
             <div class="new-article-inputs">
-                <input class="title" type="text" ng-model="title" placeholder="Título">
-                <select ng-model="category" class="category" ng-options="subseccion.nombre for subseccion in subsecciones track by subseccion.id">
+                <input class="title" type="text" ng-model="articulo.titulo" placeholder="Título">
+                <select ng-model="articulo.idSubseccion" class="category" ng-options="subseccion.id as subseccion.nombre for subseccion in subsecciones">
                     <option value="" disabled>Subsección</option>
                 </select>
-                <div ng-if="category.id == 2">
-                <select style="margin-bottom:-10px;" ng-model="$parent.columna" ng-options="subseccion.nombre for subseccion in subsecciones track by subseccion.id">
+                <div ng-if="articulo.idSubseccion == 2">
+                <select style="margin-bottom:-10px;" ng-model="articulo.columna" ng-options="subseccion.id as subseccion.nombre for subseccion in subsecciones">
                     <option value="" disabled>Sección de columna</option>
                 </select>
                 </div>
                 </br>
-                <select ng-model="author" ng-options="autor.nombre for autor in autores track by autor.id">
+                <select ng-model="articulo.idPersonal" ng-options="autor.id as autor.nombre for autor in autores">
                     <option value="" disabled>Autor</option>
                 </select></br>
-                <div ng-if="category.id != 2">
-                <textarea placeholder="Entradilla" ng-model="$parent.entradilla" class="entradilla"></textarea>
+                <div ng-if="articulo.idSubseccion != 2">
+                <textarea placeholder="Entradilla" ng-model="articulo.preview" class="entradilla"></textarea>
                 </div>
                 <div class="new-article-editor">
-                    <div text-angular ng-model="htmlContent" name="demo-editor"></div>
+                    <div text-angular ng-model="articulo.contenido" name="demo-editor"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="destacado" ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4"><input type="checkbox" ng-model="destacado" ng-true-value="1" ng-false-value="0"><span>Destacado</span></div>
+                <div class="col-md-4 checks">
+                    <div class="destacado" ng-hide="articulo.idSubseccion == 1 || articulo.idSubseccion == 2 || articulo.idSubseccion == 3 || articulo.idSubseccion == 4"><input type="checkbox" ng-model="esp" ng-checked="articulo.especial == 1"><span>Destacado</span></div>
+                    <div class="destacado"><input type="checkbox" ng-model="articulo.activo" ng-checked="articulo.activo == 1"><span>Activo</span></div>
+                    {{esp}}
+                    {{articulo.activo}}
                 </div>
                 <div class="col-md-8">
                     <div class="publicar">
-                        <button ng-click="newArticle(category.id,columna.id,entradilla,author.id,htmlContent,destacado,title,fotografo.id,'http://blogs.periodistadigital.com/imgs/20090729/francoise-demulder.jpg')">Publicar</button>
+                        <button data-toggle="modal" data-target=".delete" class="borrar">Borrar</button>
+                        <button data-toggle="modal" data-target=".edit">Editar</button>
                     </div>
                 </div>
             </div>
@@ -78,3 +84,29 @@
         </div>
     </div>
 </div>
+<!-- Modulos | Editar -->
+<div class="modal fade edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete">
+    <h3>¿Está seguro que desea editar este artículo?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="editar" ng-click="editArticle(articulo.id,articulo.idSubseccion,articulo.columna,articulo.preview,articulo.idPersonal,articulo.contenido,articulo.especial,articulo.titulo,articulo.imagen.idFotografo,'http://www.navegandodelpasadoalfuturo.net/wp-content/uploads/2014/09/Decenas-de-paises-en-guerra.jpg',articulo.activo)">Editar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | Editar -->
+<!-- Modulos | borrar -->
+<div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog-delete modal-xs">
+  <div class="modal-delete">
+    <h3>¿Está seguro que desea borrar este artículo?</h3>
+    <div style="text-align:right;">
+      <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="deleteArticle(articulo.id)">Borrar</button>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Modulos | borrar -->
