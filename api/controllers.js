@@ -318,7 +318,7 @@ angular.module('cpad.controllers', [])
             });
           }
     })
-    .controller('newArticleController', function($scope, $http, $location, uService, $cookies){
+    .controller('newArticleController', function($scope, $http, $location, uService, $cookies, Upload, $timeout){
       $scope.date = new Date();
 
       $scope.logout = function(){
@@ -341,6 +341,30 @@ angular.module('cpad.controllers', [])
           $scope.autores = response.autores;
           $scope.fotografos = response.fotografos;
        });
+       $scope.uploadFiles = function(file, errFiles) {
+           $scope.f = file;
+           $scope.filenamesave = 'img/articulos/'+file.name;
+
+           $scope.errFile = errFiles && errFiles[0];
+           if (file) {
+               file.upload = Upload.upload({
+                   url: 'api/php/marticulo.php?tipo=img',
+                   data: {file: file}
+               });
+
+               file.upload.then(function (response) {
+                   $timeout(function () {
+                       file.result = response.data;
+                   });
+               }, function (response) {
+                   if (response.status > 0)
+                       $scope.errorMsg = response.status + ': ' + response.data;
+               }, function (evt) {
+                   file.progress = Math.min(100, parseInt(100.0 *
+                                            evt.loaded / evt.total));
+               });
+           }
+       };
        $scope.newArticle = function(categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta){
          if(categoria != 2){
            if(categoria == 1 || categoria == 3 || categoria == 4){

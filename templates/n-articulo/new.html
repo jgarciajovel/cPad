@@ -28,7 +28,12 @@
         <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4" class="col-md-4">
             <h1 class="new-article-h1">Nuevo articulo</h1>
             <div ng-class="{'upload-image img-fill': imagenNueva ,'upload-image no-photo': !imagenNueva}" style="background-image: url({{imagenNueva}});">
-                <input fileread="imagenNueva" type="file">
+              <input fileread="imagenNueva" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+                      accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
+                      <span ng-show="f.progress >= 0">
+                          <div style="width:{{f.progress}}%;"
+                               ng-bind="f.progress + '%'"></div>
+                      </span>
             </div>
             <select class="autor-photo" ng-model="fotografo" ng-options="fotografo.nombre for fotografo in fotografos track by fotografo.id">
                 <option value="" disabled>autor/foto</option>
@@ -64,7 +69,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="publicar">
-                        <button ng-click="newArticle(category.id,columna.id,entradilla,author.id,htmlContent,destacado,title,fotografo.id,'http://blogs.periodistadigital.com/imgs/20090729/francoise-demulder.jpg')">Publicar</button>
+                        <button ng-click="newArticle(category.id,columna.id,entradilla,author.id,htmlContent,destacado,title,fotografo.id,filenamesave)">Publicar</button>
                     </div>
                 </div>
             </div>

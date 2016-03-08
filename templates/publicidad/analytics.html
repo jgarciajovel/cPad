@@ -79,11 +79,18 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="positions-sq" style="background-image:url(img/ads/bottom-purple.svg);">
+            <div class="positions-sq" style="background-color:#DAE6EC;">
                 <div class="texto-2">
-                    <h2>Sección con más posiciones utilizadas</h2>
-                    <!-- <h1>{{seccionPopular.nombre}}</h1> -->
-                    <h4 ng-repeat="seccion in seccionPopular">{{seccion.nombre}}: {{seccion.ocupadas}} POSICIONES OCUPADAS DE {{seccion.total}}</h4>
+                    <h2>Posiciones utilizadas</h2>
+                      <div class="row">
+                        <div ng-repeat="seccion in seccionPopular">
+                        <div class="col-md-3">
+                          <div class="conteo-posiciones">
+                            <h4>{{seccion.nombre}} </br> <span>{{seccion.ocupadas}}</span> / {{seccion.total}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>

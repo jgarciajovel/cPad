@@ -67,6 +67,7 @@
                                   <select class="input-modal" ng-model="idAutor" ng-options="fotografos.nombre for fotografos in fotografos">
                                     <option value="">autor/foto</option>
                                   </select>
+                                  {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
                                   <span ng-show="f.progress >= 0">
                                       <div style="width:{{f.progress}}%;"
                                            ng-bind="f.progress + '%'"></div>
