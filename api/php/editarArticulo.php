@@ -35,6 +35,10 @@ if($tipo == 1){
   $activo = $editdata -> activo;
   $columna = $editdata -> columna;
   mysql_query("UPDATE columna set titulo='".mysql_escape_string($titulo)."',contenido='".mysql_escape_string($contenido)."',idSubseccion=$columna,idPersonal=$autor,activo=$activo where idColumna=$id");
+}elseif($tipo == 4){
+  mysql_query("delete from columna where idColumna=$id");
+}elseif($tipo == 5){
+  mysql_query("delete from articulo where idArticulo = $id");
 }
 
 

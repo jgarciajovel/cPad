@@ -62,10 +62,8 @@
             </div>
             <div class="row">
                 <div class="col-md-4 checks">
-                    <div class="destacado" ng-hide="articulo.idSubseccion == 1 || articulo.idSubseccion == 2 || articulo.idSubseccion == 3 || articulo.idSubseccion == 4"><input type="checkbox" ng-model="esp" ng-checked="articulo.especial == 1"><span>Destacado</span></div>
-                    <div class="destacado"><input type="checkbox" ng-model="articulo.activo" ng-checked="articulo.activo == 1"><span>Activo</span></div>
-                    {{esp}}
-                    {{articulo.activo}}
+                    <div class="destacado" ng-hide="articulo.idSubseccion == 1 || articulo.idSubseccion == 2 || articulo.idSubseccion == 3 || articulo.idSubseccion == 4"><input type="checkbox" ng-model="tcheck"><span>Destacado</span></div>
+                    <div class="destacado"><input type="checkbox" ng-model="act"><span>Activo</span></div>
                 </div>
                 <div class="col-md-8">
                     <div class="publicar">
@@ -91,7 +89,7 @@
     <h3>¿Está seguro que desea editar este artículo?</h3>
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
-      <button data-dismiss="modal" aria-label="Close" class="editar" ng-click="editArticle(articulo.id,articulo.idSubseccion,articulo.columna,articulo.preview,articulo.idPersonal,articulo.contenido,articulo.especial,articulo.titulo,articulo.imagen.idFotografo,'http://www.navegandodelpasadoalfuturo.net/wp-content/uploads/2014/09/Decenas-de-paises-en-guerra.jpg',articulo.activo)">Editar</button>
+      <button data-dismiss="modal" aria-label="Close" class="editar" ng-click="editArticle(articulo.id,articulo.idSubseccion,articulo.columna,articulo.preview,articulo.idPersonal,articulo.contenido,tcheck,articulo.titulo,articulo.imagen.idFotografo,'http://www.navegandodelpasadoalfuturo.net/wp-content/uploads/2014/09/Decenas-de-paises-en-guerra.jpg',act)">Editar</button>
     </div>
   </div>
   </div>
@@ -104,7 +102,7 @@
     <h3>¿Está seguro que desea borrar este artículo?</h3>
     <div style="text-align:right;">
       <button data-dismiss="modal" aria-label="Close" class="cancelar">Cancelar</button>
-      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="deleteArticle(articulo.id)">Borrar</button>
+      <button data-dismiss="modal" aria-label="Close" class="eliminar" ng-click="deleteArticle(articulo.id,articulo.idSubseccion)">Borrar</button>
     </div>
   </div>
   </div>

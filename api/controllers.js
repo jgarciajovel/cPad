@@ -430,10 +430,14 @@ angular.module('cpad.controllers', [])
             $scope.fotografos = response.fotografos;
             $scope.articulo = response.articulo;
             if($scope.articulo.especial == 1){
-              $scope.checke = "checked";
+              $scope.tcheck = true;
+            }else{
+              $scope.tcheck = false;
             }
             if($scope.articulo.activo == 1){
-              $scope.che = "checked";
+              $scope.act = true;
+            }else{
+              $scope.act = false;
             }
          });
       }else{
@@ -441,6 +445,16 @@ angular.module('cpad.controllers', [])
         $location.path('/');
       }
        $scope.editArticle = function(id,categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta,activo){
+         if(checkbox == true){
+           checkbox = 1;
+         }else{
+           checkbox = 0;
+         }
+         if(activo == true){
+           activo = 1;
+         }else{
+           activo = 0;
+         }
          if(categoria != 2){
            if(categoria == 1 || categoria == 3 || categoria == 4){
              if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
@@ -459,7 +473,7 @@ angular.module('cpad.controllers', [])
            }else{
              if(title != undefined && entradilla != undefined && contenido != undefined && categoria != undefined && autor != undefined && fotografo != undefined && ruta != undefined){
                $http.post('api/php/editarArticulo.php?tipo=1',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':checkbox,'titulo':title,'fotografo':fotografo,'ruta':ruta,'id':id,'activo':activo}).success(function(response){
-               alert("Nuevo articulo registrado");
+               alert("Artículo editado con éxito");
                $http.get('api/php/edit-article.php?tipo=articulo&id='+id).success(function(response){
                    $scope.subsecciones = response.subsecciones;
                    $scope.autores = response.autores;
@@ -474,7 +488,7 @@ angular.module('cpad.controllers', [])
          }else{
            if(title != undefined  && contenido != undefined && autor != undefined && columna != undefined){
              $http.post('api/php/editarArticulo.php?tipo=3',{'autor':autor,'contenido':contenido,'titulo':title, 'columna':columna,'id':id,'activo':activo}).success(function(response){
-             alert("Nuevo articulo registrado");
+             alert("Artículo editado con éxito");
              $http.get('api/php/edit-article.php?tipo=columnistas&id='+id).success(function(response){
                  $scope.subsecciones = response.subsecciones;
                  $scope.autores = response.autores;
@@ -485,6 +499,19 @@ angular.module('cpad.controllers', [])
            }else{
              alert("Complete todos los campos");
            }
+         }
+       }
+       $scope.deleteArticle = function(id,sub){
+         if(sub == 2){
+           $http.post('api/php/editarArticulo.php?tipo=4',{'id':id}).success(function(response){
+             alert("Artículo borrado");
+             $location.path('/history');
+           });
+         }else{
+           $http.post('api/php/editarArticulo.php?tipo=5',{'id':id}).success(function(response){
+             alert("Artículo borrado");
+             $location.path('/history');
+           });
          }
        }
     })
