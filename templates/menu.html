@@ -1,5 +1,5 @@
 <!-- Top Menu -->
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -27,5 +27,72 @@
     </center>
     </div>
   </div>
+</nav> -->
+<!-- Top Menu -->
+<!-- Top Menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#">cPad.</a>
+    </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="">Reportar Error</a></li>
+            <li><a href="" data-toggle="modal" data-target=".o-settings">Configuración</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="" ng-click="logout()">Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    <center>
+        <input type="text" class="search-bar"><button class="search-btn"><i class="ion-android-search"></i>
+        </button>
+    </center>
+    </div>
+  </div>
 </nav>
 <!-- Top Menu -->
+<!-- modal | Settings -->
+<div class="modal fade o-settings" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog modal-xs">
+            <div class="modal-content-modulos">
+                <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
+                  <div class="modal-header h-settings">
+                      <h4 class="modal-title" id="gridSystemModalLabel">Configuración</h4>
+                    </div>
+                    <style>
+                    .old-set-photo{
+                      background-image: url({{userphoto}}) !important;
+                    }
+                    </style>
+                    <center>
+                      <div class="modal-container-settings">
+                          <div ng-class="{'set-photo': userPoto ,'set-photo old-set-photo': !userPoto}" style="background-image: url({{userPoto}});">
+                            <input fileread="userPoto" type="file" class="set-file">
+                          </div>
+                          <h4 class="set-nombre">{{username}}</h4>
+                          <div class="set-social"><i class="ion-email"></i><input placeholder="ejemplo@contrapunto.com.sv" type="text"></div>
+                          <textarea placeholder="Bio" class="set-info" ng-model="userbio"></textarea>
+                          <div class="set-social"><i class="ion-social-twitter"></i><input placeholder="@username" type="text"></div>
+                          <div class="set-social"><i class="ion-social-facebook"></i><input placeholder="url" type="text"></div>
+                          <div class="set-social"><i class="ion-social-googleplus"></i><input placeholder="url" type="text"></div>
+                          <div class="set-social"><i class="ion-social-linkedin"></i><input placeholder="url" type="text"></div>
+                          <div style="text-align:right; margin-top:10px;">
+                            <button class="pub-boton">Guardar</button>
+                          </div>
+                      </div>
+                    </center>
+
+                </form>
+          </div>
+        </div>
+</div>
+<!-- modal | Settings -->

@@ -28,14 +28,14 @@
         <div class="col-md-12">
             <h1 class="new-article-h1">Historial de articulos</h1>
              <!-- | startFrom:(currentPage - 1)*pageSize | limitTo:pageSize | -->
-            <div class="history-table" ng-repeat="(key, value) in contenido | groupBy: 'fecha' | orderBy:'fecha'">
+            <div class="history-table" ng-repeat="cont in contenido | groupBy: 'fecha' | toArray: true | orderBy: '-$key'| startFrom:(currentPage - 1)*pageSize | limitTo:pageSize">
                 <div class="resumen">
                     <div class="row">
                         <div class="col-md-2">
-                            <h4 class="fecha">{{key | date:'dd/MM/yyyy'}}</h4>
+                            <h4 class="fecha">{{cont.$key | date:'dd/MM/yyyy'}}</h4>
                         </div>
                         <div class="col-md-10">
-                            <h4 class="visitantes">{{totalVisitas(value)}} visitas en total</h4>
+                            <h4 class="visitantes">{{totalVisitas(cont)}} visitas en total</h4>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                             <th>Visitas</th>
                             <th>Creador</th>
                         </tr>
-                        <tr ng-repeat="row in value | orderBy: '-total'">
+                        <tr ng-repeat="row in cont | orderBy: '-total'">
                             <td style="width: 450px; display: inline-block;"><a ng-href="#/edit-article/{{row.tipo}}/{{row.id}}">{{row.titulo}}</a></th>
                             <td style="">{{row.subseccion}}</td>
                             <td style="">{{row.autor}}</td>
@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
             </div>
-          <!-- <uib-pagination ng-click="top()" total-items="paginadorf.length" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination> -->
+          <uib-pagination ng-click="top()" total-items="paginadorf.length-1" ng-model="currentPage" items-per-page="pageSize" previous-text="Anterior" next-text="Siguiente" max-size="maxSize" boundary-link-numbers="true" class="tab-subseccion"></uib-pagination>
         </div>
     </div>
     <div class="footer">

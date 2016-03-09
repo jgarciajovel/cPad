@@ -37,7 +37,7 @@ angular.module('cpad.controllers', [])
       $scope.inPassword;
 
       $scope.logIn = function(){
-        $http.get('api/php/login.php?username='+$scope.inUsername+'&password='+$scope.inPassword).success(function(response){
+        $http.post('api/php/login.php',{'username':$scope.inUsername,'password':$scope.inPassword}).success(function(response){
           var now = new Date(),
           exp = new Date(now.getFullYear(), now.getMonth()+6, now.getDate());
 
@@ -90,6 +90,7 @@ angular.module('cpad.controllers', [])
             if(userId && userId != 'null'){
               $scope.username = uService.nombre;
               $scope.userphoto = uService.foto;
+              $scope.userbio = uService.bio;
             }else{
               $cookies.remove('usercpid');
               $location.path('/login');            }
@@ -537,7 +538,7 @@ angular.module('cpad.controllers', [])
 
         $scope.date = new Date();
         $scope.currentPage = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 7;
         $scope.maxSize = 4;
         $http.get("api/php/history.php").success(function(response){
           $scope.contenido = response.contenido;
