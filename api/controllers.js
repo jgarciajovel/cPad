@@ -406,7 +406,7 @@ angular.module('cpad.controllers', [])
          }
        }
     })
-    .controller('editArticleController', function($scope, $http, $location, uService, $cookies, $routeParams){
+    .controller('editArticleController', function($scope, $http, $location, uService, $cookies, $routeParams, Upload, $timeout){
       $scope.logout = function(){
           $cookies.remove('usercpid');
           $location.path('/login');
@@ -445,6 +445,32 @@ angular.module('cpad.controllers', [])
         alert("No se ha encontrado el articulo buscado");
         $location.path('/');
       }
+
+      $scope.editFilesCliente = function(file, errFiles) {
+          $scope.f = file;
+          $scope.filenamesave = 'img/articulos/'+file.name;
+
+          $scope.errFile = errFiles && errFiles[0];
+          if (file) {
+              file.upload = Upload.upload({
+                  url: 'api/php/editarArticulo.php?tipo=img',
+                  data: {file: file}
+              });
+
+              file.upload.then(function (response) {
+                  $timeout(function () {
+                      file.result = response.data;
+                  });
+              }, function (response) {
+                  if (response.status > 0)
+                      $scope.errorMsg = response.status + ': ' + response.data;
+              }, function (evt) {
+                  file.progress = Math.min(100, parseInt(100.0 *
+                                           evt.loaded / evt.total));
+              });
+          }
+      };
+
        $scope.editArticle = function(id,categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta,activo){
          if(checkbox == true){
            checkbox = 1;
