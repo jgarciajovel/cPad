@@ -6,7 +6,11 @@ $editdata = json_decode(file_get_contents("php://input"));
 date_default_timezone_set('America/El_Salvador');
 $id = $editdata -> id;
 $tipo = $_GET['tipo'];
-if($tipo == 1){
+if($tipo == "img"){
+  $filename = $_FILES['file']['name'];
+  $destination = '../../../img/articulos/'.$filename;
+  move_uploaded_file( $_FILES['file']['tmp_name'],$destination);
+}elseif($tipo == 1){
   $categoria = $editdata -> categoria;
   $preview = $editdata -> preview;
   $autor = $editdata -> autor;
