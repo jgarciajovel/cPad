@@ -1072,4 +1072,31 @@ angular.module('cpad.controllers', [])
           });
         }
 
+    })
+
+    .controller('personalController', function($scope, $http, $location, uService, $cookies,$anchorScroll){
+
+      $scope.top = function(){
+        $anchorScroll();
+      };
+
+      $scope.logout = function(){
+          $cookies.remove('usercpid');
+          $location.path('/login');
+      };
+
+      uService.list(function(uService) {
+        if(userId && userId != 'null'){
+          $scope.username = uService.nombre;
+          $scope.userphoto = uService.foto;
+        }else{
+          $location.path('/login');
+        }
+      });
+
+      $scope.agregar = function(nombres,apellidos,descripcion,cargo,ruta){
+        $http.post('api/php/personal',{'nombres':nombres,'apellidos':apellidos,'descripcion':descripcion,'cargo':cargo,'ruta':ruta}).success(function(response){
+          alert("Personal insertado");
+        });
+      }
     });
