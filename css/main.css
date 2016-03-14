@@ -274,6 +274,30 @@ a:hover, a:focus, a:active{
 }
 /* Fotogaleria Square*/
 /* Nuevo Articulo Square*/
+.square .no-pub{
+    width: 100%;
+    height: 230px;
+    background-color: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 10px 0px 0px 20px;
+    background-image: url(../img/squares/no-pub.svg);
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+.no-pub h1{
+    font-size: 25px;
+    color: #222;
+}
+.no-pub h4{
+    margin-top: 20px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #505050;
+    text-transform: uppercase;
+}
 .square .pub{
     width: 100%;
     height: 230px;

@@ -33,7 +33,7 @@
                     <h1>Nuevo Articulo <i class="ion-edit"></i></h1>
                     <h4>tu articulo más leido</h4>
                     <h2>{{tops[0].titulo}}</h2>
-                    <h3>{{tops[0].total}} visitas </h3>
+                    <h3>{{tops[0].total}} visitas</h3>
                 </div>
             </div></a>
         </div>
@@ -51,15 +51,27 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-4">
-            <a href="#/ads"><div class="square">
-                <div class="pub">
-                    <h1>Publicidad</h1>
-                    <h4>Cliente más visto</h4>
-                    <h2>{{cliente.nombre}}</h2>
-                    <h3>{{cliente.total}} Clicks</h3>
-                </div>
-            </div></a>
+        <div ng-if="userCargo != 'periodista'">
+          <div class="col-md-4">
+              <a href="#/ads"><div class="square">
+                  <div class="pub">
+                      <h1>Publicidad</h1>
+                      <h4>Cliente más visto</h4>
+                      <h2>{{cliente.nombre}}</h2>
+                      <h3>{{cliente.total}} Clicks</h3>
+                  </div>
+              </div></a>
+          </div>
+        </div>
+        <div ng-if="userCargo == 'periodista'">
+          <div class="col-md-4">
+              <a><div class="square">
+                  <div class="no-pub">
+                      <h1>Publicidad</h1>
+                      <h4>No esta autorizado para ver este modulo</h4>
+                  </div>
+              </div></a>
+          </div>
         </div>
     </div>
     <div class="row">
