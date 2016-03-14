@@ -33,7 +33,7 @@ if(isset($editdata->id) != null){
 
   $idd = $editdata->id;
 
-  $userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto, c.descripcion
+  $userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto, c.descripcion, c.cargo as cargo
                           FROM usuario u, personal c
                           WHERE u.idPersonal = c.idPersonal and u.idUsuario = '$idd'");
   $userpreview = mysql_fetch_row($userinfo);
@@ -42,7 +42,8 @@ if(isset($editdata->id) != null){
       'id' =>  $idd,
       'nombre' => $userpreview[0],
       'foto' => $userpreview[1],
-      'bio' => $userpreview[2]
+      'bio' => $userpreview[2],
+      'cargo' => $userpreview[3]
     )
   );
 

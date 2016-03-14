@@ -21,7 +21,9 @@ angular.module('cpad.controllers', [])
 
     .filter('urlEncode', function() {
         return function(input) {
-            return input.split(" ").join("-");
+            var patron ="?";
+            var var_new = input.replace(patron,"-");
+            return var_new.split(" ").join("-");
         }
     })
 
@@ -91,6 +93,7 @@ angular.module('cpad.controllers', [])
               $scope.username = uService.nombre;
               $scope.userphoto = uService.foto;
               $scope.userbio = uService.bio;
+              $scope.userCargo = uService.cargo;
             }else{
               $cookies.remove('usercpid');
               $location.path('/login');            }
@@ -372,10 +375,8 @@ angular.module('cpad.controllers', [])
            if(categoria == 1 || categoria == 3 || categoria == 4){
              if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
                $http.post('api/php/marticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'creador':$scope.userid,'titulo':title}).success(function(response){
-               alert("Nuevo articulo registrado");
-               $scope.htmlContent = "";
-               $scope.title = "";
-               $scope.entradilla = "";
+                 alert("Nuevo articulo registrado");
+                 $location.path('/history');
               });
              }else{
                alert("Complete todos los campos");
@@ -384,9 +385,7 @@ angular.module('cpad.controllers', [])
              if(title != undefined && entradilla != undefined && contenido != undefined && categoria != undefined && autor != undefined && fotografo != undefined && ruta != undefined){
                $http.post('api/php/marticulo.php?tipo=1',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':checkbox,'creador':$scope.userid,'titulo':title,'fotografo':fotografo,'ruta':ruta}).success(function(response){
                alert("Nuevo articulo registrado");
-               $scope.htmlContent = "";
-               $scope.title = "";
-               $scope.entradilla = "";
+               $location.path('/history');
               });
              }else{
                alert("Complete todos los campos");
@@ -396,9 +395,7 @@ angular.module('cpad.controllers', [])
            if(title != undefined  && contenido != undefined && autor != undefined && columna != undefined){
              $http.post('api/php/marticulo.php?tipo=3',{'autor':autor,'contenido':contenido,'creador':$scope.userid,'titulo':title, 'columna':columna}).success(function(response){
              alert("Nuevo articulo registrado");
-             $scope.htmlContent = "";
-             $scope.title = "";
-             $scope.entradilla = "";
+             $location.path('/history');
             });
            }else{
              alert("Complete todos los campos");
@@ -486,13 +483,7 @@ angular.module('cpad.controllers', [])
            if(categoria == 1 || categoria == 3 || categoria == 4){
              if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
                $http.post('api/php/editarArticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'titulo':title,'id':id,'activo':activo}).success(function(response){
-               alert("Artículo editado con éxito");
-               $http.get('api/php/edit-article.php?tipo=articulo&id='+id).success(function(response){
-                   $scope.subsecciones = response.subsecciones;
-                   $scope.autores = response.autores;
-                   $scope.fotografos = response.fotografos;
-                   $scope.articulo = response.articulo;
-                });
+                 $location.path('/history');
               });
              }else{
                alert("Complete todos los campos");
@@ -500,13 +491,7 @@ angular.module('cpad.controllers', [])
            }else{
              if(title != undefined && entradilla != undefined && contenido != undefined && categoria != undefined && autor != undefined && fotografo != undefined && ruta != undefined){
                $http.post('api/php/editarArticulo.php?tipo=1',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':checkbox,'titulo':title,'fotografo':fotografo,'ruta':ruta,'id':id,'activo':activo}).success(function(response){
-               alert("Artículo editado con éxito");
-               $http.get('api/php/edit-article.php?tipo=articulo&id='+id).success(function(response){
-                   $scope.subsecciones = response.subsecciones;
-                   $scope.autores = response.autores;
-                   $scope.fotografos = response.fotografos;
-                   $scope.articulo = response.articulo;
-                });
+               $location.path('/history');
               });
              }else{
                alert("Complete todos los campos");
@@ -515,13 +500,7 @@ angular.module('cpad.controllers', [])
          }else{
            if(title != undefined  && contenido != undefined && autor != undefined && columna != undefined){
              $http.post('api/php/editarArticulo.php?tipo=3',{'autor':autor,'contenido':contenido,'titulo':title, 'columna':columna,'id':id,'activo':activo}).success(function(response){
-             alert("Artículo editado con éxito");
-             $http.get('api/php/edit-article.php?tipo=columnistas&id='+id).success(function(response){
-                 $scope.subsecciones = response.subsecciones;
-                 $scope.autores = response.autores;
-                 $scope.fotografos = response.fotografos;
-                 $scope.articulo = response.articulo;
-              });
+             $location.path('/history');
             });
            }else{
              alert("Complete todos los campos");
@@ -1072,31 +1051,4 @@ angular.module('cpad.controllers', [])
           });
         }
 
-    })
-
-    .controller('personalController', function($scope, $http, $location, uService, $cookies,$anchorScroll){
-
-      $scope.top = function(){
-        $anchorScroll();
-      };
-
-      $scope.logout = function(){
-          $cookies.remove('usercpid');
-          $location.path('/login');
-      };
-
-      uService.list(function(uService) {
-        if(userId && userId != 'null'){
-          $scope.username = uService.nombre;
-          $scope.userphoto = uService.foto;
-        }else{
-          $location.path('/login');
-        }
-      });
-
-      $scope.agregar = function(nombres,apellidos,descripcion,cargo,ruta){
-        $http.post('api/php/personal',{'nombres':nombres,'apellidos':apellidos,'descripcion':descripcion,'cargo':cargo,'ruta':ruta}).success(function(response){
-          alert("Personal insertado");
-        });
-      }
     });

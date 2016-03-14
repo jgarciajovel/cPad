@@ -10,6 +10,7 @@ $fecha = date('Y-m-d');
 $hora = date('H:i:s');
 if($tipo == 'img'){
   $filename = $_FILES['file']['name'];
+  $filename = preg_replace('/\s+/', '', $filename);
   $destination = '../../../img/articulos/'.$filename;
   move_uploaded_file( $_FILES['file']['tmp_name'],$destination);
 }elseif($tipo == 1){
@@ -22,6 +23,7 @@ if($tipo == 'img'){
   $titulo = $editdata -> titulo;
   $fotografo = $editdata -> fotografo;
   $ruta = $editdata -> ruta;
+  $ruta = preg_replace('/\s+/', '', $ruta);
 
   mysql_query("INSERT into articulo(titulo,preview,contenido,idPersonal,idSubseccion,fecha,hora,especial,idUsuario) values('".mysql_escape_string($titulo)."','".mysql_escape_string($preview)."','".mysql_escape_string($contenido)."',$autor,$categoria,'$fecha','$hora',$destacado,'$creador')");
   $usquery = mysql_query("SELECT max(`idArticulo`) FROM `articulo`");

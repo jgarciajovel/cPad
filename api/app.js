@@ -47,13 +47,9 @@ angular.module("cpad", ['cpad.controllers','angular.filter','ngRoute','textAngul
                 controller: "analyticsController",
                 templateUrl: "templates/publicidad/analytics.html"
             })
-            .when("/caricaturas", {
-                controller: "CaricaturasController",
-                templateUrl: "templates/caricaturas/main.html"
-            })
-            .when("/personal", {
-                controller: "personalController",
-                templateUrl: "templates/mantenimientos/personal.html"
+            .when("/file", {
+                controller: "positionController",
+                templateUrl: "templates/file.html"
             })
             .otherwise({
                 redirectTo: "/"
