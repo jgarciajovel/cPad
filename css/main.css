@@ -1686,6 +1686,15 @@ padding: 0px 10px;
   border-radius: 100%;
   position: absolute;
 }
+.set-photo-new{
+  background-color: #222;
+  background-position: center;
+  background-size: cover;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  position: absolute;
+}
 .pub-delete{
   background-color:#D32F2F;
   float:left;

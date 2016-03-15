@@ -276,12 +276,15 @@ function subsecciones(){
 	return $subseccion;
 }
 function autores(){
-	$autinfo = mysql_query("SELECT idPersonal, CONCAT(nombres,' ',apellidos) as nombre from personal order by nombre ");
+	$autinfo = mysql_query("SELECT idPersonal, CONCAT(nombres,' ',apellidos) as nombre, rutaFoto, descripcion, cargo from personal order by nombre ");
 
 	while($autpreview = mysql_fetch_array($autinfo)){
 	  $autor[] = array(
 	    'id' => $autpreview['idPersonal'],
-	    'nombre' => $autpreview['nombre']
+			'nombre' => $autpreview['nombre'],
+			'descripcion' => $autpreview['descripcion'],
+			'cargo' => $autpreview['cargo'],
+			'foto' => $autpreview['rutaFoto']
 	  );
 	}
 	return $autor;

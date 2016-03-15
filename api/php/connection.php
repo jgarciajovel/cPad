@@ -1,14 +1,14 @@
 <?php
 
-define('db_nombre','cpdb');
-define('db_usuario','root');
-define('db_contrasena','');
-define('db_host','localhost');
-
 // define('db_nombre','cpdb');
 // define('db_usuario','root');
 // define('db_contrasena','');
 // define('db_host','localhost');
+
+define('db_nombre','cpdb');
+define('db_usuario','root');
+define('db_contrasena','');
+define('db_host','localhost');
 
 $link = mysql_connect(db_host,db_usuario,db_contrasena);
 

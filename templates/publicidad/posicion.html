@@ -120,7 +120,6 @@
                     </style>
                     <div ng-if="cliente">
                         <center>
-                           <!-- <div ng-class="{'upload-input no-client-old': clientesin.foto ,'upload-input-old-client ': !clientesin.foto}" style="background-image: url(../{{cliente.foto}});"> -->
                            {{f.name}}
                            <div ng-class="{'upload-input img-client si-client-old': f.name ,'upload-input no-client-old': !f.name}">
                                 <input fileread="cliente.foto" type="file" ngf-select="editFilesCliente($file, $invalidFiles,cliente.id)"
