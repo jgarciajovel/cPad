@@ -15,14 +15,16 @@ if($modulo == 1){
     $nombre = $editdata -> nombre;
     $porcentaje = $editdata -> porcentaje;
     $valor = $editdata -> valor;
-    mysql_query("update bolsa set nombre='".mysql_escape_string($nombre)."',porcentaje=$porcentaje,valor=$valor where idBolsa=$id");
+    $ciudad = $editdata -> ciudad;
+    mysql_query("update bolsa set nombre='".mysql_escape_string($nombre)."',porcentaje=$porcentaje,valor=$valor,ciudad='".mysql_escape_string($ciudad)."' where idBolsa=$id");
   }elseif($tipo == 2){
     mysql_query("delete from bolsa where idBolsa=$id");
   }elseif($tipo == 3){
     $nombre = $editdata -> nombre;
     $porcentaje = $editdata -> porcentaje;
     $valor = $editdata -> valor;
-    mysql_query("insert into bolsa(nombre,porcentaje,valor,fecha) values('".mysql_escape_string($nombre)."',$porcentaje,$valor,'$fecha')");
+    $ciudad = $editdata -> ciudad;
+    mysql_query("insert into bolsa(nombre,porcentaje,valor,fecha,ciudad) values('".mysql_escape_string($nombre)."',$porcentaje,$valor,'$fecha','".mysql_escape_string($ciudad)."')");
   }else{
     $f = $editdata->fecha;
     mysql_query("update bolsa set fecha='$f'");

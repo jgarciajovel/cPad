@@ -196,16 +196,18 @@
                             <td><input ng-model="newBolsaNombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
                             <td><input ng-model="newBolsaPorcentaje" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsaPorcentaje > 0, 'red': bolsaPorcentaje < 0}" type="text"></td>
                             <td><input ng-model="newBolsaValor" placeholder="Valor" class="input-modal-economics" type="text"></td>
+                            <td><input ng-model="newBolsaCiudad" placeholder="Ciudad" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button" ng-click="addBolsa(newBolsaNombre,newBolsaPorcentaje,newBolsaValor)"><i class="ion-android-add-circle"></i></a>
+                              <a class="add-button" ng-click="addBolsa(newBolsaNombre,newBolsaPorcentaje,newBolsaValor,newBolsaCiudad)"><i class="ion-android-add-circle"></i></a>
                             </td>
                           </tr>
                           <tr ng-repeat="bolsa in bolsas">
                             <td><input value="{{bolsa.nombre}}" ng-model="bolsa.nombre" placeholder="Nombre" class="input-modal-economics" type="text"></td>
                             <td><input value="{{bolsa.porcentaje}}" ng-model="bolsa.porcentaje" placeholder="%" class="input-modal-economics" ng-class="{'green': bolsa.porcentaje > 0, 'red': bolsa.porcentaje < 0}" type="text"></td>
                             <td><input value="{{bolsa.valor}}" ng-model="bolsa.valor" plceholder="Valor" class="input-modal-economics" type="text"></td>
+                            <td><input value="{{bolsa.ciudad}}" ng-model="bolsa.ciudad" plceholder="Ciudad" class="input-modal-economics" type="text"></td>
                             <td class="row-buttons">
-                              <a class="add-button" ng-click="editBolsa(bolsa.id,bolsa.nombre,bolsa.porcentaje,bolsa.valor)"><i class="ion-edit"></i></a>
+                              <a class="add-button" ng-click="editBolsa(bolsa.id,bolsa.nombre,bolsa.porcentaje,bolsa.valor,bolsa.ciudad)"><i class="ion-edit"></i></a>
                               <a class="delete-button" ng-click="valor(bolsa.id)"data-toggle="modal" data-target=".delete-m"><i class="ion-trash-a"></i></a>
                             </td>
                           </tr>

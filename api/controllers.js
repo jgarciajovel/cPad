@@ -136,10 +136,10 @@ angular.module('cpad.controllers', [])
           $scope.valor = function(val){
             $scope.control = val;
           }
-          $scope.editBolsa = function(id,nombre,porcentaje,valor){
+          $scope.editBolsa = function(id,nombre,porcentaje,valor,ciudad){
             // $http.post("api/php/modulos.php?id="+id+"&nombre="+nombre+"&porcentaje="+porcentaje+"&valor="+valor+"&tipo=1&modulo=1",{'selectSeccion':$scope.userId}).success(function(data,status,headers,config,response){
-            if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
-              $http.post('api/php/modulos.php?tipo=1&modulo=1',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
+            if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined && ciudad!= undefined){
+              $http.post('api/php/modulos.php?tipo=1&modulo=1',{'id':id, 'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor, 'ciudad': ciudad}).success(function(response){
                 alert("Cambios guardados");
                   $scope.bolsas = response.bolsas;
               });
@@ -147,13 +147,14 @@ angular.module('cpad.controllers', [])
               alert("Ingrese contenido valido");
             }
           }
-          $scope.addBolsa = function(nombre,porcentaje,valor){
-              if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined){
-                $http.post('api/php/modulos.php?tipo=3&modulo=1',{'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor}).success(function(response){
+          $scope.addBolsa = function(nombre,porcentaje,valor,ciudad){
+              if(!isNaN(porcentaje) && !isNaN(valor) && porcentaje!= undefined && valor!= undefined && nombre!= undefined && ciudad!= undefined){
+                $http.post('api/php/modulos.php?tipo=3&modulo=1',{'nombre': nombre, 'porcentaje': porcentaje, 'valor': valor, 'ciudad': ciudad}).success(function(response){
                   $scope.bolsas = response.bolsas;
                   $scope.newBolsaNombre ="";
                   $scope.newBolsaPorcentaje ="";
                   $scope.newBolsaValor ="";
+                  $scope.newBolsaCiudad ="";
                 });
               }else{
                 alert("Ingrese contenido valido");
