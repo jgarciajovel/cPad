@@ -74,6 +74,15 @@ $fotogaleria = array('foto' => $fotopreview[0], 'titulo' => $fotopreview[1], 'to
   $caricol = mysql_fetch_row($cariq);
   $caricatura = $caricol[0];
 // CARICATURA
+
+// USUARIOS
+  $usuariosq = mysql_query("SELECT `usuario` FROM `usuario` ORDER BY idPersonal");
+  while($usuariosw = mysql_fetch_array($usuariosq)){
+    $usuarios[] = array(
+        'username' => $usuariosw['usuario']
+    );
+  }
+// USUARIOS
 echo json_encode(array(
   'leidos' => $leido,
   'sondeo' => dashSondeo(),
@@ -85,6 +94,7 @@ echo json_encode(array(
   'divisas' => divisap(),
   'tasas' => tasap(),
   'tops' => $top,
-  'caricatura' => $caricatura
+  'caricatura' => $caricatura,
+  'usuarios' => $usuarios
 ));
 ?>

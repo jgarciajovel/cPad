@@ -530,6 +530,18 @@ a:hover, a:focus, a:active{
     border-top: 0px;
 }
 /* tus mas leidos */
+/* usuarios */
+.edit-user{
+  color:#B2C3C5;
+  font-size:20px;
+}
+.edit-user:hover{
+  color:#FF8CB5;
+}
+.edit-user:focus{
+  color:#FF8CB5;
+}
+/* usuarios */
 /* los mas leidos */
 .los-mas-leidos{
     margin-top: 30px;

@@ -1,4 +1,7 @@
 <?php
+if(!isset($_COOKIE['usercpid'])){
+	header('Location: undefined.php');
+}
 function sondeop(){
 	$soninfo = mysql_query("SELECT idSondeo, titulo, pregunta, fecha, rutaFoto as foto
 												FROM sondeo
@@ -277,7 +280,7 @@ function subsecciones(){
 	return $subseccion;
 }
 function autores(){
-	$autinfo = mysql_query("SELECT idPersonal, CONCAT(nombres,' ',apellidos) as nombre, rutaFoto, descripcion, cargo from personal order by nombre ");
+	$autinfo = mysql_query("SELECT idPersonal, CONCAT(nombres,' ',apellidos) as nombre, rutaFoto, descripcion, cargo from personal WHERE cargo != 'cthulhu' order by nombre ");
 
 	while($autpreview = mysql_fetch_array($autinfo)){
 	  $autor[] = array(

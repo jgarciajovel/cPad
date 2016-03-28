@@ -141,7 +141,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="tus-mas-leidos">
+            <div ng-if="userCargo != 'cthulhu'" class="tus-mas-leidos">
                 <h1>Tus articulos más leidos</h1>
                 <table class="table table-hover">
                     <tbody>
@@ -149,6 +149,18 @@
                             <th scope="row">{{tops.indexOf(top) +1}}</th>
                             <td style="max-width: 300px; display: inline-block;"><a ng-href="http://www.contrapunto.com.sv/#/{{top.urlSeccion}}/{{top.urlSubseccion}}/{{top.titulo | urlEncode}}/{{top.id}}" class="urlvisto">{{top.titulo}}</a></td>
                             <td style="min-width:30%;">{{top.total}} visitas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="userCargo == 'cthulhu'" class="tus-mas-leidos">
+                <h1>Usuarios activos</h1>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="usuario in usuarios">
+                            <th scope="row">{{usuarios.indexOf(usuario) +1}}</th>
+                            <td style="width: 500px; display: inline-block;">{{usuario.username}}</td>
+                            <td style="min-width:30%;"><a class="edit-user" href=""><i class="ion-edit"></i></a></td>
                         </tr>
                     </tbody>
                 </table>

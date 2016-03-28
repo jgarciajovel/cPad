@@ -130,6 +130,7 @@ angular.module('cpad.controllers', [])
             $scope.fechaTames = ta[1];
             $scope.fechaTaanio = ta[0];
             $scope.caricatura = response.caricatura;
+            $scope.usuarios = response.usuarios;
 
           });
           $scope.control;
@@ -401,6 +402,22 @@ angular.module('cpad.controllers', [])
            }else{
              alert("Complete todos los campos");
            }
+         }
+       }
+       $scope.nPersonal = function(nombre,fotonueva,apellido,bio,personalTipo){
+         if(nombre != undefined  && apellido != undefined && bio != undefined && personalTipo != undefined){
+           $http.post('api/php/mantenimientoP.php?tipo=1',{'foto':'fotonueva','nombre':nombre,'apellido':apellido,'bio':bio,'personalTipo':personalTipo}).success(function(response){
+              $scope.nombre = null;
+              $scope.apellido = null;
+              $scope.bio = null;
+              $scope.personalTipo = null;
+              $http.get('api/php/article.php').success(function(response){
+                 $scope.autores = response.autores;
+              });
+             alert("¡Autor creado!");
+          });
+         }else{
+           alert("Complete todos los campos");
          }
        }
     })

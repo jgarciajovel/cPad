@@ -16,5 +16,5 @@ $db_seleccionada = mysql_select_db(db_nombre, $link);
 
 if (!$db_seleccionada) {
 	die('No se puede conectar con la base de datos ');
-	}
+}
 ?>
