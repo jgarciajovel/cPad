@@ -28,15 +28,15 @@ while($leidopreview = mysql_fetch_array($leidoinfo)){
   );
 }
 
-while($leidocolpreview = mysql_fetch_array($leidocol)){
-  $leido[] = array(
-      'id' => $leidocolpreview['id'],
-      'titulo' => $leidocolpreview['titulo'],
-      'urlSubseccion' => 'columnistas',
-      'urlSeccion' => 'opinion',
-      'total' => $leidocolpreview['total'],
-  );
-}
+// while($leidocolpreview = mysql_fetch_array($leidocol)){
+//   $leido[] = array(
+//       'id' => $leidocolpreview['id'],
+//       'titulo' => $leidocolpreview['titulo'],
+//       'urlSubseccion' => 'columnistas',
+//       'urlSeccion' => 'opinion',
+//       'total' => $leidocolpreview['total'],
+//   );
+// }
 // TOP LEIDOS GLOBALES
 // TOP LEIDOS PERSONALES
 $topinfo = mysql_query("SELECT a.idArticulo as id, a.titulo, s.url as urlSubseccion, se.url as urlSeccion, count(b.idArticulo) as total

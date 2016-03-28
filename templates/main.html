@@ -171,7 +171,7 @@
                 <h1>Los articulos más leidos</h1>
                 <table class="table table-hover">
                     <tbody>
-                        <tr ng-repeat="leido in leidos | orderBy:'-total' | limitTo:9">
+                        <tr ng-repeat="leido in leidos | limitTo:9">
                             <th scope="row">{{vserie[$index]}}</th>
                             <td style="max-width: 300px; display: inline-block;"><a target="_blank" ng-href="http://www.contrapunto.com.sv/#/{{leido.urlSeccion}}/{{leido.urlSubseccion}}/{{leido.titulo | urlEncode}}/{{leido.id}}" class="urlvisto">{{leido.titulo}}</a></td>
                             <td style="min-width:30%;">{{leido.total}} visitas</td>

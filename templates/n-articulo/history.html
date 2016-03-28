@@ -49,7 +49,7 @@
                             <th>Visitas</th>
                             <th>Creador</th>
                         </tr>
-                        <tr ng-repeat="row in cont | orderBy: '-total'">
+                        <tr ng-repeat="row in cont | orderBy: '-hora'">
                             <td style="width: 450px; display: inline-block;"><a ng-href="#/edit-article/{{row.tipo}}/{{row.id}}">{{row.titulo}}</a></th>
                             <td style="">{{row.subseccion}}</td>
                             <td style="">{{row.autor}}</td>
