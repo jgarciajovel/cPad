@@ -49,7 +49,7 @@ angular.module('cpad.controllers', [])
             });
             $location.path('/');
           }else{
-          $scope.error = "!Hay un problema con su usuario ó contraseña¡";
+          $scope.error = "¡Hay un problema con su usuario ó contraseña!";
           }
 
         });
