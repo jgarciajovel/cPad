@@ -32,6 +32,9 @@ if($tipo == 'banner'){
 }elseif($tipo == 3){
   $act = $editdata -> act;
   mysql_query("update banner set activo=$act where idBanner=$id");
+}elseif($tipo == 4){
+  $tiempo = ($editdata -> tiempo)*1000;
+  mysql_query("UPDATE posicion set tiempo=$tiempo where idPosicion=$id");
 }
 
 ?>

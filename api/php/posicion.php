@@ -15,7 +15,7 @@ $baninfo = mysql_query("SELECT a.idBanner as id, a.activo, a.rutaFoto as foto, a
                       ORDER BY a.fecha desc, a.hora desc");
 
 
-$posinfo = mysql_query("SELECT c.idPosicion, c.posicion from posicion c where (SELECT f.url from seccion f where f.idSeccion = c.idSeccion) = '$posicion'");
+$posinfo = mysql_query("SELECT c.idPosicion, c.posicion, c.tiempo from posicion c where (SELECT f.url from seccion f where f.idSeccion = c.idSeccion) = '$posicion'");
 
 while($banpreview = mysql_fetch_array($baninfo)){
   $banners[] = array(
@@ -33,6 +33,7 @@ while($pospreview = mysql_fetch_array($posinfo)){
   $posiciones[] = array(
     'idPosicion' => $pospreview['idPosicion'],
     'posicion' => $pospreview['posicion'],
+    'tiempo' => $pospreview['tiempo']/1000,
     'ocupados' => ocupados($pospreview['idPosicion']),
     'clientes' => clientes($pospreview['idPosicion']),
     'maxCliente' =>  maxCliente($pospreview['idPosicion'])

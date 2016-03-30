@@ -36,6 +36,8 @@
             <div ng-repeat="posicion in posiciones" ng-if="adsPosition == posicion.idPosicion" class="details-position">
                 <h6>Resumen {{posicion.posicion}}</h6>
                 <h1 class="item">Espacios disponibles: {{5-posicion.ocupados}}</h1>
+                <h6>Tiempo</h6>
+                <h1 class="item"><input type="text" class="tiempo" ng-model="posicion.tiempo">segundos<a ng-click="editarTiempo(posicion.idPosicion,posicion.tiempo,pos)"><i class="ion-edit time-edit"></i></a></h1>
                 <h6>Clientes</h6>
                 <h1 ng-repeat="cliente in posicion.clientes" class="item-2">{{cliente}}</h1>
                 <h6>Cliente más visto</h6>

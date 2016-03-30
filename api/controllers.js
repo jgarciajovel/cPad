@@ -945,6 +945,22 @@ angular.module('cpad.controllers', [])
             }
         };
 
+        $scope.editarTiempo = function(id,tiempo,pos){
+          if(!isNaN(tiempo) && tiempo!= undefined){
+            $http.post('api/php/mantenimientoBanner.php?tipo=4',{ 'id': id, 'tiempo': tiempo}).success(function(response){
+              $http.get("api/php/posicion.php?posicion=" + pos).success(function(response){
+                alert("Cambios realizados");
+                $scope.banners = response.banners;
+                $scope.posiciones = response.posiciones;
+                $scope.clientes = response.clientes;
+                $scope.f.progress = '';
+              });
+            });
+          }else{
+            alert("Ingrese contenido valido");
+          }
+        }
+
     })
 
     .controller('analyticsController', function($scope, $http, $location, uService, $cookies){
