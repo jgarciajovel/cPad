@@ -1024,18 +1024,21 @@ input:-moz-placeholder { color:#777; }
     moz-input-placeholder:#fff;
 }
 .tiempo{
-    background-color: transparent;
-    border: 0px;
-    color: #000;
-    width:20px;
-    margin-right: 1px;
+    background-color: #EEF4F7;
+    border: 1px solid #EEF4F7;
+    border-radius: 2px;
+    text-align: center;
+    color: #333;
+    width:30px;
+    margin-right: 10px;
     webkit-input-placeholder:#fff;
     moz-input-placeholder:#fff;
 }
 .time-edit{
   color: #00BAD5;
-  margin-left: 5px;
+  margin-left: 10px;
   cursor: pointer;
+  font-size: 15px;
 }
 .fecha-mod{
   float: right;
