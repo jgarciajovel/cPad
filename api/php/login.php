@@ -14,16 +14,12 @@ $firstValidation = mysql_fetch_row($firstQ);
 
 $id = $firstValidation[0];
 
-$userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto, c.descripcion
-                        FROM usuario u, personal c
-                        WHERE u.idPersonal = c.idPersonal and u.idUsuario = '$id'");
-$userpreview = mysql_fetch_row($userinfo);
 echo json_encode(
   array(
     'id' =>  $id,
-    'nombre' => $userpreview[0],
-    'foto' => $userpreview[1],
-    'bio' => $userpreview[2]
+    // 'nombre' => $userpreview[0],
+    // 'foto' => $userpreview[1],
+    // 'bio' => $userpreview[2],
   )
 );
 
@@ -33,7 +29,7 @@ if(isset($editdata->id) != null){
 
   $idd = $editdata->id;
 
-  $userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto, c.descripcion, c.cargo as cargo
+  $userinfo = mysql_query("SELECT CONCAT(c.nombres, ' ', c.apellidos) as nombre, c.rutaFoto as foto, c.descripcion, c.cargo as cargo, u.mail, u.facebook, u.twitter, u.linkedin, u.googleplus
                           FROM usuario u, personal c
                           WHERE u.idPersonal = c.idPersonal and u.idUsuario = '$idd'");
   $userpreview = mysql_fetch_row($userinfo);
@@ -43,7 +39,12 @@ if(isset($editdata->id) != null){
       'nombre' => $userpreview[0],
       'foto' => $userpreview[1],
       'bio' => $userpreview[2],
-      'cargo' => $userpreview[3]
+      'cargo' => $userpreview[3],
+      'mail' => $userpreview[4],
+      'facebook' => $userpreview[5],
+      'twitter' => $userpreview[6],
+      'linkedin' => $userpreview[7],
+      'googleplus' => $userpreview[8]
     )
   );
 

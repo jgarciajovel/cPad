@@ -79,14 +79,14 @@
                             <input fileread="userPoto" type="file" class="set-file">
                           </div>
                           <h4 class="set-nombre">{{username}}</h4>
-                          <div class="set-social"><i class="ion-email"></i><input placeholder="ejemplo@contrapunto.com.sv" type="text"></div>
+                          <div class="set-social"><i class="ion-email"></i><input placeholder="ejemplo@contrapunto.com.sv" type="text" ng-model="usermail"></div>
                           <textarea placeholder="Bio" class="set-info" ng-model="userbio"></textarea>
-                          <div class="set-social"><i class="ion-social-twitter"></i><input placeholder="@username" type="text"></div>
-                          <div class="set-social"><i class="ion-social-facebook"></i><input placeholder="url" type="text"></div>
-                          <div class="set-social"><i class="ion-social-googleplus"></i><input placeholder="url" type="text"></div>
-                          <div class="set-social"><i class="ion-social-linkedin"></i><input placeholder="url" type="text"></div>
+                          <div class="set-social"><i class="ion-social-twitter"></i><input placeholder="@username" type="text" ng-model="userTwitter"></div>
+                          <div class="set-social"><i class="ion-social-facebook"></i><input placeholder="url" type="text" ng-model="userFacebook"></div>
+                          <div class="set-social"><i class="ion-social-googleplus"></i><input placeholder="url" type="text" ng-model="userGoogleplus"></div>
+                          <div class="set-social"><i class="ion-social-linkedin"></i><input placeholder="url" type="text" ng-model="userLinkedin"></div>
                           <div style="text-align:right; margin-top:10px;">
-                            <button class="pub-boton">Guardar</button>
+                            <button class="pub-boton" ng-click="settings('http://smallbusinessbc.ca/wp-content/themes/sbbcmain/images/default-avatar.svg',usermail,userbio,userTwitter,userFacebook,userGoogleplus,userLinkedin,userid)">Guardar</button>
                           </div>
                       </div>
                     </center>
