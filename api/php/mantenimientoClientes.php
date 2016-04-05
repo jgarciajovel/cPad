@@ -53,7 +53,8 @@ if($tipo == 'clienteimg'){
     }
 
   $filename = $_FILES['file']['name'];
-  $destination = '../../../img/clientes/'.$filename;
+  $destination = '../../../
+  img/clientes/'.$filename;
   move_uploaded_file( $_FILES['file']['tmp_name'],$destination);
 
   mysql_query("update cliente set rutaFoto='$editrutacliente' where idCliente=$id");

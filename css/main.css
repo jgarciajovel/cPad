@@ -177,7 +177,7 @@ a:hover, a:focus, a:active{
     margin-top: 20px;
     padding: 10px 10px 0px 20px;
     background-image: url(../img/squares/s-1.svg);
-    background-size: contain;
+    background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
 }
@@ -225,7 +225,7 @@ a:hover, a:focus, a:active{
     height: 100%;
     width: 100%;
     background-image: url(../img/squares/s-2.svg);
-    background-size: contain;
+    background-size: cover;
     background-position:top;
     background-repeat: no-repeat;
 }

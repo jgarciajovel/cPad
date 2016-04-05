@@ -365,6 +365,7 @@ angular.module('cpad.controllers', [])
           $scope.subsecciones = response.subsecciones;
           $scope.autores = response.autores;
           $scope.fotografos = response.fotografos;
+          $scope.autorSeparado = response.autorSeparado;
        });
        $scope.settings = function(ruta,mail,bio,twitter,facebook,googleplus,linkedin,id){
          $http.post("api/php/settings.php",{'ruta':ruta,'mail':mail,'bio':bio,'twitter':twitter,'facebook':facebook,'googleplus':googleplus,'linkedin':linkedin,'id':id}).success(function(response){
@@ -427,17 +428,75 @@ angular.module('cpad.controllers', [])
            }
          }
        }
+       $scope.uploadPersonal = function(file, errFiles) {
+           $scope.f = file;
+           $scope.filenamePsave = 'img/perfiles/'+file.name;
+
+           $scope.errFile = errFiles && errFiles[0];
+           if (file) {
+               file.upload = Upload.upload({
+                   url: 'api/php/mantenimientoP.php?tipo=img',
+                   data: {file: file}
+               });
+
+               file.upload.then(function (response) {
+                   $timeout(function () {
+                       file.result = response.data;
+                   });
+               }, function (response) {
+                   if (response.status > 0)
+                       $scope.errorMsg = response.status + ': ' + response.data;
+               }, function (evt) {
+                   file.progress = Math.min(100, parseInt(100.0 *
+                                            evt.loaded / evt.total));
+               });
+           }
+       };
+       $scope.uploadNewPersonal = function(file, errFiles,autorid) {
+           $scope.f = file;
+           $scope.filenameNPsave = 'img/perfiles/'+file.name;
+
+           if (file) {
+               file.upload = Upload.upload({
+                   url: 'api/php/mantenimientoP.php?tipo=editImg&autor='+ autorid + '&foto='+ $scope.filenameNPsave + '',
+                   data: {file: file, autor: autorid, fileName: $scope.filenameNPsave}
+               });
+
+               file.upload.then(function (response) {
+                   $timeout(function () {
+                       file.result = response.data;
+                   });
+               }, function (response) {
+                   if (response.status > 0)
+                       $scope.errorMsg = response.status + ': ' + response.data;
+               }, function (evt) {
+                   file.progress = Math.min(100, parseInt(100.0 *
+                                            evt.loaded / evt.total));
+               });
+           }
+       };
        $scope.nPersonal = function(nombre,fotonueva,apellido,bio,personalTipo){
          if(nombre != undefined  && apellido != undefined && bio != undefined && personalTipo != undefined){
-           $http.post('api/php/mantenimientoP.php?tipo=1',{'foto':'fotonueva','nombre':nombre,'apellido':apellido,'bio':bio,'personalTipo':personalTipo}).success(function(response){
-              $scope.nombre = null;
-              $scope.apellido = null;
-              $scope.bio = null;
-              $scope.personalTipo = null;
+           $http.post('api/php/mantenimientoP.php?tipo=1',{'foto':fotonueva,'nombre':nombre,'apellido':apellido,'bio':bio,'personalTipo':personalTipo}).success(function(response){
               $http.get('api/php/article.php').success(function(response){
                  $scope.autores = response.autores;
+                 $scope.autorSeparado = response.autorSeparado;
               });
              alert("¡Autor creado!");
+          });
+         }else{
+           alert("Complete todos los campos");
+         }
+       }
+       $scope.editPersonal = function(autor,nombre,fotonueva,apellido,bio,personalTipo){
+
+         if(nombre != undefined  && apellido != undefined && bio != undefined && autor != undefined){
+           $http.post('api/php/mantenimientoP.php?tipo=3',{'autor':autor,'nombre':nombre,'apellido':apellido,'bio':bio,'personalTipo':personalTipo,'foto':fotonueva}).success(function(response){
+              $http.get('api/php/article.php').success(function(response){
+                 $scope.autores = response.autores;
+                 $scope.autorSeparado = response.autorSeparado;
+              });
+             alert("¡Autor editado!");
           });
          }else{
            alert("Complete todos los campos");

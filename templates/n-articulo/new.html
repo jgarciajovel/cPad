@@ -98,71 +98,68 @@
               </div>
             <div>
                 <center>
-                  <div ng-if="!autor">
-                  <style>
-                  .old-old-photo-new{
-                    background-image: url({{autorFotoNew}}) !important;
-                  }
-                  .old-old-photo{
-                    background-image: url({{autorFoto}}) !important;
-                  }
-                  .set-photo{
-                    background-image: url(img/photogallery/user-default.svg);
-                  }
-                  </style>
-                    <div ng-class="{'set-photo old-old-photo-new': autorFotoNew ,'set-photo': !autorFotoNew}" style="position:relative !important; margin-top:15px;">
-                      <input fileread="autorFotoNew" type="file" class="set-file">
-                    </div>
-                  </div>
-                  <div ng-if="autor">
-                  <style>
-                  .old-set-photo{
-                    background-image: url({{autor.foto}}) !important;
-                  }
-                  .old-old-photo{
-                    background-image: url({{autorFoto}}) !important;
-                  }
-                  </style>
-                    <div ng-class="{'set-photo old-old-photo': autorFoto ,'set-photo old-set-photo': !autorFoto}" style="position:relative !important; margin-top:15px;">
-                      <input fileread="autorFoto" type="file" class="set-file">
-                    </div>
-                  </div>
                     <div class="modal-container">
-                      <!-- <select class="input-modal" ng-model="autor" ng-options="autor.nombre for autor in autores track by autor.id">
+                      <select class="input-modal" ng-model="autor" ng-options="autorSeparado.nombre + ' ' + autorSeparado.apellidos for autorSeparado in autorSeparado">
                         <option value="">Nuevo autor</option>
-                      </select> -->
-                      <!-- <div ng-if="!autor.nombre"> -->
+                      </select>
+                      <div ng-if="!autor">
+                      <style>
+                      .old-old-photo-new{
+                        background-image: url({{autorFotoNew}}) !important;
+                      }
+                      .old-old-photo{
+                        background-image: url({{autorFoto}}) !important;
+                      }
+                      .set-photo{
+                        background-image: url(img/photogallery/user-default.svg);
+                      }
+                      </style>
+                        <div ng-class="{'set-photo old-old-photo-new': autorFotoNew ,'set-photo': !autorFotoNew}" style="position:relative !important; margin-top:15px;">
+                          <input fileread="autorFotoNew" type="file" type="file" ngf-select="uploadPersonal($file, $invalidFiles)"
+                                  accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file set-file">
+                        </div>
                         <input placeholder="Nombre" class="input-modal" type="text" ng-model="nombre"><br>
                         <input placeholder="Apellido" class="input-modal" type="text" ng-model="apellido"><br>
                         <textarea placeholder="Descripción" class="pregunta-sondeo" ng-model="bio"></textarea>
 
                         <select ng-model="personalTipo" class="input-modal">
-                          <option value="">Tipo de autor</option>
+                          <option value="" disabled>Tipo de autor</option>
                           <option value="externo">externo</option>
                           <option value="columnista">columnista</option>
                         </select>
                         <div style="text-align:right; margin-top:10px;">
-                          <button ng-click="nPersonal(nombre,autorFotoNew,apellido,bio,personalTipo)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
+                          <button ng-click="nPersonal(nombre,filenamePsave,apellido,bio,personalTipo)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
                         </div>
-                      <!-- </div> -->
+                       </div>
 
 
-                      <!-- <div ng-if="autor.nombre">
+                      <div ng-if="autor">
+                      <style>
+                      .old-set-photo{
+                        background-image: url(../{{autor.foto}}) !important;
+                      }
+                      .old-old-photo{
+                        background-image: url({{autorFoto}}) !important;
+                      }
+                      </style>
+                        <div ng-class="{'set-photo old-old-photo': autorFoto ,'set-photo old-set-photo': !autorFoto}" style="position:relative !important; margin-top:15px;">
+                          <input fileread="autorFoto" type="file" type="file" ngf-select="uploadNewPersonal($file, $invalidFiles,autor.id)"
+                                  accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file set-file">
+                        </div>
                         <input placeholder="Nombre" class="input-modal" type="text" ng-model="autor.nombre"><br>
-                        <input placeholder="Apellido" class="input-modal" type="text"><br>
+                        <input placeholder="Apellido" class="input-modal" type="text" ng-model="autor.apellidos"><br>
                         <textarea placeholder="Descripción" class="pregunta-sondeo" ng-model="autor.descripcion"></textarea>
-                        <div ng-if="autor.nombre">
-                        <select class="input-modal">
+                        {{cargoNuevo}}
+                        <select class="input-modal" ng-model="cargoNuevo">
                           <option value="">{{autor.cargo}}</option>
-                          <option ng-if="autor.cargo == 'columnista'" value="">externo</option>
-                          <option ng-if="autor.cargo == 'externo'" value="">columnista</option>
+                          <option ng-if="autor.cargo == 'columnista'" value="externo">externo</option>
+                          <option ng-if="autor.cargo == 'externo'" value="columnista">columnista</option>
                         </select>
-                        </div>
 
                         <div style="text-align:right; margin-top:10px;">
-                          <button ng-click="" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
+                          <button ng-click="editPersonal(autor.id,autor.nombre,filenameNPsave,autor.apellidos,autor.descripcion,cargoNuevo)" style="float:right" class="pub-boton" data-dismiss="modal">Publicar</button>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                 </center>
             </div>
