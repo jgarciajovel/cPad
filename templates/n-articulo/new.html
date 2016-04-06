@@ -25,10 +25,10 @@
         </div>
     </div>
      <div class="row">
-        <div ng-class="{'col-md-2': category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4, 'col-md-4':category.id != 1 || category.id != 2 || category.id != 3 || category.id != 4}">
+        <div ng-class="{'col-md-2': category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4 || category.id == 49, 'col-md-4':category.id != 1 || category.id != 2 || category.id != 3 || category.id != 4 || category.id != 49}">
             <h1 class="new-article-h1">Nuevo articulo</h1>
             <button data-toggle="modal" data-target=".new-client" class="crear-cliente">Agregar/editar autor</button>
-            <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4">
+            <div ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4 || category.id == 49">
             <div ng-class="{'upload-image img-fill': imagenNueva ,'upload-image no-photo': !imagenNueva}" style="background-image: url({{imagenNueva}});">
               <input fileread="imagenNueva" type="file" ngf-select="uploadFiles($file, $invalidFiles)"
                       accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file">
@@ -63,12 +63,12 @@
                 <textarea placeholder="Entradilla" ng-model="$parent.entradilla" class="entradilla"></textarea>
                 </div>
                 <div class="new-article-editor">
-                    <div text-angular ng-model="htmlContent" name="demo-editor"></div>
+                    <div text-angular ng-model="htmlContent" name="demo-editor" ta-paste="htmlToPlaintext($html)"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="destacado" ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4"><input type="checkbox" ng-model="destacado" ng-true-value="1" ng-false-value="0"><span>Agenda CP</span></div>
+                    <div class="destacado" ng-hide="category.id == 1 || category.id == 2 || category.id == 3 || category.id == 4|| category.id == 49"><input type="checkbox" ng-model="destacado" ng-true-value="1" ng-false-value="0"><span>Agenda CP</span></div>
                 </div>
                 <div class="col-md-8">
                     <div class="publicar">

@@ -32,7 +32,6 @@ angular.module('cpad.controllers', [])
             return data.slice(start);
         }
     })
-
     .controller('loginController', function($scope, $http, $location, uService, $cookies){
 
       $scope.inUsername;
@@ -367,6 +366,10 @@ angular.module('cpad.controllers', [])
           $scope.fotografos = response.fotografos;
           $scope.autorSeparado = response.autorSeparado;
        });
+       $scope.htmlToPlaintext = function(text) {
+        var ex = /<br>/g;
+        return text ? String(text).replace(/<br[^>]*>/gm, ' ') : ' ';
+        }
        $scope.settings = function(ruta,mail,bio,twitter,facebook,googleplus,linkedin,id){
          $http.post("api/php/settings.php",{'ruta':ruta,'mail':mail,'bio':bio,'twitter':twitter,'facebook':facebook,'googleplus':googleplus,'linkedin':linkedin,'id':id}).success(function(response){
              alert("Cambios realizados correctamente");
@@ -398,7 +401,7 @@ angular.module('cpad.controllers', [])
        };
        $scope.newArticle = function(categoria,columna,entradilla,autor,contenido,checkbox,title,fotografo,ruta){
          if(categoria != 2){
-           if(categoria == 1 || categoria == 3 || categoria == 4){
+           if(categoria == 1 || categoria == 3 || categoria == 4 || categoria == 49){
              if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
                $http.post('api/php/marticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'creador':$scope.userid,'titulo':title}).success(function(response){
                  alert("Nuevo articulo registrado");
@@ -554,6 +557,10 @@ angular.module('cpad.controllers', [])
             alert("Cambios realizados correctamente");
         });
       }
+      $scope.htmlToPlaintext = function(text) {
+       var ex = /<br>/g;
+       return text ? String(text).replace(/<br[^>]*>/gm, ' ') : ' ';
+       }
       $scope.editFilesCliente = function(file, errFiles) {
           $scope.f = file;
           $scope.filenamesave = 'img/articulos/'+file.name;
@@ -591,7 +598,7 @@ angular.module('cpad.controllers', [])
            activo = 0;
          }
          if(categoria != 2){
-           if(categoria == 1 || categoria == 3 || categoria == 4){
+           if(categoria == 1 || categoria == 3 || categoria == 4 || categoria == 49){
              if(title != undefined && entradilla != undefined  && contenido != undefined && categoria != undefined && autor != undefined){
                $http.post('api/php/editarArticulo.php?tipo=2',{'categoria':categoria,'preview':entradilla,'autor':autor,'contenido':contenido,'destacado':0,'titulo':title,'id':id,'activo':activo}).success(function(response){
                  $location.path('/history');
