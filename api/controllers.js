@@ -20,11 +20,37 @@ angular.module('cpad.controllers', [])
     }])
 
     .filter('urlEncode', function() {
-        return function(input) {
-            var patron ="?";
-            var var_new = input.replace(patron,"-");
-            return var_new.split(" ").join("-");
+      return function(input) {
+        var normalize = (function() {
+        var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+            to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+            mapping = {};
+
+        for(var i = 0, j = from.length; i < j; i++ )
+            mapping[ from.charAt( i ) ] = to.charAt( i );
+
+        return function( str ) {
+            var ret = [];
+            for( var i = 0, j = str.length; i < j; i++ ) {
+                var c = str.charAt( i );
+                if( mapping.hasOwnProperty( str.charAt( i ) ) )
+                    ret.push( mapping[ c ] );
+                else
+                    ret.push( c );
+            }
+            return ret.join( '' );
         }
+
+      })();
+
+
+          var var_new = normalize(input);
+          var x = var_new.replace(/[&\/\\#,+()$~%.'":*?¿<>{}]/g,"");
+          var y = x.replace(/[^a-zA-Z0-9]/g,"-");
+          var z = y.replace("--","-");
+          return z.toLowerCase();
+
+      }
     })
 
     .filter('startFrom', function(){
