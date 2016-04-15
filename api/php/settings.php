@@ -14,7 +14,30 @@ $linkedin = $editdata->linkedin;
 $googleplus = $editdata->googleplus;
 $ruta = $editdata->ruta;
 
-mysql_query("UPDATE personal set descripcion='".mysql_escape_string($bio)."', rutaFoto='".mysql_escape_string($ruta)."' where idPersonal = (SELECT idPersonal from usuario where idUsuario = '$id')");
-mysql_query("UPDATE usuario set mail='".mysql_escape_string($mail)."',facebook='".mysql_escape_string($facebook)."',twitter='".mysql_escape_string($twitter)."',linkedin='".mysql_escape_string($linkedin)."',googleplus='".mysql_escape_string($googleplus)."' where idUsuario = '$id'");
+$tipo = $_GET['tipo'];
+
+if($tipo == 'img'){
+  $autor = $_GET['userid'];
+  $foto = $_GET['foto'];
+
+  $delcarcon = mysql_query("SELECT `rutaFoto` FROM `personal` WHERE idPersonal = (SELECT idPersonal from usuario where idUsuario = '$autor')");
+  $rowdel = mysql_fetch_row($delcarcon);
+
+  // if($rowdel[0] != 'img/perfiles/default-avatar.svg'){
+  // $filepos = '../../../'.$rowdel[0];
+  //   if (file_exists($filepos)) {
+  //     unlink($filepos);
+  //   }
+  // }
+
+  $filename = $_FILES['file']['name'];
+  echo $destination = '../../../img/perfiles/'.$filename;
+  move_uploaded_file($_FILES['file']['tmp_name'],$destination);
+
+  mysql_query("UPDATE personal set rutaFoto='$foto' where idPersonal = (SELECT idPersonal from usuario where idUsuario = '$autor')");
+}else{
+  mysql_query("UPDATE personal set descripcion='".mysql_escape_string($bio)."' where idPersonal = (SELECT idPersonal from usuario where idUsuario = '$id')");
+  mysql_query("UPDATE usuario set mail='".mysql_escape_string($mail)."',facebook='".mysql_escape_string($facebook)."',twitter='".mysql_escape_string($twitter)."',linkedin='".mysql_escape_string($linkedin)."',googleplus='".mysql_escape_string($googleplus)."' where idUsuario = '$id'");
+}
 
 ?>

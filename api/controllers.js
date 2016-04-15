@@ -105,7 +105,7 @@ angular.module('cpad.controllers', [])
           ]
         };
       })
-    .controller('mainController', function($scope, $http, $location, uService, $cookies){
+    .controller('mainController', function($scope, $http, $location, uService, $cookies, Upload, $timeout){
           $scope.date = new Date();
 
           $scope.logout = function(){
@@ -355,6 +355,30 @@ angular.module('cpad.controllers', [])
                 $scope.tasas = response.tasas;
             });
           }
+          $scope.personalNewPhoto = function(file, errFiles, userid) {
+              $scope.f = file;
+              $scope.filePersonalNewPhoto = 'img/perfiles/'+file.name;
+
+              $scope.errFile = errFiles && errFiles[0];
+              if (file) {
+                  file.upload = Upload.upload({
+                      url: 'api/php/settings.php?tipo=img&userid='+userid + '&foto='+ $scope.filePersonalNewPhoto + '',
+                      data: {file: file}
+                  });
+
+                  file.upload.then(function (response) {
+                      $timeout(function () {
+                          file.result = response.data;
+                      });
+                  }, function (response) {
+                      if (response.status > 0)
+                          $scope.errorMsg = response.status + ': ' + response.data;
+                  }, function (evt) {
+                      file.progress = Math.min(100, parseInt(100.0 *
+                                               evt.loaded / evt.total));
+                  });
+              }
+          };
           $scope.settings = function(ruta,mail,bio,twitter,facebook,googleplus,linkedin,id){
             $http.post("api/php/settings.php",{'ruta':ruta,'mail':mail,'bio':bio,'twitter':twitter,'facebook':facebook,'googleplus':googleplus,'linkedin':linkedin,'id':id}).success(function(response){
                 alert("Cambios realizados correctamente");

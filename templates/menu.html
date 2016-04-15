@@ -43,10 +43,10 @@
     </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url({{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
+            <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><div style="background-image: url(../{{userphoto}});" class="user-photo"></div>{{username}} <span style="margin-left:10px;" class="ion-ios-arrow-down"></span></a>
           <ul class="dropdown-menu">
             <li><a href="">Reportar Error</a></li>
-            <li><a href="" data-toggle="modal" data-target=".o-settings">Configuración</a></li>
+            <li><a href="" data-toggle="modal" data-target=".o-settings">Configuraci&oacute;n</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-click="logout()">Salir</a></li>
           </ul>
@@ -66,17 +66,21 @@
             <div class="modal-content-modulos">
                 <form class="text-center" name="insertForm" ng-submit="insert(user.id)">
                   <div class="modal-header h-settings">
-                      <h4 class="modal-title" id="gridSystemModalLabel">Configuración</h4>
+                      <h4 class="modal-title" id="gridSystemModalLabel">Configuraci&oacute;n</h4>
                     </div>
                     <style>
                     .old-set-photo{
-                      background-image: url({{userphoto}}) !important;
+                      background-image: url(../{{userphoto}}) !important;
+                    }
+                    .old-old-photo{
+                      background-image: url({{autorFoto}}) !important;
                     }
                     </style>
                     <center>
                       <div class="modal-container-settings">
-                          <div ng-class="{'set-photo': userPoto ,'set-photo old-set-photo': !userPoto}" style="background-image: url({{userPoto}});">
-                            <input fileread="userPoto" type="file" class="set-file">
+                          <div ng-class="{'set-photo old-old-photo': autorFoto ,'set-photo old-set-photo': !autorFoto}">
+                            <input fileread="autorFoto" type="file" type="file" ngf-select="personalNewPhoto($file, $invalidFiles,userid)"
+                                    accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" class="file set-file">
                           </div>
                           <h4 class="set-nombre">{{username}}</h4>
                           <div class="set-social"><i class="ion-email"></i><input placeholder="ejemplo@contrapunto.com.sv" type="text" ng-model="usermail"></div>
@@ -86,7 +90,7 @@
                           <div class="set-social"><i class="ion-social-googleplus"></i><input placeholder="url" type="text" ng-model="userGoogleplus"></div>
                           <div class="set-social"><i class="ion-social-linkedin"></i><input placeholder="url" type="text" ng-model="userLinkedin"></div>
                           <div style="text-align:right; margin-top:10px;">
-                            <button class="pub-boton" ng-click="settings('http://smallbusinessbc.ca/wp-content/themes/sbbcmain/images/default-avatar.svg',usermail,userbio,userTwitter,userFacebook,userGoogleplus,userLinkedin,userid)">Guardar</button>
+                            <button class="pub-boton" ng-click="settings(filePersonalNewPhoto,usermail,userbio,userTwitter,userFacebook,userGoogleplus,userLinkedin,userid)">Guardar</button>
                           </div>
                       </div>
                     </center>
