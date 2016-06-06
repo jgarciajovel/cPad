@@ -5,8 +5,8 @@
 // define('db_contrasena','');
 // define('db_host','');
 
-define('db_nombre','cpdb');
-define('db_usuario','root');
+define('db_nombre','');
+define('db_usuario','');
 define('db_contrasena','');
 define('db_host','localhost');
 
